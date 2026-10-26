@@ -165,6 +165,37 @@
   .signal li::before { content: counter(s, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--dim); padding-top: 3px; }
   .signal li small { display: block; color: var(--dim); font-size: 12.5px; margin-top: 2px; font-family: var(--mono); }
 
+  /* News */
+  .news-layout { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 960px) { .news-layout { grid-template-columns: 1fr; } }
+  .feed, .market { padding: 22px; }
+  .feed h3, .market h3 { margin: 0 0 14px; font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); }
+  .feed h3 span { color: var(--dim); }
+  .feed .filters { margin-bottom: 8px; }
+  .feed .chip { font-size: 11.5px; padding: 5px 11px; }
+  .feed-list { list-style: none; margin: 0; padding: 0; }
+  .feed-list li { display: grid; grid-template-columns: 62px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .feed-list time { font-family: var(--mono); font-size: 12px; color: var(--dim); padding-top: 2px; text-transform: uppercase; }
+  .who { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 11.5px; color: var(--text); }
+  .who i { width: 7px; height: 7px; border-radius: 2px; }
+  .who em { font-style: normal; color: var(--dim); }
+  .feed-list p { margin: 4px 0 0; font-size: 14.5px; color: #cfd4e6; overflow-wrap: anywhere; }
+  .feed-list a, .market a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--violet), var(--violet)); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .3s, color .2s; }
+  .feed-list a:hover, .market a:hover { color: var(--text); background-size: 100% 1px; }
+  .feed-list a::after, .market a::after { content: " ↗"; color: var(--dim); font-size: .85em; }
+  .more {
+    width: 100%; margin-top: 6px; padding: 10px; border-radius: 10px; cursor: pointer;
+    font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--bg-2); border: 1px solid var(--line);
+  }
+  .more:hover { color: var(--text); border-color: var(--violet); }
+  .more[hidden] { display: none; }
+  .market-group + .market-group { margin-top: 18px; }
+  .market-cat { margin: 0 0 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); }
+  .market ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .market li { font-size: 14.5px; color: #cfd4e6; padding-left: 14px; border-left: 1px solid var(--line-strong); }
+  .market li small { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--dim); margin-top: 2px; }
+  .market-note { margin: 18px 0 0; font-family: var(--mono); font-size: 11.5px; color: var(--dim); }
+
   /* Card competitor */
   .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
   .chip {
@@ -298,9 +329,10 @@
     <div class="brand"><span class="brand-mark">CV</span> CVing <small>/ intelligence</small></div>
     <ul>
       <li><a href="#segnali">01 Segnali</a></li>
-      <li><a href="#competitor">02 Competitor</a></li>
-      <li><a href="#confronto">03 Confronto</a></li>
-      <li><a href="#grafico">04 Dati</a></li>
+      <li><a href="#news">02 News</a></li>
+      <li><a href="#competitor">03 Competitor</a></li>
+      <li><a href="#confronto">04 Confronto</a></li>
+      <li><a href="#grafico">05 Dati</a></li>
     </ul>
   </div>
 </nav>
@@ -371,10 +403,35 @@
     </div>
   </section>
 
+  <section id="news">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">02 · News</span>
+        <h2>Le notizie della settimana</h2>
+        <p>Tutte le uscite dei competitor nel report del 26 ottobre e le notizie di mercato su HR, AI e lavoro. Ogni voce apre la fonte originale.</p>
+      </div>
+      <div class="news-layout">
+        <div class="panel feed reveal">
+          <div class="feed-head">
+            <h3 class="mono">Feed competitor <span id="feed-count"></span></h3>
+            <div class="filters" id="feed-filters" role="group" aria-label="Filtra le news per competitor"></div>
+          </div>
+          <ol class="feed-list" id="feed-list"></ol>
+          <button type="button" class="more" id="feed-more"></button>
+        </div>
+        <div class="panel market reveal">
+          <h3 class="mono">Mercato HR &amp; AI</h3>
+          <div id="market-list"></div>
+          <p class="market-note">Dal feed automatico abbiamo escluso 4 notizie fuori tema (es. cronaca locale e gossip).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="competitor">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="kicker">02 · Profili</span>
+        <span class="kicker">03 · Profili</span>
         <h2>I competitor uno per uno</h2>
         <p>Punti di forza e debolezze letti dai segnali delle ultime due settimane: notizie, post LinkedIn e follower Instagram.</p>
       </div>
@@ -391,7 +448,7 @@
   <section id="confronto">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="kicker">03 · Confronto</span>
+        <span class="kicker">04 · Confronto</span>
         <h2>Tabella comparativa</h2>
         <p>Clicca sulle intestazioni per ordinare. La riga evidenziata è CVing, come riferimento.</p>
       </div>
@@ -417,7 +474,7 @@
   <section id="grafico">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="kicker">04 · Dati</span>
+        <span class="kicker">05 · Dati</span>
         <h2>Chi si muove di più</h2>
         <p>Uscite monitorate (notizie e post LinkedIn) per report e crescita dei follower Instagram nell'ultima settimana.</p>
       </div>
@@ -608,6 +665,10 @@
     w43: null, w44: null, igPrev: 13113, igNow: 13189, us: true
   };
 
+  // News dalla scheda Storico Intelligence (report del 26/10) e dalle schede Weekly Highlights / Analisi di mercato
+  const newsFeed = [{"c": "Factorial", "d": "2026-10-25", "t": "«We're #hiring a new Staff Software Engineer in Oleiros, Galicia. Apply today or share this post with your network.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_hiring-activity-7520086294438264832-aEhD"}, {"c": "Factorial", "d": "2026-10-24", "t": "Factorial: con l’AI crescono le aspettative di produttività, ma il carico di lavoro non cala", "s": "Il Giornale delle PMI", "u": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOV3BFX2NONlVURnpYUEdvSlVDZXFWY2syel9rbnNMbVdXZWhrYl9xTnllUHpSdmJ6djhIamdESlNsbTBNMnUwMmczblU2SVdEQmlhU29JNVEzTVJxajBvelZTT3BpaXZrTlUtNjd1Z3Bza29qX2wxZjYwTUlQd3R0QXo3dy0wMXFzcmlDWU5vRGR4eTVBZXc3SElCdWpNMjBXclJZTFNDWHFjZUNPWHhSNEk5M1ZnMURqdWc?oc=5"}, {"c": "nCore HR", "d": "2026-10-24", "t": "«In Paris we stocked up on more questions than croissants 🥐»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/company-ncorehr_more-questions-than-croissants-at-unleash-activity-7519669065456668672-iXH7"}, {"c": "Factorial", "d": "2026-10-24", "t": "«We're #hiring a new Staff Software Engineer in Madrid, Community of Madrid. Apply today or share this post with your network.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_hiring-activity-7519720711683375104-tYTD"}, {"c": "Factorial", "d": "2026-10-23", "t": "Factorial racconta il caos del lavoro con la campagna \"Il groviglio\"", "s": "Engage.it", "u": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQMmM1akJCYmpfR05XM2xER3FLWXBJWUtzb0RJQlQyTmFuYzh5Y3RiaVUyaU8xT1F5R2hzSldPckVZQ0owMFhKRVhYSGt2UDlmaDBjaVZSMDRNX1hhdV9MZFBjREZSTTFxRDBma2lkb1lHbnRRb1RNdlhPSmQwZUlGNkMwbkkwUjhtakJ5MVZkSVV5UGJTaFNOc2ZKMzV2Ylp6c1VUbQ?oc=5"}, {"c": "Factorial", "d": "2026-10-23", "t": "L’impatto dell’AI sulla produttività aziendale al Factorial Summit 2026", "s": "Forbes Italia", "u": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUnZhZkpsUUlYNUNiaUZYZU1uaktZRzZyR0pndWdQLWJJdzRtR2VFSGJvTnhzWHQzTHp2ZDZmdE94aFA0ZW1WWHI0UE1zOElPS0tyOFh1QWdRNjhDekk4bE4ybXRLX0NxVHM1aV80eVZUaG1YRldkWGlTYV90LUVpSWFLbXlTS0J2eVE4TWNB?oc=5"}, {"c": "Personio", "d": "2026-10-23", "t": "«Nearly a quarter of employees are using AI at work without telling their employer 👀»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/personio_hrstrategy-futureofwork-shadowai-activity-7519394571663872001-9PEA"}, {"c": "Personio", "d": "2026-10-23", "t": "«Spent Wednesday in Paris for UNLEASH. Between kicking off at the UNLEASH 100 breakfast with fellow leaders and diving into discussions with...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/richterph_spent-wednesday-in-paris-for-unleash-between-ugcPost-7519350782568108032-xxKO"}, {"c": "nCore HR", "d": "2026-10-23", "t": "«⚖️ L’AI può aiutarti a scegliere chi assumere. Da oggi, per legge, non può farlo al posto tuo.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/company-ncorehr_dlgs-1792026-cosa-cambia-per-chi-assume-activity-7519374092223938560-07v-"}, {"c": "Factorial", "d": "2026-10-23", "t": "«Everyone agrees on this one thing: AI is helping teams deliver more. But what isn't following is pay.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_everyone-agrees-on-this-one-thing-ai-is-activity-7519382405451943936-t75i"}, {"c": "TeamSystem", "d": "2026-10-23", "t": "«All’Education & Open Innovation Forum di Confindustria, il nostro Executive Chairman Federico Leproux ha espresso la posizione del Gruppo...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/teamsystem_alleducation-open-innovation-forum-di-activity-7519421840931561472-r0_w"}, {"c": "Inrecruiting", "d": "2026-10-22", "t": "«Everything you need for recruiting, in one single platform.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/in-recruiting-worldwide_inrecruiting-talentacquisition-recruiting-activity-7518982776990351360-S_Uw"}, {"c": "Personio", "d": "2026-10-22", "t": "«HR wears many hats- and these are only a few🧢»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/adriesmith_hr-wears-many-hats-and-these-are-only-a-ugcPost-7518946261949939712-1XI_"}, {"c": "Personio", "d": "2026-10-22", "t": "«Sit down to write a self-review and most people can only really remember the last month, even when the review is meant to cover the last...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/personio_sit-down-to-write-a-self-review-and-most-activity-7518959442688737300-54Iq"}, {"c": "Altamira", "d": "2026-10-22", "t": "«La valutazione la chiedono spesso anche i dipendenti.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/altamira-srl_quale-di-questi-aspetti-sistemeresti-per-activity-7518987379534159872-sTjF"}, {"c": "Factorial", "d": "2026-10-22", "t": "«If you’ve watched this video thinking, “This company looks just like mine,” we need to talk.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_if-youve-watched-this-video-thinking-this-activity-7518944663278649344-hyUx"}, {"c": "TeamSystem", "d": "2026-10-22", "t": "«#adv Quando pensi a un'azienda che guarda al futuro, ti vengono in mente tecnologia e investimenti? Anche, ma bisogna guardare soprattutto...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factanza_adv-ugcPost-7518971454244204544-Uoha"}, {"c": "Personio", "d": "2026-10-21", "t": "«HUG 2026 is in the books! Great few days in Munich, speaking on a panel with Sara Weber, Kim Kristin Eggers, and Dr. Bardia Monshi, and...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/richterph_personio-recruiting-hr-ugcPost-7518641479616036864-nYrL"}, {"c": "Personio", "d": "2026-10-21", "t": "«🤝 Networking that actually matters. That’s what Personio’s event HUG yesterday was all about!»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/activity-7516803058706837505-tXEx"}, {"c": "Personio", "d": "2026-10-21", "t": "«Die Zukunft von HR wird nicht irgendwann gestaltet. Sie entsteht bereits heute.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/uwe-hoffmann-318147225_hug2026-personio-digitalisierung-ugcPost-7518565592979718144-_kSS"}, {"c": "Personio", "d": "2026-10-21", "t": "«At UNLEASH Paris today? Come grab a coffee and say hi to the Personio team at booth #211 ☕️👋🏼»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/pc-f_at-unleash-paris-today-come-grab-a-coffee-ugcPost-7518574267681394688-fIkv"}, {"c": "Personio", "d": "2026-10-21", "t": "«HR wears every hat. Come and pick yours at UNLEASH Paris, stand #210 🧢»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/personio_unleashparis-hrtech-peopleops-activity-7518574670875373568-oiZU"}, {"c": "nCore HR", "d": "2026-10-21", "t": "«Quanti candidati stanno ancora aspettando una tua risposta? 🤔»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/company-ncorehr_ncorehr-thehumanrecruiting-recruiting-activity-7518559213464375296-y2MX"}, {"c": "Factorial", "d": "2026-10-21", "t": "«Saying no feels harder than saying yes. Until you’ve seen what a partnership that was never going to work really costs.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_saying-no-feels-harder-than-saying-yes-until-activity-7518665108588376064-6_5q"}, {"c": "Factorial", "d": "2026-10-21", "t": "«Spanisches Catering, Drinks und mehr als 100 Gäste: Factorial hat am 30. September 2026 sein neues Büro in München eröffnet. Dazu gab es...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/activity-7518340576488910848-H7-k"}, {"c": "Inrecruiting", "d": "2026-10-20", "t": "«Inda’s AI is becoming increasingly conversational.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/in-recruiting-worldwide_inda-inrecruiting-artificialintelligence-activity-7518258680031604736-oY2B"}, {"c": "Personio", "d": "2026-10-20", "t": "«🙏 The day has come. Cancel your morning meetings, it’s time to dig into the 2026 Workforce Pulse report.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/personio_workforcepulse-activity-7518219577202442240-2mx1"}, {"c": "Altamira", "d": "2026-10-20", "t": "«Alcune cose si capiscono meglio guardandole.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/altamira-srl_quando-tutto-ci%C3%B2-che-%C3%A8-visivo-diventa-essenziale-activity-7518242289530429440-JXoT"}, {"c": "TeamSystem", "d": "2026-10-20", "t": "«Per un hotel, aumentare le entrate non significa intervenire solo sulle tariffe delle camere.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/teamsystem_per-un-hotel-aumentare-le-entrate-non-significa-activity-7518228260200185856-xBHo"}, {"c": "Teamtailor", "d": "2026-10-19", "t": "«We’re officially ISO 42001 certified! Teamtailor is happy to announce that we’re officially ISO 42001 certified, and we are among the first...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/teamtailor_were-officially-iso-42001-certified-teamtailor-activity-7517931227488677888--sIg"}, {"c": "Altamira", "d": "2026-10-19", "t": "«Sulla carta non fa una piega.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/altamira-srl_ps-sul-sasso-dellultima-immagine-non-si-activity-7518060929641762816-L6dx"}];
+  const marketNews = [{"k": "Employer branding", "t": "InJob si espande. In ingresso altri cinquanta addetti", "s": "Quotidiano Nazionale", "d": "26/10", "u": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQbW5SZDhSTWdxRWNKcHphZWlMenpjWmd3UUNEQkx6VGJiNEhxUjBHYjBvUmw3QTJkNGRFOWlLWE1qZTJxRF9xaFlqZy1PYllSRkhBZzNYMWcwLXRIYVhORnd4X3V2WGN6dXlMb2N6ZWxaal9HTWFDUmQ4VF9zMUdXakY1UW1rWGM?oc=5"}, {"k": "Recruiting & AI", "t": "Recruiting Day Young a Pordenone: quattro colloqui in 20 minuti per gli under 35", "s": "RaiNews", "d": "25/10", "u": "https://news.google.com/rss/articles/CBMigAJBVV95cUxQXzhnYVhReUk0NVJBWTFaRnBUNWZsR1dQaHRuTVNEQklxMlRJUzBSSk5oY0RtRDZpaWZBLW5uZXpTbnE0Q3NheHI2QnRMRlZsZEUzOVJGTmNyVmlSR19IQlZPc3VqNlp2SzFlVlhaRTltaTktbjBTci0zLXpWUnEta3Zyam5VZkJvNXFrc3JJUVczQ20yMHNCZ2YySVFmLXlqS3JtQWp6bzE3YUJaSjJWdFpJak1yQTlTRDg0WE1lMlMyOHFYbUNpdnEwZzE2ekM3NEpqcVdJc09uODFWVVVyVDFMNDVrbEswd3RlZ2s5RGlXQWtyYW1EYjdWYVk1R0w00gGAAkFVX3lxTFBfOGdhWFF5STQ1UkFZMVpGcFQ1ZmxHV1BodG5NU0RCSXEyVElTMFJKTmhjRG1ENmlpZkEtbm5lelNucTRDc2F4cjZCdExGVmxkRTM5UkZOY3JWaVJHX0hCVk9zdWo2WnZLMWVWWFpFOW1pOS1uMFNyLTMtelZScS1rdnJqblVmQm81cWtzcklRVzNDbTIwc0JnZjJJUWYteWpLcm1BanpvMTdhQlpKMlZ0WklqTXJBOVNEODRYTWUyUzI4cVhtQ2l2cTBnMTZ6Qzc0SmpxV0lzT244MVZVVXJUMUw0NWtsSzB3dGVnazlEaVdBa3JhbURiN1ZhWTVHTDQ?oc=5"}, {"k": "HR Tech Italia", "t": "Paylocity balza del 69% dopo che InvestingPro ne ha identificato il valore Da Investing.com", "s": "Investing.com", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOWXhmckFIajdFTTROY1pLcGJYX2JaZzlhUHFLYnpZaWc3N2s5SGNaTWRiakhqOWMyek9mTmZ4VzJqUGN0Mi1XOEx2N0pTWEMzZTBXVHA4dUpjcFlLWVROUkxIWG5KS3NCWnU4Y1JEeVJURXFmVXFNMzJGQ0lIaTVBX2c5eEtZQVh1azM2UzJqTmQ3QkE1UjBMUEtOM202VE1OaUlSbXJjc09lbkduRkpjYWdzS3N3SlVzSUVpSVlURHd4TE9ILVZucUQ2dWFSQQ?oc=5"}, {"k": "Trasparenza retributiva", "t": "Aziende italiane alla prova degli stipendi trasparenti: i dati 2026", "s": "Agenda Digitale", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPNTk5a1pYdnRhVVNKVTFDMWJwcTItUU9yVmJzdHVrcGRqeFRZQl81VU9JS0tFM2hXLXFUclh1U2lmZzl0ZHNMYUF1YUE4TVg0U19JTzNoUVBWWDdYRVdDSEtPVVlfaE5JcnNOUnpHM3lhNTlCa0w2YWh4YklmeGZrdXhIS2NJRUVCMjRyTFBMUG15Q1ZldUNjWkhSNjRIZDRWSnI2d0lIMzBwQzhoRWZsV2swTzRBQQ?oc=5"}, {"k": "AI Act e lavoro", "t": "Decreto IA e Lavoro: cosa cambia dal 23 ottobre 2026", "s": "shattered.io", "d": "26/10", "u": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5EbERMdnFZSWNTYzl4cTBKaElQd0RwSGRVUTA5VDRaWDN5MndUMFJJWjZ3OFpoOFJIUHRmRnRrcVlURDFxT0tHZmNJQzM3NVd4OXJSYzJnQXpqYVNydW5LMFBlc1FkMnFXbEJIb2NHOEx1Y0otZHZRclZ0RzQ?oc=5"}, {"k": "Intelligenza Artificiale in HR", "t": "Forbes Top Hr: cultura, retention e intelligenza artificiale ridisegnano il lavoro in Italia", "s": "Forbes Italia", "d": null, "u": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOLWdmN2VNZkVOS1JsbjBMUTlBdFhIVmg3aUxZSDQyT280dEdwUFFjQmZaQ3RkQjd2ZjBXdENpSjliaHdrV3hYYy1XOWpjX055SUtOVVYxdjFzYVdudXlCd2YyaF9MUEhYNmhRamRWMkZiVEJ6VUtvUWZCeW9YdnJuTkIyNXBqa2lNQVZTdWZRNlcxZGNSYVlQWTU2cGRKalNpMENqMEFkVjh4c29ZTkJlTlhaME9rSzQxazFBeQ?oc=5"}, {"k": "Intelligenza Artificiale in HR", "t": "Come l’AI trasforma il people management tra nuovi ruoli e competenze", "s": "Il Sole 24 ORE", "d": null, "u": "https://news.google.com/rss/articles/CBMipgFBVV95cUxORURVZlJOcjJmQnIyMjgxMjRISl9hT19HRzZuQmg4RDg2am5pc2hWeHJLQVdiYUE3VWFKbmVNQjlqNVh5MGhLbzRfWWpwYVZ0OTJReENhN0gtUHNsMVRKcGVGMEloa3diTk9fc25pUTlxSXJDM3IxRVhSX3AzTXNmd1RFT1g1ZHliQ3M5cmRiN1NIcEFZdnNjazZ3U0xNaFNhbnZLcXBB?oc=5"}, {"k": "Intelligenza Artificiale in HR", "t": "Gestione delle HR e AI: come guidare l’innovazione con visione e responsabilità", "s": "AI4Business", "d": null, "u": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQX3owaVU3TnJQbjY2YUoxMEtqOVlXRVZzQkFzampLTmdBMGRpVENTWmNfUzdiTjZNZDBNLVEtYk55NWhSQjBsMlJhSjItWnZVWDRxMWJicXJPZlc1N0lDQlRDUXRlQ1Q2TVhaNnVYTnVmbjBuMUxxN2QzSG9KWVJueXJwckpmbkJweXBwTmd5MFpodkxjR3JKc2dLZ2tUdDZBZE1oUTN6ZWhzMzhVZG9KMkQtSVR6Yi1tV2w4XzNOaTE1LXAzOHFKTzR1RGJ3ekFpRXc?oc=5"}, {"k": "Intelligenza Artificiale in HR", "t": "AI e lavoro: nuovi obblighi per datori e HR", "s": "Ipsoa", "d": null, "u": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdVJkX3l1M2JSZ2o0ZGZXVTZCci13bE5pMGxnOUVyZWt0dlE1OWlSUDNmc0syeE41Rmc3MGEzTWlGRlNfXzk4NWNHT1pxTzdva2JERU5EQ1NJMi1hWkNyakFBRmhQeVhCVTdzX0Q0V3VyMXJUdl9HcnZTd2VQUld1U01OZ2J2WlRiT1lvSE9sRW1ZYnhldE9ESy1Ga1NBeWMy?oc=5"}, {"k": "Intelligenza Artificiale in HR", "t": "Oracle lancia applicazioni HR basate sull’intelligenza artificiale con Claw", "s": "Investing.com", "d": null, "u": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPZ0Q5T0FhREVGWnZ1dkNzQnhOSDFhd1FfMHR6RVhKZFdxOVVreVBqRmlITVQ0eUFMcVNaT0xTbm1KUHNnOC1TcmFFTl9WM2l5YnY0bEJlRlVFRlpiRGU2cmhubVVGMUpHLTNiN1drLTZmdnFBZVZuZUQxRXUwdkJFU2hQSU5GU2M3MUlwdzZyUmdFVDliTzAweFMtMGhMVXhtTEVlU3pCanNTWGM0VjBKNjdQREptS0NaUzZDUW1QNDVYeUVKU29zaFZn?oc=5"}, {"k": "Employer Branding & Talent", "t": "Una creatura bifronte: la restanza e la retention", "s": "7Grammilavoro", "d": null, "u": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPRTRqREw2QUk2aG1nS0Q4d3hBV3NrUC1qaDkxSXFNbEVzazNIR09HeF9Pd2NHeUVoSm80NVpFYy1WYXM4UlVMakJ2cmZWaXFNWWFhVEk4NlZkbmdwNldJQVdJR1lhMXNETUZZN3JSVGpXLWVvVVRQNU04U2V5NFBBM2pvUzFidw?oc=5"}, {"k": "Welfare & Organizzazione", "t": "Industria 5.0 e welfare aziendale: perché le PMI restano indietro", "s": "Agenda Digitale", "d": null, "u": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQcDZSUGNzb3VzRzhVcjRINUcwLXRIblRCYWttNTdTdjFCeE13M0ZDamhwQ0MtSU5fY2k3U2wyQkxGUkdTUV9adDQ4X3FObk9FcVF5V0p4SnE3ZUMwTFJ1VnB3ZS1qRmRvMUNRRTNYaUdCWVRKSGFFTFVJNEpWenkwWUZCSWhnOERMcjhhUkFlV1gwVWVWRVhwejF5aTA1dUpUcmRuSi1McmkwczVLNGc?oc=5"}, {"k": "Welfare & Organizzazione", "t": "Fringe benefit 2027: la sfida delle Pmi nella digitalizzazione del welfare aziendale", "s": "Il Sole 24 ORE", "d": null, "u": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQYjRpQWxVampzWWRWa0NfUVFIUzhXa2dNMVllTi1LQlItVF9EZ1lWdGdKR0VDaG44NG4tekVXQkgxWTgzdVFsNDRlT28xdmI1bFVvRlNYaGFJcTJHcmxwN3AzRWxNSjdGMTF2ZHc3T3J6NU16RVg2TkpzVDN0X09ReGFKU3Vid01NS0tmdWJjSjRzRVRNR0RPaG1yUktVNy12Y3lXSGhJM08?oc=5"}, {"k": "Welfare & Organizzazione", "t": "Welfare aziendale, dieci anni dopo: un confronto sulle sfide e le prospettive future", "s": "Università Pontificia Salesiana", "d": null, "u": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNSXM2d1J5UkR3LThiZjdkN0NZQVFOeGJOemo2WmgzdElmM0lqLW9ncS14RFNVMEtVelRUcjVGeDhEQVBiRFdzZFBZQ3JOMnB6LVlBOEFXUDVZR3doNTlka043M216clZLN1o1eDVnVDZac25lR3pSY1dFUDRnNlVEdWFlWWtGRGVhY2FoVmtqUnZ2LU5Ca3pBaGdleElFajMxcUswZXBfal9OVHpPMko4aVVLNnctLWln?oc=5"}, {"k": "Welfare & Organizzazione", "t": "Rimborso RSA con il welfare aziendale per un genitore", "s": "Generazione Vincente", "d": null, "u": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOZkQ5SzBpOEd2S1ZZLUZCdmdCSlJOb19SVWc4WU9UWkpNa3gyMEJ4NUxLQW9LS2dMS3laR29HXzlHdWdiNm0zbDRXdEw0aFFCaE5ucWxiTWo5YUp5UmVuN1hiVUtnZUY4VFFRRThISWhaWFRweTZFY1NpeUxOeXlram40QldpdGZzeE5uRlY0SVkyTk0?oc=5"}];
+
   // Profili Instagram monitorati (scheda Follower Instagram)
   const instagram = [
     ["@cving_app", 13113, 13189], ["@factorial", 81289, 83154], ["@siamo_jethr", 38445, 39061],
@@ -680,15 +741,62 @@
     </article>`).join("");
 
   // Filtri per livello di attività
-  document.querySelectorAll(".chip").forEach(chip => {
+  document.querySelectorAll(".chip[data-filter]").forEach(chip => {
     chip.addEventListener("click", () => {
-      document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === chip));
+      document.querySelectorAll(".chip[data-filter]").forEach(c => c.setAttribute("aria-pressed", c === chip));
       const f = chip.dataset.filter;
       document.querySelectorAll("#cards .card").forEach(card => {
         card.hidden = f !== "all" && card.dataset.level !== f;
       });
     });
   });
+
+  // News: feed competitor filtrabile + mercato
+  const df = new Intl.DateTimeFormat("it-IT", { day: "2-digit", month: "short" });
+  const safeUrl = u => /^https:\/\//.test(u || "") ? u : null;
+  const colorOf = Object.fromEntries(sov.map((c, i) => [c.short, palette[i]]));
+  const feedNames = [...new Set(newsFeed.map(n => n.c))];
+  let feedFilter = "Tutti", feedOpen = false;
+  const FEED_LIMIT = 8;
+  document.getElementById("feed-filters").innerHTML = ["Tutti", ...feedNames].map(n =>
+    `<button type="button" class="chip" aria-pressed="${n === "Tutti"}" data-feed="${esc(n)}">${esc(n)}${n === "Tutti" ? "" : ` · ${newsFeed.filter(x => x.c === n).length}`}</button>`).join("");
+  function renderFeed() {
+    const items = newsFeed.filter(n => feedFilter === "Tutti" || n.c === feedFilter);
+    const shown = feedOpen ? items : items.slice(0, FEED_LIMIT);
+    document.getElementById("feed-count").textContent = `· ${items.length}`;
+    document.getElementById("feed-list").innerHTML = shown.map(n => {
+      const url = safeUrl(n.u);
+      const title = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(n.t)}</a>` : esc(n.t);
+      return `<li>
+        <time datetime="${n.d}">${df.format(new Date(n.d + "T12:00:00"))}</time>
+        <div>
+          <span class="who"><i style="background:${colorOf[n.c] || "var(--dim)"}"></i>${esc(n.c)} <em>· ${esc(n.s)}</em></span>
+          <p>${title}</p>
+        </div>
+      </li>`;
+    }).join("");
+    const more = document.getElementById("feed-more");
+    more.hidden = items.length <= FEED_LIMIT;
+    more.textContent = feedOpen ? "Mostra meno ↑" : `Mostra tutte (${items.length}) ↓`;
+  }
+  document.querySelectorAll(".chip[data-feed]").forEach(chip => chip.addEventListener("click", () => {
+    document.querySelectorAll(".chip[data-feed]").forEach(c => c.setAttribute("aria-pressed", c === chip));
+    feedFilter = chip.dataset.feed; feedOpen = false; renderFeed();
+  }));
+  document.getElementById("feed-more").addEventListener("click", () => { feedOpen = !feedOpen; renderFeed(); });
+  renderFeed();
+
+  const groups = {};
+  marketNews.forEach(n => (groups[n.k] ||= []).push(n));
+  document.getElementById("market-list").innerHTML = Object.entries(groups).map(([k, list]) => `
+    <div class="market-group">
+      <p class="market-cat">${esc(k)}</p>
+      <ul>${list.map(n => {
+        const url = safeUrl(n.u);
+        const title = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(n.t)}</a>` : esc(n.t);
+        return `<li>${title}<small>${esc(n.s)}${n.d ? " · " + esc(n.d) : ""}</small></li>`;
+      }).join("")}</ul>
+    </div>`).join("");
 
   // Tabella ordinabile
   const tbody = document.querySelector("#compare tbody");
