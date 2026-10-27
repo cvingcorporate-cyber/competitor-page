@@ -298,6 +298,23 @@
     .tabs { display: flex; }
     .tabs button { flex: 1; padding: 8px 8px; }
   }
+  @media (max-width: 760px) { .tabs { flex-wrap: wrap; } }
+  .chart-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-bottom: 22px;
+    background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  }
+  @media (max-width: 760px) { .chart-stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { background: var(--bg-2); padding: 14px 16px; min-width: 0; }
+  .stat small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+  .stat b { display: block; font-family: var(--display); font-weight: 600; font-size: clamp(24px, 3vw, 30px); line-height: 1.15; margin: 4px 0 2px; }
+  .stat span { display: block; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+  .stat b.up { color: var(--green); }
+  .stat b.down { color: var(--red); }
+  .chart-insight {
+    margin: 18px 0 0; padding: 12px 14px; border-radius: 12px; font-size: 14.5px; color: #cfd4e6;
+    background: rgba(139, 123, 255, .08); border: 1px solid rgba(139, 123, 255, .22);
+  }
+  .chart-insight b { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); margin-right: 8px; }
   .chart-box { position: relative; height: 420px; }
   @media (max-width: 640px) { .chart-box { height: 460px; } }
   .chart-note { font-family: var(--mono); font-size: 12px; color: var(--dim); margin: 14px 0 0; }
@@ -482,10 +499,13 @@
       <div class="panel chart-card reveal">
         <div class="tabs" role="tablist" aria-label="Scegli il grafico">
           <button type="button" role="tab" aria-selected="true" data-view="activity">Attività per report</button>
+          <button type="button" role="tab" aria-selected="false" data-view="delta">Variazione settimanale</button>
           <button type="button" role="tab" aria-selected="false" data-view="instagram">Crescita Instagram</button>
         </div>
+        <div class="chart-stats" id="chart-stats"></div>
         <div class="chart-box"><canvas id="chart" aria-label="Grafico dei competitor" role="img"></canvas></div>
         <p class="chart-fallback" id="chart-fallback">Il grafico non si è caricato (Chart.js non raggiungibile). I dati sono nella tabella qui sopra.</p>
+        <p class="chart-insight" id="chart-insight"></p>
         <p class="chart-note" id="chart-note"></p>
       </div>
     </div>
@@ -859,9 +879,98 @@
     });
   }
 
-  // Grafico
+  // Grafico: statistiche di sintesi, lettura e grafico per ciascuna vista
   const fallback = document.getElementById("chart-fallback");
   const note = document.getElementById("chart-note");
+  // Le variazioni sotto lo 0,1% prendono un decimale in più, così non risultano "+0,0%"
+  const pct = (v, digits = v !== 0 && Math.abs(v) < 0.1 ? 2 : 1) =>
+    `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toLocaleString("it-IT", { minimumFractionDigits: digits, maximumFractionDigits: digits })}%`;
+  const nfg = new Intl.NumberFormat("it-IT", { useGrouping: "always" });
+  const signed = v => v > 0 ? `+${v}` : v < 0 ? `−${-v}` : "0";
+  const cls = v => v > 0 ? "up" : v < 0 ? "down" : "";
+
+  const byTotal = [...competitors].sort((a, b) => b.total - a.total);
+  const sumW43 = competitors.reduce((s, c) => s + c.w43, 0);
+  const sumW44 = competitors.reduce((s, c) => s + c.w44, 0);
+  const deltas = competitors.map(c => ({ ...c, delta: c.w44 - c.w43 })).sort((a, b) => b.delta - a.delta || b.total - a.total);
+  const igRows = instagram.map(([h, p, n]) => ({ h, p, n, d: (n - p) / p * 100 })).sort((a, b) => b.d - a.d);
+  const cvingRank = igRows.findIndex(r => r.h === "@cving_app") + 1;
+  const names = list => list.map(c => c.short).join(", ").replace(/, ([^,]*)$/, " e $1");
+
+  function summary(view) {
+    if (view === "activity") {
+      const [a, b] = byTotal;
+      const top2 = Math.round((a.total + b.total) / sumTotal * 100);
+      const silent = competitors.filter(c => c.total === 0);
+      return {
+        stats: [
+          ["Uscite totali", sumTotal, `${sumW43} + ${sumW44} nei due report`],
+          ["Più attivo", a.short, `${a.total} uscite · ${Math.round(a.total / sumTotal * 100)}% del totale`],
+          ["Top 2", `${top2}%`, `${a.short} e ${b.short}`],
+          ["Senza uscite", silent.length, silent.length ? names(silent) : "nessuno"]
+        ],
+        insight: `${a.short} e ${b.short} da soli fanno il ${top2}% delle uscite: il dibattito sull'AI nell'HR lo stanno guidando loro. Gli altri ${competitors.length - 2} competitor si dividono il resto.`
+      };
+    }
+    if (view === "delta") {
+      const diff = sumW44 - sumW43;
+      const maxUp = deltas[0].delta, maxDown = deltas[deltas.length - 1].delta;
+      const risers = deltas.filter(c => c.delta === maxUp && maxUp > 0);
+      const fallers = deltas.filter(c => c.delta === maxDown && maxDown < 0);
+      const stable = deltas.filter(c => c.delta === 0);
+      return {
+        stats: [
+          ["Report 26/10 vs 19/10", { v: signed(diff), c: cls(diff) }, `${sumW44} uscite contro ${sumW43} (${pct(diff / sumW43 * 100, 0)})`],
+          ["Crescita maggiore", { v: signed(maxUp), c: cls(maxUp) }, names(risers)],
+          ["Calo maggiore", { v: signed(maxDown), c: cls(maxDown) }, names(fallers)],
+          ["Stabili", stable.length, names(stable)]
+        ],
+        insight: `Il volume complessivo è quasi fermo (${signed(diff)}), ma cambia chi parla: ${names(risers)} accelera${risers.length > 1 ? "no" : ""}, mentre ${names(fallers)} si ferma dopo una settimana intensa.`
+      };
+    }
+    const best = igRows[0];
+    const cv = igRows.find(r => r.h === "@cving_app");
+    const down = igRows.filter(r => r.d < 0);
+    return {
+      stats: [
+        ["CVing", { v: pct(cv.d), c: cls(cv.d) }, `${nfg.format(cv.n)} follower (+${nfg.format(cv.n - cv.p)})`],
+        ["Posizione CVing", `${cvingRank}° su ${igRows.length}`, "per crescita percentuale"],
+        ["Crescita maggiore", { v: pct(best.d), c: cls(best.d) }, `${best.h} · +${nfg.format(best.n - best.p)} follower`],
+        ["Profili in calo", down.length, down.map(r => r.h).join(", ") || "nessuno"]
+      ],
+      insight: `CVing cresce più di Personio, nCore HR e Altamira, ma Factorial aggiunge in una settimana ${nfg.format(best.n - best.p)} follower, più di 20 volte i ${nfg.format(cv.n - cv.p)} di CVing.`
+    };
+  }
+
+  function renderSummary(view) {
+    const { stats, insight } = summary(view);
+    document.getElementById("chart-stats").innerHTML = stats.map(([label, value, sub]) => {
+      const v = typeof value === "object" ? value : { v: value, c: "" };
+      return `<div class="stat"><small>${esc(label)}</small><b class="${v.c}">${esc(v.v)}</b><span>${esc(sub)}</span></div>`;
+    }).join("");
+    document.getElementById("chart-insight").innerHTML = `<b>Lettura</b>${esc(insight)}`;
+  }
+
+  const notes = {
+    activity: "// uscite registrate nella scheda Storico Intelligence: notizie Google News e post LinkedIn ufficiali",
+    delta: "// differenza di uscite tra il report del 26/10 e quello del 19/10, per competitor",
+    instagram: "// variazione tra la settimana precedente e il dato del 26/10 · in verde CVing"
+  };
+
+  let current = "activity";
+  let draw = () => {};
+  document.querySelectorAll(".tabs button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b === btn));
+      current = btn.dataset.view;
+      renderSummary(current);
+      note.textContent = notes[current];
+      draw(current);
+    });
+  });
+  renderSummary(current);
+  note.textContent = notes[current];
+
   if (typeof Chart === "undefined") {
     document.querySelector(".chart-box").style.display = "none";
     fallback.style.display = "block";
@@ -877,6 +986,34 @@
     };
     let chart;
 
+    // Etichette con il valore in cima a ogni barra (o alla fine, se orizzontale)
+    const valueLabels = {
+      id: "valueLabels",
+      afterDatasetsDraw(c, _args, opts) {
+        if (!opts.format) return;
+        const { ctx } = c;
+        const meta = c.getDatasetMeta(c.data.datasets.length - 1);
+        const horizontal = c.options.indexAxis === "y";
+        ctx.save();
+        ctx.font = "500 11px 'JetBrains Mono', ui-monospace, monospace";
+        ctx.fillStyle = "#e8ebf7";
+        meta.data.forEach((bar, i) => {
+          const value = opts.value(i);
+          const text = opts.format(value);
+          if (text == null) return;
+          const neg = value < 0;
+          if (horizontal) {
+            ctx.textAlign = neg ? "right" : "left"; ctx.textBaseline = "middle";
+            ctx.fillText(text, bar.x + (neg ? -8 : 8), bar.y);
+          } else {
+            ctx.textAlign = "center"; ctx.textBaseline = neg ? "top" : "bottom";
+            ctx.fillText(text, bar.x, bar.y + (neg ? 6 : -6));
+          }
+        });
+        ctx.restore();
+      }
+    };
+
     function gradient(ctx, area, horizontal, from, to) {
       if (!area) return from;
       const g = horizontal
@@ -886,75 +1023,95 @@
       return g;
     }
 
-    function draw(view) {
+    draw = view => {
       if (chart) chart.destroy();
       const horizontal = isMobile();
       let data, options;
 
       if (view === "activity") {
-        const sorted = [...competitors].sort((a, b) => b.total - a.total);
         data = {
-          labels: sorted.map(c => c.short),
+          labels: byTotal.map(c => c.short),
           datasets: [
-            { label: "Report del 19 ottobre", data: sorted.map(c => c.w43), backgroundColor: "rgba(139, 123, 255, .35)", borderRadius: 6, borderSkipped: false },
-            { label: "Report del 26 ottobre",  data: sorted.map(c => c.w44), borderRadius: 6, borderSkipped: false,
+            { label: "Report del 19 ottobre", data: byTotal.map(c => c.w43), backgroundColor: "rgba(139, 123, 255, .35)", borderRadius: 6, borderSkipped: false },
+            { label: "Report del 26 ottobre",  data: byTotal.map(c => c.w44), borderRadius: 6, borderSkipped: false,
               backgroundColor: ctx => gradient(ctx.chart.ctx, ctx.chart.chartArea, horizontal, "#8b7bff", "#3ee6ff") }
           ]
         };
+        const axis = { border: { display: false }, ticks: { precision: 0 } };
         options = {
           indexAxis: horizontal ? "y" : "x",
+          layout: { padding: horizontal ? { right: 28 } : { top: 22 } },
           scales: {
-            x: { stacked: true, grid: { color: horizontal ? grid : "transparent" }, border: { display: false }, ticks: { precision: 0 } },
-            y: { stacked: true, grid: { color: horizontal ? "transparent" : grid }, border: { display: false }, ticks: { precision: 0 } }
+            x: { ...axis, stacked: true, grid: { color: horizontal ? grid : "transparent" } },
+            y: { ...axis, stacked: true, grid: { color: horizontal ? "transparent" : grid } }
           },
-          plugins: { tooltip: { ...tooltip, callbacks: { footer: items => `Totale: ${items.reduce((s, i) => s + i.parsed[horizontal ? "x" : "y"], 0)}` } } }
+          plugins: {
+            tooltip: { ...tooltip, callbacks: { footer: items => `Totale: ${items.reduce((s, i) => s + i.parsed[horizontal ? "x" : "y"], 0)}` } },
+            valueLabels: { value: i => byTotal[i].total, format: v => String(v) }
+          }
         };
-        note.textContent = "// uscite registrate nella scheda Storico Intelligence: notizie Google News e post LinkedIn ufficiali";
-      } else {
-        const sorted = instagram.map(([h, p, n]) => ({ h, d: (n - p) / p * 100, n })).sort((a, b) => b.d - a.d);
+      } else if (view === "delta") {
         data = {
-          labels: sorted.map(r => r.h),
+          labels: deltas.map(c => c.short),
+          datasets: [{
+            label: "Differenza di uscite",
+            data: deltas.map(c => c.delta),
+            backgroundColor: deltas.map(c => c.delta > 0 ? "#3df5a7" : c.delta < 0 ? "#ff6b7a" : "rgba(139, 123, 255, .35)"),
+            borderRadius: 6, borderSkipped: false, minBarLength: 3
+          }]
+        };
+        const axis = { border: { display: false }, ticks: { precision: 0 } };
+        options = {
+          indexAxis: horizontal ? "y" : "x",
+          layout: { padding: horizontal ? { left: 24, right: 28 } : { top: 22, bottom: 8 } },
+          scales: {
+            x: { ...axis, grid: { color: horizontal ? grid : "transparent" }, suggestedMin: horizontal ? -8 : undefined, suggestedMax: horizontal ? 4 : undefined },
+            y: { ...axis, grid: { color: horizontal ? "transparent" : grid }, suggestedMin: horizontal ? undefined : -8, suggestedMax: horizontal ? undefined : 4 }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: { ...tooltip, callbacks: { label: i => `${signed(i.raw)} uscite · ${deltas[i.dataIndex].w43} → ${deltas[i.dataIndex].w44}` } },
+            valueLabels: { value: i => deltas[i].delta, format: signed }
+          }
+        };
+      } else {
+        data = {
+          labels: igRows.map(r => r.h),
           datasets: [{
             label: "Variazione follower (%)",
-            data: sorted.map(r => +r.d.toFixed(2)),
-            backgroundColor: sorted.map(r => r.h === "@cving_app" ? "#3df5a7" : r.d < 0 ? "#ff6b7a" : "rgba(139, 123, 255, .75)"),
-            borderRadius: 6, borderSkipped: false
+            data: igRows.map(r => +r.d.toFixed(2)),
+            backgroundColor: igRows.map(r => r.h === "@cving_app" ? "#3df5a7" : r.d < 0 ? "#ff6b7a" : "rgba(139, 123, 255, .75)"),
+            borderRadius: 6, borderSkipped: false, minBarLength: 3
           }]
         };
         options = {
           indexAxis: "y",
+          layout: { padding: { left: 8, right: 52 } },
           scales: {
             x: { grid: { color: grid }, border: { display: false }, ticks: { callback: v => v + "%" } },
             y: { grid: { color: "transparent" }, border: { display: false } }
           },
           plugins: {
             legend: { display: false },
-            tooltip: { ...tooltip, callbacks: { label: i => `${i.raw > 0 ? "+" : ""}${i.raw.toLocaleString("it-IT")}% · ${nf.format(sorted[i.dataIndex].n)} follower` } }
+            tooltip: { ...tooltip, callbacks: { label: i => `${pct(i.raw, 2)} · ${nfg.format(igRows[i.dataIndex].n)} follower` } },
+            valueLabels: { value: i => igRows[i].d, format: v => pct(v) }
           }
         };
-        note.textContent = "// variazione tra la settimana precedente e il dato del 26/10 · in verde CVing";
       }
 
       chart = new Chart(document.getElementById("chart"), {
-        type: "bar", data,
+        type: "bar", data, plugins: [valueLabels],
         options: {
           responsive: true, maintainAspectRatio: false,
           animation: reduceMotion ? false : { duration: 900, easing: "easeOutQuart" },
           interaction: { mode: "index", intersect: false },
+          layout: options.layout,
           plugins: { legend: { position: "bottom", labels: { usePointStyle: true, pointStyle: "rectRounded", boxWidth: 8, padding: 18 } }, ...options.plugins },
           scales: options.scales, indexAxis: options.indexAxis
         }
       });
-    }
+    };
 
-    let current = "activity";
-    document.querySelectorAll(".tabs button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b === btn));
-        current = btn.dataset.view;
-        draw(current);
-      });
-    });
     let wasMobile = isMobile();
     window.addEventListener("resize", () => {
       if (isMobile() !== wasMobile) { wasMobile = isMobile(); draw(current); }
