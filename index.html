@@ -228,42 +228,36 @@
   .feed, .market { padding: 22px; }
   .feed h3, .market h3 { margin: 0 0 14px; font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); }
   .feed h3 span { color: var(--dim); }
-  .feed .filters { margin-bottom: 8px; }
-  .feed .chip { font-size: 11.5px; padding: 5px 11px; }
-  .feed-list { list-style: none; margin: 0; padding: 0; }
-  .feed-list li { display: grid; grid-template-columns: 62px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
-  .feed-list time { font-family: var(--mono); font-size: 12px; color: var(--dim); padding-top: 2px; text-transform: uppercase; }
-  .who { display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 11.5px; color: var(--text); }
-  .who i { width: 7px; height: 7px; border-radius: 2px; }
-  .who em { font-style: normal; color: var(--dim); }
-  .feed-list li.is-key { box-shadow: inset 2px 0 0 var(--amber); padding-left: 10px; margin-left: -12px; }
-  .meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .tag {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--muted);
-    border: 1px solid var(--line-strong); border-radius: 6px; padding: 1px 7px;
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .feed-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .feed-head h3 { margin: 0; }
+  .feed-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+  .seg { display: inline-flex; background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+  .seg button { border: 0; background: transparent; color: var(--muted); font: 500 12.5px var(--mono); padding: 6px 12px; border-radius: 7px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: rgba(139, 123, 255, .18); color: var(--text); box-shadow: inset 0 0 0 1px rgba(139, 123, 255, .5); }
+  #feed-who {
+    font: 500 12.5px var(--mono); color: var(--text); background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 10px; padding: 7px 10px; cursor: pointer;
   }
-  .tag.key { color: var(--amber); border-color: rgba(255, 181, 71, .4); background: rgba(255, 181, 71, .08); }
-  .chip.key[aria-pressed="false"] { color: var(--amber); border-color: rgba(255, 181, 71, .4); }
-  .feed-list p.brief { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--text); }
-  .feed-list p.orig { margin: 4px 0 0; font-size: 12.5px; color: var(--dim); overflow-wrap: anywhere; }
-  .feed-list p.orig span { font-style: italic; }
-  .feed-list p.orig a { font-family: var(--mono); font-style: normal; font-size: 12px; color: var(--cyan); white-space: nowrap; }
-  .m-brief { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
-  .feed-list a, .market a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--violet), var(--violet)); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .3s, color .2s; }
-  .feed-list a:hover, .market a:hover { color: var(--text); background-size: 100% 1px; }
-  .feed-list a::after, .market a::after { content: " ↗"; color: var(--dim); font-size: .85em; }
+  .feed-list, .market-list { list-style: none; margin: 0; padding: 0; }
+  .feed-list li { display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .feed-list time { font-family: var(--mono); font-size: 12px; color: var(--dim); padding-top: 3px; }
+  .market-list li { padding: 12px 0; border-top: 1px solid var(--line); }
+  .market-list li:first-child { border-top: 0; }
+  p.line { margin: 0; font-size: 15px; line-height: 1.5; color: var(--text); }
+  p.line b { font-weight: 600; margin-right: 4px; }
+  p.line b::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: var(--dot); margin-right: 7px; vertical-align: 1px; }
+  p.src { margin: 3px 0 0; font-family: var(--mono); font-size: 11.5px; color: var(--dim); }
+  p.src a { color: var(--muted); text-decoration: none; }
+  p.src a:hover { color: var(--cyan); }
+  p.src a::after { content: " ↗"; }
+  .feed-empty { margin: 16px 0 4px; font-size: 14px; color: var(--muted); }
   .more {
     width: 100%; margin-top: 6px; padding: 10px; border-radius: 10px; cursor: pointer;
     font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--bg-2); border: 1px solid var(--line);
   }
   .more:hover { color: var(--text); border-color: var(--violet); }
   .more[hidden] { display: none; }
-  .market-group + .market-group { margin-top: 18px; }
-  .market-cat { margin: 0 0 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); }
-  .market ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-  .market li { font-size: 14.5px; color: #cfd4e6; padding-left: 14px; border-left: 1px solid var(--line-strong); }
-  .market li small { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--dim); margin-top: 2px; }
-  .market-note { margin: 18px 0 0; font-family: var(--mono); font-size: 11.5px; color: var(--dim); }
 
   /* Card competitor */
   .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
@@ -520,21 +514,29 @@
       <div class="section-head reveal">
         <span class="kicker">03 · News</span>
         <h2>Le notizie della settimana</h2>
-        <p>Tutte le uscite dei competitor nel report del 26 ottobre, con una sintesi in italiano per ognuna, e le notizie di mercato su HR, AI e lavoro. Le voci evidenziate sono le più rilevanti per CVing.</p>
+        <p>Le cose da sapere della settimana, in una riga ciascuna. Clicca sulla fonte per leggere l'originale.</p>
       </div>
       <div class="news-layout">
         <div class="panel feed reveal">
           <div class="feed-head">
-            <h3 class="mono">Feed competitor <span id="feed-count"></span></h3>
-            <div class="filters" id="feed-filters" role="group" aria-label="Filtra le news per competitor"></div>
+            <h3 class="mono">Cosa hanno fatto i competitor</h3>
+            <div class="feed-controls">
+              <div class="seg" role="group" aria-label="Quali notizie mostrare">
+                <button type="button" data-scope="key" aria-pressed="true"></button>
+                <button type="button" data-scope="all" aria-pressed="false"></button>
+              </div>
+              <label class="sr-only" for="feed-who">Competitor</label>
+              <select id="feed-who"></select>
+            </div>
           </div>
           <ol class="feed-list" id="feed-list"></ol>
+          <p class="feed-empty" id="feed-empty" hidden>Nessuna notizia importante per questo competitor. Passa a "Tutte" per vedere le altre.</p>
           <button type="button" class="more" id="feed-more"></button>
         </div>
         <div class="panel market reveal">
-          <h3 class="mono">Mercato HR &amp; AI</h3>
-          <div id="market-list"></div>
-          <p class="market-note">Dal feed automatico abbiamo escluso 4 notizie fuori tema (es. cronaca locale e gossip).</p>
+          <h3 class="mono">Nel mercato</h3>
+          <ol class="market-list" id="market-list"></ol>
+          <button type="button" class="more" id="market-more"></button>
         </div>
       </div>
     </div>
@@ -940,62 +942,66 @@
     </article>`;
   }).join("");
 
-  // News: feed competitor filtrabile + mercato
-  const df = new Intl.DateTimeFormat("it-IT", { day: "2-digit", month: "short" });
+  // News: di default solo le notizie importanti, una riga ciascuna
+  const df = new Intl.DateTimeFormat("it-IT", { day: "numeric", month: "short" });
   const colorOf = Object.fromEntries(sov.map((c, i) => [c.short, palette[i]]));
-  const feedNames = [...new Set(newsFeed.map(n => n.c))];
-  let feedFilter = "Tutti", feedOpen = false;
-  const FEED_LIMIT = 8;
-  const KEY = "★ Rilevanti per CVing";
-  const feedCount = n => n === "Tutti" ? newsFeed.length : n === KEY ? newsFeed.filter(x => x.k).length : newsFeed.filter(x => x.c === n).length;
-  document.getElementById("feed-filters").innerHTML = ["Tutti", KEY, ...feedNames].map(n =>
-    `<button type="button" class="chip${n === KEY ? " key" : ""}" aria-pressed="${n === "Tutti"}" data-feed="${esc(n)}">${esc(n)} · ${feedCount(n)}</button>`).join("");
+  const FEED_LIMIT = 6;
+  let feedScope = "key", feedWho = "", feedOpen = false;
+  const segBtns = document.querySelectorAll(".seg button");
+  segBtns[0].textContent = `Da sapere · ${newsFeed.filter(n => n.k).length}`;
+  segBtns[1].textContent = `Tutte · ${newsFeed.length}`;
+  const who = document.getElementById("feed-who");
+  who.innerHTML = `<option value="">Tutti i competitor</option>` +
+    [...new Set(newsFeed.map(n => n.c))].map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  const sourceLink = n => {
+    const url = safeUrl(n.u);
+    const label = n.s === "LinkedIn" ? "Post LinkedIn" : n.s;
+    return url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>` : esc(label);
+  };
+  // Il nome è già in grassetto: "Factorial lancia…" si legge come una frase sola
+  const brief = n => n.b.startsWith(n.c + " ") ? n.b.slice(n.c.length + 1) : n.b;
   function renderFeed() {
-    const items = newsFeed.filter(n => feedFilter === "Tutti" || (feedFilter === KEY ? n.k : n.c === feedFilter));
+    const items = newsFeed.filter(n => (feedScope === "all" || n.k) && (!feedWho || n.c === feedWho));
     const shown = feedOpen ? items : items.slice(0, FEED_LIMIT);
-    document.getElementById("feed-count").textContent = `· ${items.length}`;
-    document.getElementById("feed-list").innerHTML = shown.map(n => {
-      // Sintesi in italiano in primo piano, testo originale sotto con il link
-      const url = safeUrl(n.u);
-      const post = n.s === "LinkedIn";
-      const kind = post ? "Post LinkedIn" : `Articolo · ${n.s}`;
-      const orig = post ? `Testo originale: ${n.t}` : n.t;
-      const link = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(post ? "Apri il post" : "Leggi l'articolo")}</a>` : "";
-      return `<li class="${n.k ? "is-key" : ""}">
+    document.getElementById("feed-list").innerHTML = shown.map(n => `
+      <li>
         <time datetime="${n.d}">${df.format(new Date(n.d + "T12:00:00"))}</time>
         <div>
-          <div class="meta">
-            <span class="who"><i style="background:${colorOf[n.c] || "var(--dim)"}"></i>${esc(n.c)}</span>
-            <span class="tag">${esc(n.g)}</span>
-            ${n.k ? '<span class="tag key">★ Rilevante</span>' : ""}
-          </div>
-          <p class="brief">${esc(n.b)}</p>
-          <p class="orig"><span>${esc(kind)} — ${esc(orig)}</span> ${link}</p>
+          <p class="line"><b style="--dot:${colorOf[n.c] || "var(--dim)"}">${esc(n.c)}</b> ${esc(brief(n))}</p>
+          <p class="src">${sourceLink(n)}</p>
         </div>
-      </li>`;
-    }).join("");
+      </li>`).join("");
+    document.getElementById("feed-empty").hidden = items.length > 0;
     const more = document.getElementById("feed-more");
     more.hidden = items.length <= FEED_LIMIT;
-    more.textContent = feedOpen ? "Mostra meno ↑" : `Mostra tutte (${items.length}) ↓`;
+    more.textContent = feedOpen ? "Mostra meno" : `Mostra altre ${items.length - FEED_LIMIT}`;
   }
-  document.querySelectorAll(".chip[data-feed]").forEach(chip => chip.addEventListener("click", () => {
-    document.querySelectorAll(".chip[data-feed]").forEach(c => c.setAttribute("aria-pressed", c === chip));
-    feedFilter = chip.dataset.feed; feedOpen = false; renderFeed();
+  segBtns.forEach(btn => btn.addEventListener("click", () => {
+    segBtns.forEach(b => b.setAttribute("aria-pressed", b === btn));
+    feedScope = btn.dataset.scope; feedOpen = false; renderFeed();
   }));
+  who.addEventListener("change", () => { feedWho = who.value; feedOpen = false; renderFeed(); });
   document.getElementById("feed-more").addEventListener("click", () => { feedOpen = !feedOpen; renderFeed(); });
   renderFeed();
 
-  const groups = {};
-  marketNews.forEach(n => (groups[n.k] ||= []).push(n));
-  document.getElementById("market-list").innerHTML = Object.entries(groups).map(([k, list]) => `
-    <div class="market-group">
-      <p class="market-cat">${esc(k)}</p>
-      <ul>${list.map(n => {
-        const url = safeUrl(n.u);
-        const title = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(n.t)}</a>` : esc(n.t);
-        return `<li>${title}${n.b ? `<span class="m-brief">${esc(n.b)}</span>` : ""}<small>${esc(n.s)}${n.d ? " · " + esc(n.d) : ""}</small></li>`;
-      }).join("")}</ul>
-    </div>`).join("");
+  // Mercato: prima le 5 notizie più utili per CVing, le altre a richiesta
+  const MARKET_FIRST = ["Decreto IA e Lavoro", "AI e lavoro: nuovi obblighi", "stipendi trasparenti", "Recruiting Day Young", "InJob"];
+  const marketSorted = [
+    ...MARKET_FIRST.map(k => marketNews.find(n => n.t.includes(k))).filter(Boolean),
+    ...marketNews.filter(n => !MARKET_FIRST.some(k => n.t.includes(k)))
+  ];
+  let marketOpen = false;
+  function renderMarket() {
+    const shown = marketOpen ? marketSorted : marketSorted.slice(0, MARKET_FIRST.length);
+    document.getElementById("market-list").innerHTML = shown.map(n => `
+      <li>
+        <p class="line">${esc(n.b || n.t)}</p>
+        <p class="src">${sourceLink(n)}</p>
+      </li>`).join("");
+    document.getElementById("market-more").textContent = marketOpen ? "Mostra meno" : `Mostra altre ${marketSorted.length - MARKET_FIRST.length}`;
+  }
+  document.getElementById("market-more").addEventListener("click", () => { marketOpen = !marketOpen; renderMarket(); });
+  renderMarket();
 
   // Tabella ordinabile
   const tbody = document.querySelector("#compare tbody");
