@@ -1,0 +1,19 @@
+{
+  "source": "linkedin-apify",
+  "from": "dataset zLVyM2B45EZtMHXOX",
+  "windowDays": 7,
+  "covered": [
+    "CVing"
+  ],
+  "competitorsCovered": 0,
+  "activity": {
+    "CVing": {
+      "prev": 0,
+      "now": 1,
+      "likes": 16,
+      "comments": 0,
+      "shares": 6
+    }
+  },
+  "updatedAt": "2026-11-03T10:12:56Z"
+}
