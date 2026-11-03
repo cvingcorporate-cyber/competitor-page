@@ -562,7 +562,7 @@
         <div class="pos-box"><canvas id="posmap" role="img" aria-label="Mappa di brand positioning dei competitor"></canvas></div>
         <p class="chart-fallback" id="pos-fallback">Il grafico non si è caricato (Chart.js non raggiungibile).</p>
         <p class="chart-insight" id="pos-insight"></p>
-        <p class="chart-note">// asse orizzontale: nostra valutazione dell'offerta di ogni competitor. Asse verticale e bolle: calcolati dal Google Sheet, che viene riletto ogni 6 ore. CVing non ha uscite tracciate nel foglio: la sua bolla sta in una corsia a parte sotto lo zero, grande quanto il suo pubblico Instagram.</p>
+        <p class="chart-note" id="pos-note">// asse orizzontale: nostra valutazione dell'offerta di ogni competitor. Asse verticale e bolle: calcolati dal Google Sheet, che viene riletto ogni 6 ore. CVing non ha uscite tracciate nel foglio: la sua bolla sta in una corsia a parte sotto lo zero, grande quanto il suo pubblico Instagram.</p>
       </div>
     </div>
   </section>
@@ -1256,7 +1256,10 @@
       suite: "Visibilità suite HR", updated: "Report", none: "nessuno",
       xLeft: "← Specialisti del recruiting", xRight: "Suite HR complete →", xLeftShort: "← Recruiting", xRightShort: "Suite HR →",
       yTitle: "Share of voice (ultime 2 settimane)", band: "zona CVing",
-      share: "Share of voice", items: "Uscite", followers: "Follower IG", na: "n.d.", and: " e ", untracked: "uscite non tracciate",
+      share: "Share of voice", items: "Uscite", followers: "Follower IG", na: "n.d.", and: " e ", untracked: "uscite non tracciate", source: "fonte", srcSheet: "Google Sheet", srcLi: "LinkedIn via Apify",
+      cvShare: n => ` CVing da sola fa ${art(n)}${n}%.`,
+      noteSheet: "// asse orizzontale: nostra valutazione dell'offerta di ogni competitor. Asse verticale e bolle: calcolati dal Google Sheet, che viene riletto ogni 6 ore. CVing non ha uscite tracciate nel foglio: la sua bolla sta in una corsia a parte sotto lo zero, grande quanto il suo pubblico Instagram.",
+      noteLi: "// asse orizzontale: nostra valutazione dell'offerta di ogni competitor. Asse verticale: quota dei post LinkedIn degli ultimi 14 giorni, raccolti con Apify e riletti ogni 6 ore, CVing compresa. Bolle: follower Instagram.",
       insight: (zn, zs, sn, ss) => `Nella zona di CVing ci sono ${zn}: insieme fanno ${art(zs)}${zs}% delle uscite. ` +
         (ss > zs ? `Le suite HR (${sn}) ne fanno ${art(ss)}${ss}%: oggi la visibilità la prendono loro.`
                  : `Le suite HR (${sn}) si fermano ${art(ss) === "l'" ? "all'" : "al "}${ss}%: la zona di CVing è la più visibile.`)
@@ -1273,26 +1276,42 @@
       instagram: Object.fromEntries(instagram.map(([h, p, n]) => [h, [p, n]]))
     };
     let live = false, lastJson = "", checkedAt = null, chart = null, cvPoint = null;
+    // Post LinkedIn da Apify: sostituiscono le uscite del foglio quando coprono almeno 5 competitor
+    let li = null;
+    const MIN_COVERED = 5;
+    const fromLinkedIn = () => !!(li && li.competitorsCovered >= MIN_COVERED);
+    const activity = () => fromLinkedIn() ? li.activity : data.activity;
     const listNames = list => list.length ? list.map(p => p.name).join(", ").replace(/, ([^,]*)$/, L.and + "$1") : L.none;
     const hhmm = d => d.toLocaleTimeString(document.documentElement.lang, { hour: "2-digit", minute: "2-digit" });
 
     function points() {
-      const names = Object.keys(OFFER).filter(n => data.activity[n]);
-      const total = names.reduce((s, n) => s + data.activity[n].prev + data.activity[n].now, 0) || 1;
+      const act = activity();
+      const names = Object.keys(OFFER).filter(n => act[n]);
+      const cvA = act.CVing || null;   // presente solo se Apify raccoglie anche i post di CVing
+      const total = names.reduce((s, n) => s + act[n].prev + act[n].now, 0) + (cvA ? cvA.prev + cvA.now : 0) || 1;
       const cvF = (data.instagram["@cving_app"] || [])[1] ?? null;
       const maxF = Math.max(1, cvF || 0, ...names.map(n => (data.instagram[IG[n]] || [])[1] || 0));
-      // Le uscite di CVing non sono nel foglio: la bolla resta a 0% e non entra nei calcoli di share
-      cvPoint = { name: "CVing", us: true, x: CVING_X, y: -LANE / 2, f: cvF, r: cvF ? 8 + 22 * Math.sqrt(cvF / maxF) : 7 };
+      // Senza dati su CVing la bolla sta nella corsia sotto lo zero e non entra nei calcoli di share
+      cvPoint = { name: "CVing", us: true, tracked: !!cvA, x: CVING_X, f: cvF, r: cvF ? 8 + 22 * Math.sqrt(cvF / maxF) : 7,
+                  y: cvA ? (cvA.prev + cvA.now) / total * 100 : -LANE / 2, prev: cvA?.prev, now: cvA?.now };
       return names.map(n => {
-        const a = data.activity[n], f = (data.instagram[IG[n]] || [])[1] ?? null;
+        const a = act[n], f = (data.instagram[IG[n]] || [])[1] ?? null;
         return { name: n, x: OFFER[n], y: (a.prev + a.now) / total * 100, prev: a.prev, now: a.now, f,
                  r: f ? 8 + 22 * Math.sqrt(f / maxF) : 7 };
       });
     }
 
+    // Con la fonte LinkedIn la data è quella dell'ultimo aggiornamento Apify (gg/mm/aaaa hh:mm)
+    const reportDate = () => {
+      if (!fromLinkedIn() || !li.updatedAt) return data.reportDate || "—";
+      const d = new Date(li.updatedAt), pad = n => String(n).padStart(2, "0");
+      return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    };
+
     function renderStatus() {
       const el = document.getElementById("pos-status");
-      el.innerHTML = `<span class="pulse${live ? "" : " off"}"></span>${live ? L.live : L.offline} · ${L.report} <b>${esc(data.reportDate || "—")}</b>` +
+      el.innerHTML = `<span class="pulse${live ? "" : " off"}"></span>${live ? L.live : L.offline} · ${L.report} <b>${esc(reportDate())}</b>` +
+        ` · ${L.source}: ${fromLinkedIn() ? L.srcLi : L.srcSheet}` +
         (live && checkedAt ? ` · ${L.checked} ${hhmm(checkedAt)}` : "");
     }
 
@@ -1302,14 +1321,16 @@
       const suite = pts.filter(p => p.x >= 70);
       const zs = Math.round(zone.reduce((s, p) => s + p.y, 0));
       const ss = Math.round(suite.reduce((s, p) => s + p.y, 0));
-      const [day, time] = String(data.reportDate || "— —").split(" ");
+      const [day, time] = String(reportDate() || "— —").split(" ");
       document.getElementById("pos-stats").innerHTML = [
         [L.zone, zone.length, `${L.zoneSub}: ${listNames(zone)}`],
         [L.zoneShare, `${zs}%`, L.zoneShareSub],
         [L.suite, `${ss}%`, listNames(suite)],
         [L.updated, day.slice(0, 5), `${day.slice(6)}${time ? " · " + time : ""}`]
       ].map(([l, v, sub]) => `<div class="stat"><small>${esc(l)}</small><b>${esc(v)}</b><span>${esc(sub)}</span></div>`).join("");
-      document.getElementById("pos-insight").innerHTML = `<b>${document.documentElement.lang === "en" ? "Reading" : "Lettura"}</b>${esc(L.insight(listNames(zone), zs, listNames(suite), ss))}`;
+      const cvLine = cvPoint && cvPoint.tracked ? L.cvShare(Math.round(cvPoint.y)) : "";
+      document.getElementById("pos-insight").innerHTML = `<b>${document.documentElement.lang === "en" ? "Reading" : "Lettura"}</b>${esc(L.insight(listNames(zone), zs, listNames(suite), ss) + cvLine)}`;
+      document.getElementById("pos-note").textContent = fromLinkedIn() ? L.noteLi : L.noteSheet;
       renderStatus();
       drawMap(pts);
     }
@@ -1324,11 +1345,13 @@
         ctx.fillStyle = "rgba(139, 123, 255, .08)";
         ctx.fillRect(x0, a.top, x1 - x0, a.bottom - a.top);
         // Corsia sotto lo zero: qui c'è solo CVing, le cui uscite non sono nel foglio
-        const y0 = y.getPixelForValue(0);
-        ctx.fillStyle = "rgba(19, 27, 46, .05)";
-        ctx.fillRect(a.left, y0, a.right - a.left, a.bottom - y0);
-        ctx.strokeStyle = "rgba(19, 27, 46, .25)"; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(a.left, y0); ctx.lineTo(a.right, y0); ctx.stroke();
+        if (cvPoint && !cvPoint.tracked) {
+          const y0 = y.getPixelForValue(0);
+          ctx.fillStyle = "rgba(19, 27, 46, .05)";
+          ctx.fillRect(a.left, y0, a.right - a.left, a.bottom - y0);
+          ctx.strokeStyle = "rgba(19, 27, 46, .25)"; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(a.left, y0); ctx.lineTo(a.right, y0); ctx.stroke();
+        }
         ctx.strokeStyle = "#131b2e"; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
         ctx.beginPath(); ctx.moveTo(xc, a.top); ctx.lineTo(xc, a.bottom); ctx.stroke();
         ctx.setLineDash([]);
@@ -1356,7 +1379,7 @@
           const ly = [0, -15, 15, -30, 30, -45, 45].map(d => el.y + d).find(free) ?? el.y;
           placed.push({ x: lx, y: ly, w });
           ctx.textAlign = "left"; ctx.fillText(p.name, lx, ly);
-          if (p.us) {
+          if (p.us && !p.tracked) {
             ctx.save(); ctx.font = "500 10.5px 'JetBrains Mono', ui-monospace, monospace"; ctx.fillStyle = "#6e7891";
             ctx.fillText(L.untracked, lx, ly + 14); ctx.restore();
             placed.push({ x: lx, y: ly + 14, w: ctx.measureText(L.untracked).width });
@@ -1380,7 +1403,8 @@
         backgroundColor: pts.map(p => p.f ? color(p.name) + "99" : "transparent"),
         borderColor: pts.map(p => color(p.name)), borderWidth: 2, hoverBorderWidth: 3
       };
-      if (chart) { chart.data.datasets[0] = ds; chart.options.scales.y.suggestedMax = maxY + 6; chart.update(); return; }
+      const minY = cvPoint && cvPoint.tracked ? -3 : -LANE;
+      if (chart) { chart.data.datasets[0] = ds; chart.options.scales.y.suggestedMax = maxY + 6; chart.options.scales.y.min = minY; chart.update(); return; }
       chart = new Chart(document.getElementById("posmap"), {
         type: "bubble", data: { datasets: [ds] }, plugins: [layer],
         options: {
@@ -1389,7 +1413,7 @@
           layout: { padding: { top: 10, right: 16, bottom: 26 } },
           scales: {
             x: { min: 0, max: 100, grid: { display: false }, border: { color: "rgba(30, 58, 120, .22)" }, ticks: { display: false } },
-            y: { min: -LANE, suggestedMax: maxY + 6, grid: { color: c => c.tick.value < 0 ? "transparent" : "rgba(20, 24, 38, .07)" }, border: { display: false },
+            y: { min: minY, suggestedMax: maxY + 6, grid: { color: c => c.tick.value < 0 ? "transparent" : "rgba(20, 24, 38, .07)" }, border: { display: false },
                  ticks: { callback: v => v < 0 ? "" : v + "%" },
                  title: { display: true, text: L.yTitle, color: "#3b4663", font: { family: "'JetBrains Mono', ui-monospace, monospace", size: 11.5 } } }
           },
@@ -1399,7 +1423,7 @@
               backgroundColor: "#121726", titleColor: "#e8ebf7", bodyColor: "#cfd4e6", padding: 12, cornerRadius: 10,
               callbacks: {
                 title: items => items[0].raw.name,
-                label: i => i.raw.us ? [`${L.share}: ${L.untracked}`, `${L.followers}: ${i.raw.f ? nfg.format(i.raw.f) : L.na}`] :
+                label: i => i.raw.us && !i.raw.tracked ? [`${L.share}: ${L.untracked}`, `${L.followers}: ${i.raw.f ? nfg.format(i.raw.f) : L.na}`] :
                             [`${L.share}: ${Math.round(i.raw.y)}%`, `${L.items}: ${i.raw.prev} → ${i.raw.now}`,
                              `${L.followers}: ${i.raw.f ? nfg.format(i.raw.f) : L.na}`]
               }
@@ -1409,14 +1433,19 @@
       });
     }
 
+    const fetchText = async url => {
+      try { const r = await fetch(url, { cache: "no-store" }); return r.ok ? await r.text() : null; } catch (e) { return null; }
+    };
     async function refresh() {
-      try {
-        const res = await fetch("live/positioning.json", { cache: "no-store" });
-        if (!res.ok) throw new Error(res.status);
-        const text = await res.text();
-        checkedAt = new Date(); live = true;
-        if (text !== lastJson) { lastJson = text; data = JSON.parse(text); render(); } else renderStatus();
-      } catch (e) { renderStatus(); }
+      const [pos, lin] = await Promise.all([fetchText("live/positioning.json"), fetchText("live/linkedin.json")]);
+      if (pos === null) { renderStatus(); return; }
+      checkedAt = new Date(); live = true;
+      const text = pos + "\n" + (lin || "");
+      if (text === lastJson) { renderStatus(); return; }
+      lastJson = text;
+      data = JSON.parse(pos);
+      try { li = lin ? JSON.parse(lin) : null; } catch (e) { li = null; }
+      render();
     }
     render();
     refresh();

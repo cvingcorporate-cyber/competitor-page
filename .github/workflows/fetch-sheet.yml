@@ -8,6 +8,7 @@ on:
     paths:
       - .github/workflows/fetch-sheet.yml
       - scripts/build_live.py
+      - scripts/build_apify.py
   workflow_dispatch:
 
 permissions:
@@ -30,6 +31,14 @@ jobs:
         run: |
           pip install --quiet openpyxl
           python scripts/build_live.py data/competitor-2026.xlsx live/positioning.json
+      - name: Post LinkedIn da Apify
+        # Con il secret APIFY_TOKEN e la variabile APIFY_TASK_ID legge l'ultima esecuzione del task;
+        # altrimenti il dataset indicato. Se Apify non risponde si tengono i dati precedenti.
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          APIFY_TASK_ID: ${{ vars.APIFY_TASK_ID }}
+          APIFY_DATASET_ID: ${{ vars.APIFY_DATASET_ID || 'zLVyM2B45EZtMHXOX' }}
+        run: python scripts/build_apify.py live/linkedin.json || echo "Apify non disponibile, continuo con i dati del foglio"
       - name: Commit dei dati
         run: |
           git config user.name "github-actions[bot]"
