@@ -328,32 +328,14 @@
   }
   .news b { color: var(--cyan); font-family: var(--mono); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: 2px; }
 
-  /* Tabella */
-  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { width: 100%; border-collapse: collapse; min-width: 780px; font-size: 14.5px; }
-  th, td { padding: 15px 18px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); white-space: nowrap; }
-  th button { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
-  th button:hover { color: var(--text); }
-  th button:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 4px; }
-  th button::after { content: "↕"; opacity: .4; }
-  th[aria-sort="ascending"] button { color: var(--cyan); }
-  th[aria-sort="descending"] button { color: var(--cyan); }
-  th[aria-sort="ascending"] button::after { content: "↑"; opacity: 1; }
-  th[aria-sort="descending"] button::after { content: "↓"; opacity: 1; }
-  tbody tr { transition: background .2s; }
-  tbody tr:last-child td { border-bottom: 0; }
-  tbody tr:hover { background: rgba(139, 123, 255, .06); }
-  tr.us td { background: rgba(62, 230, 255, .07); }
-  tr.us td:first-child { box-shadow: inset 2px 0 0 var(--cyan); }
-  td small { color: var(--dim); font-size: 12.5px; }
-  td.num { font-family: var(--mono); font-size: 14px; white-space: nowrap; }
-  .up { color: var(--green); }
-  .down { color: var(--red); }
-  .flat { color: var(--dim); }
-  .bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--grad); vertical-align: middle; margin-right: 10px; box-shadow: 0 0 10px rgba(62, 230, 255, .4); }
-  .scroll-hint { display: none; font-family: var(--mono); font-size: 12px; color: var(--dim); margin: 10px 2px 0; }
-  @media (max-width: 820px) { .scroll-hint { display: block; } }
+  /* Brand positioning */
+  .pos-card { padding: 22px; }
+  .pos-status { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 16px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .pos-status b { color: var(--text); font-weight: 500; }
+  .pos-status .pulse.off { background: var(--dim); }
+  .pos-status .pulse.off::after { display: none; }
+  .pos-box { position: relative; height: 500px; }
+  @media (max-width: 640px) { .pos-box { height: 440px; } }
 
   /* Grafico */
   .chart-card { padding: 22px; }
@@ -420,7 +402,7 @@
       <li><a href="#trend">02 Trends</a></li>
       <li><a href="#news">03 News</a></li>
       <li><a href="#competitor">04 Competitors</a></li>
-      <li><a href="#confronto">05 Comparison</a></li>
+      <li><a href="#posizionamento">05 Positioning</a></li>
       <li><a href="#grafico">06 Data</a></li>
     </ul>
     <div class="lang" role="group" aria-label="Language"><a href="index.html" hreflang="it" lang="it">IT</a><a href="en.html" hreflang="en" lang="en" aria-current="page">EN</a></div>
@@ -567,29 +549,21 @@
     </div>
   </section>
 
-  <section id="confronto">
+  <section id="posizionamento">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="kicker">05 · Comparison</span>
-        <h2>Comparison table</h2>
-        <p>Click the headers to sort. The highlighted row is CVing, for reference.</p>
+        <span class="kicker">05 · Positioning</span>
+        <h2>Brand positioning</h2>
+        <p>Where each competitor sits: horizontally, the type of offering; vertically, how visible it has been over the last two weeks. Bubble size reflects the Instagram audience.</p>
       </div>
-      <div class="panel table-wrap reveal">
-        <table id="compare">
-          <thead>
-            <tr>
-              <th scope="col" data-key="name"><button type="button">Competitor</button></th>
-              <th scope="col" data-key="type"><button type="button">Positioning</button></th>
-              <th scope="col" data-key="priceSort"><button type="button">Price</button></th>
-              <th scope="col" data-key="total"><button type="button">Posts 2 wks</button></th>
-              <th scope="col" data-key="igNow"><button type="button">IG followers</button></th>
-              <th scope="col" data-key="igDelta"><button type="button">IG change</button></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+      <div class="panel pos-card reveal">
+        <p class="pos-status" id="pos-status"></p>
+        <div class="chart-stats" id="pos-stats"></div>
+        <div class="pos-box"><canvas id="posmap" role="img" aria-label="Competitor brand positioning map"></canvas></div>
+        <p class="chart-fallback" id="pos-fallback">The chart didn't load (Chart.js unreachable).</p>
+        <p class="chart-insight" id="pos-insight"></p>
+        <p class="chart-note">// horizontal axis: our assessment of each competitor's offering. Vertical axis and bubbles: calculated from the Google Sheet, re-read every 6 hours. CVing's own activity isn't tracked in the sheet, so it is shown as a reference line.</p>
       </div>
-      <p class="scroll-hint">← scroll the table sideways →</p>
     </div>
   </section>
 
@@ -1009,46 +983,6 @@
   document.getElementById("market-more").addEventListener("click", () => { marketOpen = !marketOpen; renderMarket(); });
   renderMarket();
 
-  // Tabella ordinabile
-  const tbody = document.querySelector("#compare tbody");
-  let rows = [...competitors, cving];
-  function deltaCell(d) {
-    if (d == null) return '<span class="flat">n/a</span>';
-    const cls = d > 0.0005 ? "up" : d < -0.0005 ? "down" : "flat";
-    return `<span class="${cls}">${pf.format(d)}</span>`;
-  }
-  function renderTable() {
-    tbody.innerHTML = rows.map(c => `
-      <tr class="${c.us ? "us" : ""}">
-        <td><b>${esc(c.name)}</b>${c.us ? ' <small>(us)</small>' : ""}</td>
-        <td>${esc(c.type)}</td>
-        <td>${esc(c.price)}${c.priceNote ? `<br><small>${esc(c.priceNote)}</small>` : ""}</td>
-        <td class="num">${c.total == null ? '<span class="flat">—</span>' :
-          `<span class="bar" style="width:${Math.max(4, c.total / maxTotal * 64)}px"></span>${c.total}`}</td>
-        <td class="num">${c.igNow == null ? '<span class="flat">n/a</span>' : nf.format(c.igNow)}${c.igNote ? `<br><small>${esc(c.igNote)}</small>` : ""}</td>
-        <td class="num">${deltaCell(c.igDelta)}</td>
-      </tr>`).join("");
-  }
-  document.querySelectorAll("#compare th").forEach(th => {
-    th.querySelector("button").addEventListener("click", () => {
-      const key = th.dataset.key;
-      const dir = th.getAttribute("aria-sort") === "descending" ? "ascending" : "descending";
-      document.querySelectorAll("#compare th").forEach(h => h.removeAttribute("aria-sort"));
-      th.setAttribute("aria-sort", dir);
-      const sign = dir === "ascending" ? 1 : -1;
-      rows.sort((a, b) => {
-        const va = a[key], vb = b[key];
-        if (va == null && vb == null) return 0;
-        if (va == null) return 1;   // valori mancanti sempre in fondo
-        if (vb == null) return -1;
-        return (typeof va === "string" ? va.localeCompare(vb, "en") : va - vb) * sign;
-      });
-      renderTable();
-    });
-  });
-  rows.sort((a, b) => (b.total ?? -1) - (a.total ?? -1));
-  renderTable();
-
   // Comparsa allo scroll e contatori
   const io = "IntersectionObserver" in window && !reduceMotion
     ? new IntersectionObserver(entries => entries.forEach(e => {
@@ -1308,6 +1242,167 @@
     });
     draw(current);
   }
+
+  // Brand positioning: offerta sull'asse X (nostra valutazione), visibilità live su asse Y e bolle
+  (() => {
+    // Articolo italiano davanti a una percentuale: "l'8%", "l'11%", "l'80%", "il 53%"
+    const art = n => (n === 1 || n === 8 || n === 11 || (n >= 80 && n < 90)) ? "l'" : "il ";
+    const L = {
+      live: "Live data", offline: "Report data", report: "report of", checked: "checked at",
+      zone: "Close to CVing", zoneSub: "recruiting specialists",
+      zoneShare: "CVing zone visibility", zoneShareSub: "share of activity",
+      suite: "HR suite visibility", updated: "Report", none: "none",
+      xLeft: "← Recruiting specialists", xRight: "Full HR suites →", xLeftShort: "← Recruiting", xRightShort: "HR suites →",
+      yTitle: "Share of voice (last 2 weeks)", band: "CVing zone",
+      share: "Share of voice", items: "Posts & news", followers: "IG followers", na: "n/a", and: " and ",
+      insight: (zn, zs, sn, ss) => `In CVing's zone are ${zn}: together they account for ${zs}% of activity. ` +
+        (ss > zs ? `The HR suites (${sn}) account for ${ss}%: today they are the ones getting the visibility.`
+                 : `The HR suites (${sn}) stop at ${ss}%: CVing's zone is the most visible.`)
+    };
+    // 0 = specialista del recruiting, 100 = suite HR completa
+    const OFFER = { StepsConnect: 8, "nCore HR": 18, Arca24: 24, Teamtailor: 28, Inrecruiting: 38, Altamira: 55, Factorial: 80, Personio: 86, TeamSystem: 94 };
+    const CVING_X = 14, ZONE = 15;
+    const IG = { Factorial: "@factorial", Personio: "@personio_hr", "nCore HR": "@ncorehr", StepsConnect: "@stepsconnect_it",
+                 Altamira: "@altamirahrm", Arca24: "@arca24_hr", Inrecruiting: "@zucchetti_official" };
+    // Se il file live non è raggiungibile (es. pagina aperta in locale) si usano i dati della pagina
+    let data = {
+      reportDate: "26/10/2026 06:58",
+      activity: Object.fromEntries(competitors.map(c => [c.short, { prev: c.w43, now: c.w44 }])),
+      instagram: Object.fromEntries(instagram.map(([h, p, n]) => [h, [p, n]]))
+    };
+    let live = false, lastJson = "", checkedAt = null, chart = null;
+    const listNames = list => list.length ? list.map(p => p.name).join(", ").replace(/, ([^,]*)$/, L.and + "$1") : L.none;
+    const hhmm = d => d.toLocaleTimeString(document.documentElement.lang, { hour: "2-digit", minute: "2-digit" });
+
+    function points() {
+      const names = Object.keys(OFFER).filter(n => data.activity[n]);
+      const total = names.reduce((s, n) => s + data.activity[n].prev + data.activity[n].now, 0) || 1;
+      const maxF = Math.max(1, ...names.map(n => (data.instagram[IG[n]] || [])[1] || 0));
+      return names.map(n => {
+        const a = data.activity[n], f = (data.instagram[IG[n]] || [])[1] ?? null;
+        return { name: n, x: OFFER[n], y: (a.prev + a.now) / total * 100, prev: a.prev, now: a.now, f,
+                 r: f ? 8 + 22 * Math.sqrt(f / maxF) : 7 };
+      });
+    }
+
+    function renderStatus() {
+      const el = document.getElementById("pos-status");
+      el.innerHTML = `<span class="pulse${live ? "" : " off"}"></span>${live ? L.live : L.offline} · ${L.report} <b>${esc(data.reportDate || "—")}</b>` +
+        (live && checkedAt ? ` · ${L.checked} ${hhmm(checkedAt)}` : "");
+    }
+
+    function render() {
+      const pts = points();
+      const zone = pts.filter(p => Math.abs(p.x - CVING_X) <= ZONE);
+      const suite = pts.filter(p => p.x >= 70);
+      const zs = Math.round(zone.reduce((s, p) => s + p.y, 0));
+      const ss = Math.round(suite.reduce((s, p) => s + p.y, 0));
+      const [day, time] = String(data.reportDate || "— —").split(" ");
+      document.getElementById("pos-stats").innerHTML = [
+        [L.zone, zone.length, `${L.zoneSub}: ${listNames(zone)}`],
+        [L.zoneShare, `${zs}%`, L.zoneShareSub],
+        [L.suite, `${ss}%`, listNames(suite)],
+        [L.updated, day.slice(0, 5), `${day.slice(6)}${time ? " · " + time : ""}`]
+      ].map(([l, v, sub]) => `<div class="stat"><small>${esc(l)}</small><b>${esc(v)}</b><span>${esc(sub)}</span></div>`).join("");
+      document.getElementById("pos-insight").innerHTML = `<b>${document.documentElement.lang === "en" ? "Reading" : "Lettura"}</b>${esc(L.insight(listNames(zone), zs, listNames(suite), ss))}`;
+      renderStatus();
+      drawMap(pts);
+    }
+
+    // Zona e linea di CVing sotto le bolle, nomi accanto alle bolle
+    const layer = {
+      id: "posLayer",
+      beforeDatasetsDraw(c) {
+        const { ctx, chartArea: a, scales: { x } } = c;
+        const x0 = x.getPixelForValue(Math.max(0, CVING_X - ZONE)), x1 = x.getPixelForValue(CVING_X + ZONE), xc = x.getPixelForValue(CVING_X);
+        ctx.save();
+        ctx.fillStyle = "rgba(139, 123, 255, .08)";
+        ctx.fillRect(x0, a.top, x1 - x0, a.bottom - a.top);
+        ctx.strokeStyle = "#131b2e"; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
+        ctx.beginPath(); ctx.moveTo(xc, a.top); ctx.lineTo(xc, a.bottom); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = "#131b2e"; ctx.font = "600 12px 'JetBrains Mono', ui-monospace, monospace"; ctx.textAlign = "left"; ctx.textBaseline = "top";
+        ctx.fillText("CVing", xc + 6, a.top + 6);
+        ctx.fillStyle = "#6e7891"; ctx.font = "500 10.5px 'JetBrains Mono', ui-monospace, monospace";
+        ctx.fillText(L.band, xc + 6, a.top + 22);
+        ctx.fillStyle = "#3b4663"; ctx.font = "500 11.5px 'JetBrains Mono', ui-monospace, monospace"; ctx.textBaseline = "top";
+        const narrow = a.right - a.left < 480;   // su mobile le etichette lunghe si sovrappongono
+        ctx.textAlign = "left"; ctx.fillText(narrow ? L.xLeftShort : L.xLeft, a.left, a.bottom + 10);
+        ctx.textAlign = "right"; ctx.fillText(narrow ? L.xRightShort : L.xRight, a.right, a.bottom + 10);
+        ctx.restore();
+      },
+      afterDatasetsDraw(c) {
+        const { ctx } = c, placed = [];
+        ctx.save();
+        ctx.font = "600 12px 'Inter', system-ui, sans-serif"; ctx.textBaseline = "middle"; ctx.fillStyle = "#131b2e";
+        c.data.datasets[0].data.forEach((p, i) => {
+          const el = c.getDatasetMeta(0).data[i];
+          const w = ctx.measureText(p.name).width;
+          let lx = el.x + p.r + 6, ly = el.y;
+          if (lx + w > c.chartArea.right) lx = el.x - p.r - 6 - w;   // vicino al bordo destro: nome a sinistra
+          // Evita che due nomi si sovrappongano spostandoli in verticale
+          while (placed.some(b => lx < b.x + b.w && lx + w > b.x && Math.abs(ly - b.y) < 15)) ly += 15;
+          placed.push({ x: lx, y: ly, w });
+          ctx.textAlign = "left"; ctx.fillText(p.name, lx, ly);
+        });
+        ctx.restore();
+      }
+    };
+
+    function drawMap(pts) {
+      if (typeof Chart === "undefined") {
+        document.querySelector(".pos-box").style.display = "none";
+        document.getElementById("pos-fallback").style.display = "block";
+        return;
+      }
+      const color = n => colorOf[n] || "#94a3b8";
+      const maxY = Math.max(...pts.map(p => p.y));
+      const ds = {
+        data: pts.map(p => ({ ...p })),
+        backgroundColor: pts.map(p => p.f ? color(p.name) + "99" : "transparent"),
+        borderColor: pts.map(p => color(p.name)), borderWidth: 2, hoverBorderWidth: 3
+      };
+      if (chart) { chart.data.datasets[0] = ds; chart.options.scales.y.suggestedMax = maxY + 6; chart.update(); return; }
+      chart = new Chart(document.getElementById("posmap"), {
+        type: "bubble", data: { datasets: [ds] }, plugins: [layer],
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          animation: reduceMotion ? false : { duration: 700, easing: "easeOutQuart" },
+          layout: { padding: { top: 10, right: 16, bottom: 26 } },
+          scales: {
+            x: { min: 0, max: 100, grid: { display: false }, border: { color: "rgba(30, 58, 120, .22)" }, ticks: { display: false } },
+            y: { min: -3, suggestedMax: maxY + 6, grid: { color: c => c.tick.value < 0 ? "transparent" : "rgba(20, 24, 38, .07)" }, border: { display: false },
+                 ticks: { callback: v => v < 0 ? "" : v + "%" },
+                 title: { display: true, text: L.yTitle, color: "#3b4663", font: { family: "'JetBrains Mono', ui-monospace, monospace", size: 11.5 } } }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: "#121726", titleColor: "#e8ebf7", bodyColor: "#cfd4e6", padding: 12, cornerRadius: 10,
+              callbacks: {
+                title: items => items[0].raw.name,
+                label: i => [`${L.share}: ${Math.round(i.raw.y)}%`, `${L.items}: ${i.raw.prev} → ${i.raw.now}`,
+                             `${L.followers}: ${i.raw.f ? nfg.format(i.raw.f) : L.na}`]
+              }
+            }
+          }
+        }
+      });
+    }
+
+    async function refresh() {
+      try {
+        const res = await fetch("live/positioning.json", { cache: "no-store" });
+        if (!res.ok) throw new Error(res.status);
+        const text = await res.text();
+        checkedAt = new Date(); live = true;
+        if (text !== lastJson) { lastJson = text; data = JSON.parse(text); render(); } else renderStatus();
+      } catch (e) { renderStatus(); }
+    }
+    render();
+    refresh();
+    setInterval(refresh, 5 * 60 * 1000);
+  })();
 </script>
 </body>
 </html>
