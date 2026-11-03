@@ -1,41 +1,41 @@
 {
-  "reportDate": "26/10/2026 06:58",
+  "reportDate": "02/11/2026 06:58",
   "weeks": [
-    "2026-W43",
-    "2026-W44"
+    "2026-W44",
+    "2026-W45"
   ],
   "activity": {
     "Factorial": {
-      "prev": 8,
-      "now": 9
+      "prev": 9,
+      "now": 6
     },
     "Personio": {
-      "prev": 8,
-      "now": 10
+      "prev": 10,
+      "now": 9
     },
     "TeamSystem": {
-      "prev": 5,
-      "now": 4
+      "prev": 4,
+      "now": 7
     },
     "StepsConnect": {
-      "prev": 7,
+      "prev": 0,
       "now": 0
     },
     "Altamira": {
       "prev": 3,
-      "now": 3
+      "now": 4
     },
     "nCore HR": {
-      "prev": 2,
-      "now": 3
+      "prev": 3,
+      "now": 2
     },
     "Teamtailor": {
       "prev": 1,
       "now": 1
     },
     "Inrecruiting": {
-      "prev": 0,
-      "now": 2
+      "prev": 2,
+      "now": 0
     },
     "Arca24": {
       "prev": 0,
@@ -44,45 +44,45 @@
   },
   "instagram": {
     "@cving_app": [
-      13113,
-      13189
+      13189,
+      13199
     ],
     "@factorial": [
-      81289,
-      83154
+      83154,
+      84629
     ],
     "@ncorehr": [
-      1162,
+      1166,
       1166
     ],
     "@stepsconnect_it": [
       1156,
-      1156
+      1153
     ],
     "@wework": [
-      594207,
-      594057
+      594057,
+      593959
     ],
     "@zucchetti_official": [
-      4702,
-      4751
+      4751,
+      4803
     ],
     "@personio_hr": [
-      15619,
-      15623
+      15623,
+      15608
     ],
     "@altamirahrm": [
-      1774,
-      1780
+      1780,
+      1782
     ],
     "@arca24_hr": [
-      187,
+      186,
       186
     ],
     "@siamo_jethr": [
-      38445,
-      39061
+      39061,
+      39678
     ]
   },
-  "updatedAt": "2026-11-03T09:19:03Z"
+  "updatedAt": "2026-11-03T09:23:17Z"
 }
