@@ -1,0 +1,63 @@
+name: Apify · ricognizione actor e dataset
+
+# Da lanciare a mano: elenca actor e task Apify dell'account e, per l'ultima
+# esecuzione riuscita di ognuno, i campi del dataset. Serve a mappare i dati
+# prima di agganciarli alla pagina. Non salva nulla nel repository.
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Elenca actor, task e campi dei dataset
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json, os, sys, urllib.request
+
+          token = os.environ.get("APIFY_TOKEN")
+          if not token:
+              sys.exit("Manca il secret APIFY_TOKEN: aggiungilo in Settings → Secrets and variables → Actions.")
+
+          def get(path):
+              # Token nell'header, non nell'URL: così non compare nei log
+              req = urllib.request.Request("https://api.apify.com/v2" + path, headers={"Authorization": "Bearer " + token})
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as r:
+                      return json.load(r)
+              except urllib.error.HTTPError as e:
+                  return {"error": e.code}
+
+          def short(v):
+              s = json.dumps(v, ensure_ascii=False) if not isinstance(v, str) else v
+              return (s[:70] + "…") if len(s) > 70 else s
+
+          def describe(kind, item_id, name):
+              last = get(f"/{kind}/{item_id}/runs/last?status=SUCCEEDED").get("data")
+              print(f"\n=== {kind[:-1].upper()} {name} ({item_id})")
+              if not last:
+                  print("  nessuna esecuzione riuscita"); return
+              ds = last.get("defaultDatasetId")
+              info = get(f"/datasets/{ds}").get("data", {})
+              print(f"  ultima esecuzione: {last.get('finishedAt')} · elementi: {info.get('itemCount')} · actor: {last.get('actId')}")
+              items = get(f"/datasets/{ds}/items?limit=2&clean=1")
+              if isinstance(items, list) and items:
+                  keys = sorted({k for it in items for k in it})
+                  print("  campi:", ", ".join(keys))
+                  for n, it in enumerate(items, 1):
+                      print(f"  esempio {n}:")
+                      for k in keys[:25]:
+                          if k in it: print(f"    {k}: {short(it[k])}")
+
+          acts = get("/acts?limit=100").get("data", {}).get("items", [])
+          tasks = get("/actor-tasks?limit=100").get("data", {}).get("items", [])
+          print(f"Actor usati: {len(acts)} · Task salvati: {len(tasks)}")
+          for a in acts:
+              describe("acts", a["id"], f"{a.get('username', '')}/{a.get('name', '')}")
+          for t in tasks:
+              describe("actor-tasks", t["id"], t.get("name", ""))
+          PY
