@@ -562,7 +562,7 @@
         <div class="pos-box"><canvas id="posmap" role="img" aria-label="Mappa di brand positioning dei competitor"></canvas></div>
         <p class="chart-fallback" id="pos-fallback">Il grafico non si è caricato (Chart.js non raggiungibile).</p>
         <p class="chart-insight" id="pos-insight"></p>
-        <p class="chart-note">// asse orizzontale: nostra valutazione dell'offerta di ogni competitor. Asse verticale e bolle: calcolati dal Google Sheet, che viene riletto ogni 6 ore. CVing non ha uscite tracciate nel foglio: è indicata come linea di riferimento.</p>
+        <p class="chart-note">// asse orizzontale: nostra valutazione dell'offerta di ogni competitor. Asse verticale e bolle: calcolati dal Google Sheet, che viene riletto ogni 6 ore. CVing non ha uscite tracciate nel foglio: la sua bolla sta in una corsia a parte sotto lo zero, grande quanto il suo pubblico Instagram.</p>
       </div>
     </div>
   </section>
@@ -1256,14 +1256,14 @@
       suite: "Visibilità suite HR", updated: "Report", none: "nessuno",
       xLeft: "← Specialisti del recruiting", xRight: "Suite HR complete →", xLeftShort: "← Recruiting", xRightShort: "Suite HR →",
       yTitle: "Share of voice (ultime 2 settimane)", band: "zona CVing",
-      share: "Share of voice", items: "Uscite", followers: "Follower IG", na: "n.d.", and: " e ",
+      share: "Share of voice", items: "Uscite", followers: "Follower IG", na: "n.d.", and: " e ", untracked: "uscite non tracciate",
       insight: (zn, zs, sn, ss) => `Nella zona di CVing ci sono ${zn}: insieme fanno ${art(zs)}${zs}% delle uscite. ` +
         (ss > zs ? `Le suite HR (${sn}) ne fanno ${art(ss)}${ss}%: oggi la visibilità la prendono loro.`
                  : `Le suite HR (${sn}) si fermano ${art(ss) === "l'" ? "all'" : "al "}${ss}%: la zona di CVing è la più visibile.`)
     };
     // 0 = specialista del recruiting, 100 = suite HR completa
     const OFFER = { StepsConnect: 8, "nCore HR": 18, Arca24: 24, Teamtailor: 28, Inrecruiting: 38, Altamira: 55, Factorial: 80, Personio: 86, TeamSystem: 94 };
-    const CVING_X = 14, ZONE = 15;
+    const CVING_X = 14, ZONE = 15, LANE = 10;   // LANE: altezza (in punti %) della corsia di CVing sotto lo zero
     const IG = { Factorial: "@factorial", Personio: "@personio_hr", "nCore HR": "@ncorehr", StepsConnect: "@stepsconnect_it",
                  Altamira: "@altamirahrm", Arca24: "@arca24_hr", Inrecruiting: "@zucchetti_official" };
     // Se il file live non è raggiungibile (es. pagina aperta in locale) si usano i dati della pagina
@@ -1272,14 +1272,17 @@
       activity: Object.fromEntries(competitors.map(c => [c.short, { prev: c.w43, now: c.w44 }])),
       instagram: Object.fromEntries(instagram.map(([h, p, n]) => [h, [p, n]]))
     };
-    let live = false, lastJson = "", checkedAt = null, chart = null;
+    let live = false, lastJson = "", checkedAt = null, chart = null, cvPoint = null;
     const listNames = list => list.length ? list.map(p => p.name).join(", ").replace(/, ([^,]*)$/, L.and + "$1") : L.none;
     const hhmm = d => d.toLocaleTimeString(document.documentElement.lang, { hour: "2-digit", minute: "2-digit" });
 
     function points() {
       const names = Object.keys(OFFER).filter(n => data.activity[n]);
       const total = names.reduce((s, n) => s + data.activity[n].prev + data.activity[n].now, 0) || 1;
-      const maxF = Math.max(1, ...names.map(n => (data.instagram[IG[n]] || [])[1] || 0));
+      const cvF = (data.instagram["@cving_app"] || [])[1] ?? null;
+      const maxF = Math.max(1, cvF || 0, ...names.map(n => (data.instagram[IG[n]] || [])[1] || 0));
+      // Le uscite di CVing non sono nel foglio: la bolla resta a 0% e non entra nei calcoli di share
+      cvPoint = { name: "CVing", us: true, x: CVING_X, y: -LANE / 2, f: cvF, r: cvF ? 8 + 22 * Math.sqrt(cvF / maxF) : 7 };
       return names.map(n => {
         const a = data.activity[n], f = (data.instagram[IG[n]] || [])[1] ?? null;
         return { name: n, x: OFFER[n], y: (a.prev + a.now) / total * 100, prev: a.prev, now: a.now, f,
@@ -1315,18 +1318,22 @@
     const layer = {
       id: "posLayer",
       beforeDatasetsDraw(c) {
-        const { ctx, chartArea: a, scales: { x } } = c;
+        const { ctx, chartArea: a, scales: { x, y } } = c;
         const x0 = x.getPixelForValue(Math.max(0, CVING_X - ZONE)), x1 = x.getPixelForValue(CVING_X + ZONE), xc = x.getPixelForValue(CVING_X);
         ctx.save();
         ctx.fillStyle = "rgba(139, 123, 255, .08)";
         ctx.fillRect(x0, a.top, x1 - x0, a.bottom - a.top);
+        // Corsia sotto lo zero: qui c'è solo CVing, le cui uscite non sono nel foglio
+        const y0 = y.getPixelForValue(0);
+        ctx.fillStyle = "rgba(19, 27, 46, .05)";
+        ctx.fillRect(a.left, y0, a.right - a.left, a.bottom - y0);
+        ctx.strokeStyle = "rgba(19, 27, 46, .25)"; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(a.left, y0); ctx.lineTo(a.right, y0); ctx.stroke();
         ctx.strokeStyle = "#131b2e"; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
         ctx.beginPath(); ctx.moveTo(xc, a.top); ctx.lineTo(xc, a.bottom); ctx.stroke();
         ctx.setLineDash([]);
-        ctx.fillStyle = "#131b2e"; ctx.font = "600 12px 'JetBrains Mono', ui-monospace, monospace"; ctx.textAlign = "left"; ctx.textBaseline = "top";
-        ctx.fillText("CVing", xc + 6, a.top + 6);
-        ctx.fillStyle = "#6e7891"; ctx.font = "500 10.5px 'JetBrains Mono', ui-monospace, monospace";
-        ctx.fillText(L.band, xc + 6, a.top + 22);
+        ctx.fillStyle = "#6e7891"; ctx.font = "500 10.5px 'JetBrains Mono', ui-monospace, monospace"; ctx.textAlign = "left"; ctx.textBaseline = "top";
+        ctx.fillText(L.band, xc + 6, a.top + 6);
         ctx.fillStyle = "#3b4663"; ctx.font = "500 11.5px 'JetBrains Mono', ui-monospace, monospace"; ctx.textBaseline = "top";
         const narrow = a.right - a.left < 480;   // su mobile le etichette lunghe si sovrappongono
         ctx.textAlign = "left"; ctx.fillText(narrow ? L.xLeftShort : L.xLeft, a.left, a.bottom + 10);
@@ -1340,12 +1347,20 @@
         c.data.datasets[0].data.forEach((p, i) => {
           const el = c.getDatasetMeta(0).data[i];
           const w = ctx.measureText(p.name).width;
-          let lx = el.x + p.r + 6, ly = el.y;
+          let lx = el.x + p.r + 6;
           if (lx + w > c.chartArea.right) lx = el.x - p.r - 6 - w;   // vicino al bordo destro: nome a sinistra
-          // Evita che due nomi si sovrappongano spostandoli in verticale
-          while (placed.some(b => lx < b.x + b.w && lx + w > b.x && Math.abs(ly - b.y) < 15)) ly += 15;
+          // Evita che due nomi si sovrappongano: prova sopra, poi sotto, sempre più lontano
+          const y0 = c.scales.y.getPixelForValue(0);
+          // Le etichette dei competitor non scendono nella corsia di CVing sotto lo zero
+          const free = y => (p.us || y <= Math.max(el.y, y0) + 2) && !placed.some(b => lx < b.x + b.w && lx + w > b.x && Math.abs(y - b.y) < 15);
+          const ly = [0, -15, 15, -30, 30, -45, 45].map(d => el.y + d).find(free) ?? el.y;
           placed.push({ x: lx, y: ly, w });
           ctx.textAlign = "left"; ctx.fillText(p.name, lx, ly);
+          if (p.us) {
+            ctx.save(); ctx.font = "500 10.5px 'JetBrains Mono', ui-monospace, monospace"; ctx.fillStyle = "#6e7891";
+            ctx.fillText(L.untracked, lx, ly + 14); ctx.restore();
+            placed.push({ x: lx, y: ly + 14, w: ctx.measureText(L.untracked).width });
+          }
         });
         ctx.restore();
       }
@@ -1357,7 +1372,8 @@
         document.getElementById("pos-fallback").style.display = "block";
         return;
       }
-      const color = n => colorOf[n] || "#94a3b8";
+      const color = n => n === "CVing" ? "#131b2e" : colorOf[n] || "#94a3b8";
+      pts = cvPoint ? [...pts, cvPoint] : pts;
       const maxY = Math.max(...pts.map(p => p.y));
       const ds = {
         data: pts.map(p => ({ ...p })),
@@ -1373,7 +1389,7 @@
           layout: { padding: { top: 10, right: 16, bottom: 26 } },
           scales: {
             x: { min: 0, max: 100, grid: { display: false }, border: { color: "rgba(30, 58, 120, .22)" }, ticks: { display: false } },
-            y: { min: -3, suggestedMax: maxY + 6, grid: { color: c => c.tick.value < 0 ? "transparent" : "rgba(20, 24, 38, .07)" }, border: { display: false },
+            y: { min: -LANE, suggestedMax: maxY + 6, grid: { color: c => c.tick.value < 0 ? "transparent" : "rgba(20, 24, 38, .07)" }, border: { display: false },
                  ticks: { callback: v => v < 0 ? "" : v + "%" },
                  title: { display: true, text: L.yTitle, color: "#3b4663", font: { family: "'JetBrains Mono', ui-monospace, monospace", size: 11.5 } } }
           },
@@ -1383,7 +1399,8 @@
               backgroundColor: "#121726", titleColor: "#e8ebf7", bodyColor: "#cfd4e6", padding: 12, cornerRadius: 10,
               callbacks: {
                 title: items => items[0].raw.name,
-                label: i => [`${L.share}: ${Math.round(i.raw.y)}%`, `${L.items}: ${i.raw.prev} → ${i.raw.now}`,
+                label: i => i.raw.us ? [`${L.share}: ${L.untracked}`, `${L.followers}: ${i.raw.f ? nfg.format(i.raw.f) : L.na}`] :
+                            [`${L.share}: ${Math.round(i.raw.y)}%`, `${L.items}: ${i.raw.prev} → ${i.raw.now}`,
                              `${L.followers}: ${i.raw.f ? nfg.format(i.raw.f) : L.na}`]
               }
             }
