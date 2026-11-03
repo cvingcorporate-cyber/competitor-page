@@ -21,9 +21,9 @@
     --panel-solid: #d9e4f5;
     --line: rgba(30, 58, 120, .12);
     --line-strong: rgba(30, 58, 120, .22);
-    --text: #141826;
-    --muted: #4f566b;
-    --dim: #7a8196;
+    --text: #131b2e;
+    --muted: #3b4663;
+    --dim: #6e7891;
     --violet: #6d5dfc;
     --cyan: #0891b2;
     --green: #059669;
@@ -183,7 +183,7 @@
   .mix-bar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; gap: 2px; }
   .mix-line.prev .mix-bar { height: 14px; opacity: .45; }
   .mix-bar i { display: flex; align-items: center; justify-content: center; min-width: 0; font-style: normal;
-    font-family: var(--mono); font-size: 12px; font-weight: 700; color: #07090f; overflow: hidden; white-space: nowrap; }
+    font-family: var(--mono); font-size: 12px; font-weight: 700; color: #131b2e; overflow: hidden; white-space: nowrap; }
   @media (max-width: 640px) { .mix-line { grid-template-columns: 1fr; gap: 4px; } }
   .mix-row { display: grid; grid-template-columns: minmax(0, 1fr) 84px 150px 140px; gap: 16px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
   .mix-row.head { padding: 0 0 8px; border-top: 0; font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
@@ -213,15 +213,15 @@
   .trend h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: .01em; text-transform: uppercase; }
   .trend .count { margin: 6px 0 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--muted); }
   .trend .count b { font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--text); }
-  .trend p.what { margin: 0; font-size: 15px; color: #3a4157; }
-  .trend-why { border-radius: 12px; padding: 12px 14px; background: rgba(139, 123, 255, .07); border: 1px solid rgba(139, 123, 255, .2); font-size: 14px; color: #3a4157; }
+  .trend p.what { margin: 0; font-size: 15px; color: #2a3550; }
+  .trend-why { border-radius: 12px; padding: 12px 14px; background: rgba(139, 123, 255, .07); border: 1px solid rgba(139, 123, 255, .2); font-size: 14px; color: #2a3550; }
   .trend-why b, .trend-act b { display: block; font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); margin-bottom: 3px; }
-  .trend-act { font-size: 14px; color: #3a4157; }
+  .trend-act { font-size: 14px; color: #2a3550; }
   .trend-act b { color: var(--green); }
   .trend ul { list-style: none; margin: auto 0 0; padding: 0; display: grid; gap: 8px; border-top: 1px dashed var(--line); padding-top: 12px; }
   .trend.featured ul { grid-template-columns: repeat(2, 1fr); column-gap: 24px; }
   @media (max-width: 760px) { .trend.featured ul { grid-template-columns: 1fr; } }
-  .trend li { font-size: 14px; color: #3a4157; }
+  .trend li { font-size: 14px; color: #2a3550; }
   .trend li small { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--dim); margin-top: 1px; }
   .trend a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--violet), var(--violet)); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .3s, color .2s; }
   .trend a:hover { color: var(--text); background-size: 100% 1px; }
@@ -274,7 +274,7 @@
     transition: all .2s;
   }
   .chip:hover { color: var(--text); border-color: var(--violet); }
-  .chip[aria-pressed="true"] { color: #07090f; background: var(--grad); border-color: transparent; }
+  .chip[aria-pressed="true"] { color: #131b2e; background: var(--grad); border-color: transparent; }
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
   @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
@@ -318,7 +318,7 @@
   .list-title.pos { color: var(--green); }
   .list-title.neg { color: var(--red); }
   .card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
-  .card li { position: relative; padding-left: 20px; font-size: 14.5px; color: #3a4157; }
+  .card li { position: relative; padding-left: 20px; font-size: 14.5px; color: #2a3550; }
   .card li::before { position: absolute; left: 0; top: 0; font-family: var(--mono); font-size: 13px; }
   .pos-list li::before { content: "+"; color: var(--green); }
   .neg-list li::before { content: "−"; color: var(--red); }
@@ -381,7 +381,7 @@
   .stat b.up { color: var(--green); }
   .stat b.down { color: var(--red); }
   .chart-insight {
-    margin: 18px 0 0; padding: 12px 14px; border-radius: 12px; font-size: 14.5px; color: #3a4157;
+    margin: 18px 0 0; padding: 12px 14px; border-radius: 12px; font-size: 14.5px; color: #2a3550;
     background: rgba(139, 123, 255, .08); border: 1px solid rgba(139, 123, 255, .22);
   }
   .chart-insight b { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); margin-right: 8px; }
@@ -1171,7 +1171,7 @@
     const grid = "rgba(20, 24, 38, .08)";
     Chart.defaults.font.family = "'JetBrains Mono', ui-monospace, monospace";
     Chart.defaults.font.size = 11;
-    Chart.defaults.color = "#5b6275";
+    Chart.defaults.color = "#3b4663";
     const tooltip = {
       backgroundColor: "#121726", borderColor: "rgba(139, 123, 255, .4)", borderWidth: 1,
       titleColor: "#e8ebf7", bodyColor: "#cfd4e6", footerColor: "#3ee6ff", padding: 12, cornerRadius: 10
@@ -1188,7 +1188,7 @@
         const horizontal = c.options.indexAxis === "y";
         ctx.save();
         ctx.font = "500 11px 'JetBrains Mono', ui-monospace, monospace";
-        ctx.fillStyle = "#141826";
+        ctx.fillStyle = "#131b2e";
         meta.data.forEach((bar, i) => {
           const value = opts.value(i);
           const text = opts.format(value);
