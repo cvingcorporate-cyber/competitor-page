@@ -6,6 +6,8 @@
 <title>Competitor 2026 · CVing</title>
 <meta name="description" content="Competitive intelligence CVing: punti di forza, debolezze, prezzi e attività dei competitor, settimana 19–26 ottobre 2026.">
 <meta name="theme-color" content="#ffffff">
+<link rel="alternate" hreflang="it" href="index.html">
+<link rel="alternate" hreflang="en" href="en.html">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,6 +93,10 @@
   }
   nav a:hover { color: var(--text); background: rgba(139, 123, 255, .1); }
   @media (max-width: 720px) { nav ul { display: none; } }
+  .lang { display: flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2); }
+  .lang a { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; padding: 4px 9px; border-radius: 7px; }
+  .lang a:hover { color: var(--text); }
+  .lang a[aria-current="page"] { color: var(--text); background: rgba(139, 123, 255, .16); box-shadow: inset 0 0 0 1px rgba(139, 123, 255, .45); }
 
   /* Hero */
   .hero { padding: 72px 0 48px; position: relative; }
@@ -417,6 +423,7 @@
       <li><a href="#confronto">05 Confronto</a></li>
       <li><a href="#grafico">06 Dati</a></li>
     </ul>
+    <div class="lang" role="group" aria-label="Lingua"><a href="index.html" hreflang="it" lang="it" aria-current="page">IT</a><a href="en.html" hreflang="en" lang="en">EN</a></div>
   </div>
 </nav>
 
@@ -1167,7 +1174,7 @@
     Chart.defaults.color = "#5b6275";
     const tooltip = {
       backgroundColor: "#121726", borderColor: "rgba(139, 123, 255, .4)", borderWidth: 1,
-      titleColor: "#e8ebf7", bodyColor: "#3a4157", footerColor: "#3ee6ff", padding: 12, cornerRadius: 10
+      titleColor: "#e8ebf7", bodyColor: "#cfd4e6", footerColor: "#3ee6ff", padding: 12, cornerRadius: 10
     };
     let chart;
 

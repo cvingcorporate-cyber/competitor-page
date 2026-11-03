@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competitor 2026 · CVing</title>
+<meta name="description" content="CVing competitive intelligence: competitor strengths, weaknesses, pricing and activity, week of 19–26 October 2026.">
+<meta name="theme-color" content="#ffffff">
+<link rel="alternate" hreflang="it" href="index.html">
+<link rel="alternate" hreflang="en" href="en.html">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-2: #ffffff;
+    --panel: #edf3fc;
+    --panel-solid: #d9e4f5;
+    --line: rgba(30, 58, 120, .12);
+    --line-strong: rgba(30, 58, 120, .22);
+    --text: #141826;
+    --muted: #4f566b;
+    --dim: #7a8196;
+    --violet: #6d5dfc;
+    --cyan: #0891b2;
+    --green: #059669;
+    --amber: #c2660a;
+    --red: #e11d48;
+    --grad: linear-gradient(100deg, #6d5dfc 0%, #06b6d4 100%);
+    --shadow: 0 1px 2px rgba(20, 24, 38, .04), 0 8px 24px rgba(20, 24, 38, .06);
+    --radius: 18px;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --display: "Oswald", "Inter", system-ui, sans-serif;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  /* Griglia e bagliori di sfondo */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 80%);
+    opacity: .55;
+  }
+  body::after {
+    content: ""; position: fixed; inset: -20% -10% auto; height: 80vh; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(40% 50% at 25% 30%, rgba(139, 123, 255, .12), transparent 70%),
+      radial-gradient(35% 45% at 80% 20%, rgba(62, 230, 255, .10), transparent 70%);
+    filter: blur(20px);
+  }
+  ::selection { background: rgba(139, 123, 255, .4); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+  .mono { font-family: var(--mono); }
+
+  /* Navigazione */
+  nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(255, 255, 255, .85);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 700; letter-spacing: -.01em; }
+  .brand { text-decoration: none; color: inherit; }
+  .brand img { display: block; height: 26px; width: auto; }
+  .brand small { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--muted); }
+  nav ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  nav a {
+    color: var(--muted); text-decoration: none; font-family: var(--mono); font-size: 12.5px;
+    padding: 6px 12px; border-radius: 8px; transition: color .2s, background .2s;
+  }
+  nav a:hover { color: var(--text); background: rgba(139, 123, 255, .1); }
+  @media (max-width: 720px) { nav ul { display: none; } }
+  .lang { display: flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2); }
+  .lang a { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; padding: 4px 9px; border-radius: 7px; }
+  .lang a:hover { color: var(--text); }
+  .lang a[aria-current="page"] { color: var(--text); background: rgba(139, 123, 255, .16); box-shadow: inset 0 0 0 1px rgba(139, 123, 255, .45); }
+
+  /* Hero */
+  .hero { padding: 72px 0 48px; position: relative; }
+  .status {
+    display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+    border: 1px solid var(--line-strong); background: rgba(255, 255, 255, .85);
+    padding: 6px 14px 6px 10px; border-radius: 999px; margin-bottom: 28px;
+  }
+  .pulse { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .pulse::after {
+    content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--green);
+    animation: ping 2s cubic-bezier(0, 0, .2, 1) infinite;
+  }
+  @keyframes ping { 0% { transform: scale(.6); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+  .status b { color: var(--text); font-weight: 500; }
+
+  h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(44px, 8vw, 96px); line-height: .95; letter-spacing: .005em; text-transform: uppercase; margin: 0 0 24px;
+  }
+  .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: clamp(17px, 2.1vw, 20px); color: var(--muted); max-width: 780px; margin: 0; }
+  .lead strong { color: var(--text); font-weight: 600; }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 44px;
+    background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  @media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi { background: var(--panel); padding: 22px 22px 20px; position: relative; }
+  .kpi .label { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); }
+  .kpi b { display: block; font-family: var(--display); font-weight: 600; font-size: clamp(40px, 5.4vw, 56px); line-height: 1.05; margin: 6px 0 2px; }
+  .kpi span { font-size: 14px; color: var(--muted); }
+  .kpi.threat b { color: var(--red); }
+  .kpi.opp b { color: var(--green); }
+
+  /* Share of voice */
+  .sov { margin-top: 28px; }
+  .sov-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .sov-head .mono { font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+  .sov-bar { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: var(--panel-solid); gap: 2px; }
+  .sov-bar i { display: block; height: 100%; transform-origin: left; transition: transform 1.2s cubic-bezier(.2, .8, .2, 1); }
+  .sov-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .sov-legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .sov-legend i { width: 9px; height: 9px; border-radius: 3px; display: inline-block; }
+  .sov-legend b { font-family: var(--mono); font-weight: 500; color: var(--text); }
+
+  /* Sezioni */
+  section { padding: 56px 0; }
+  .section-head { margin-bottom: 28px; display: grid; gap: 8px; }
+  .kicker { font-family: var(--mono); font-size: 12px; color: var(--cyan); letter-spacing: .1em; text-transform: uppercase; }
+  h2 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 4.4vw, 46px); letter-spacing: .01em; text-transform: uppercase; line-height: 1.05; margin: 0; }
+  .section-head p { margin: 0; color: var(--muted); max-width: 720px; }
+
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  /* Segnali chiave */
+  .signals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .signals { grid-template-columns: 1fr; } }
+  .signal { padding: 22px; position: relative; overflow: hidden; }
+  .signal::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; }
+  .signal.t::before { background: var(--red); box-shadow: 0 0 18px var(--red); }
+  .signal.o::before { background: var(--green); box-shadow: 0 0 18px var(--green); }
+  .signal.a::before { background: var(--grad); box-shadow: 0 0 18px var(--violet); }
+  .signal h3 { margin: 0 0 14px; font-family: var(--mono); font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .signal.t h3 { color: var(--red); }
+  .signal.o h3 { color: var(--green); }
+  .signal.a h3 { color: var(--violet); }
+  .signal ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; counter-reset: s; }
+  .signal li { counter-increment: s; display: grid; grid-template-columns: 28px 1fr; gap: 4px; font-size: 15px; }
+  .signal li::before { content: counter(s, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--dim); padding-top: 3px; }
+  .signal li small { display: block; color: var(--dim); font-size: 12.5px; margin-top: 2px; font-family: var(--mono); }
+
+  /* Macrotrend */
+  .trend-volume { padding: 22px; margin-bottom: 16px; }
+  .trend-volume-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .trend-volume h3 { margin: 0; font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); }
+  .trend-sub { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+  .mix { display: grid; gap: 8px; margin-bottom: 18px; }
+  .mix-line { display: grid; grid-template-columns: 112px 1fr; gap: 12px; align-items: center; }
+  .mix-line > span { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+  .mix-bar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; gap: 2px; }
+  .mix-line.prev .mix-bar { height: 14px; opacity: .45; }
+  .mix-bar i { display: flex; align-items: center; justify-content: center; min-width: 0; font-style: normal;
+    font-family: var(--mono); font-size: 12px; font-weight: 700; color: #07090f; overflow: hidden; white-space: nowrap; }
+  @media (max-width: 640px) { .mix-line { grid-template-columns: 1fr; gap: 4px; } }
+  .mix-row { display: grid; grid-template-columns: minmax(0, 1fr) 84px 150px 140px; gap: 16px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
+  .mix-row.head { padding: 0 0 8px; border-top: 0; font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+  .mix-row .name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; }
+  .mix-row .name i { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .mix-row .share { font-family: var(--display); font-weight: 600; font-size: 24px; text-align: right; }
+  .mix-row .abs { font-family: var(--mono); font-size: 12px; color: var(--dim); text-align: right; }
+  .chg { justify-self: start; font-family: var(--mono); font-size: 12.5px; padding: 4px 10px; border-radius: 999px; white-space: nowrap; border: 1px solid; }
+  .chg.up { color: var(--green); border-color: rgba(61, 245, 167, .35); background: rgba(61, 245, 167, .08); }
+  .chg.down { color: var(--red); border-color: rgba(255, 107, 122, .35); background: rgba(255, 107, 122, .08); }
+  .chg.flat { color: var(--muted); border-color: var(--line-strong); }
+  @media (max-width: 700px) {
+    .mix-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 6px; }
+    .mix-row.head { display: none; }
+    .mix-row .share { grid-column: 2; grid-row: 1; }
+    .mix-row .chg { grid-column: 1; grid-row: 2; }
+    .mix-row .abs { grid-column: 2; grid-row: 2; }
+  }
+  .trend-note { margin: 14px 0 0; font-family: var(--mono); font-size: 11.5px; color: var(--dim); }
+
+  .trend-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .trend-grid { grid-template-columns: 1fr; } }
+  .trend { padding: 22px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; }
+  .trend::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--tc); box-shadow: 0 0 16px var(--tc); }
+  .trend.featured { grid-column: 1 / -1; }
+  .trend-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .trend h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: .01em; text-transform: uppercase; }
+  .trend .count { margin: 6px 0 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .trend .count b { font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--text); }
+  .trend p.what { margin: 0; font-size: 15px; color: #3a4157; }
+  .trend-why { border-radius: 12px; padding: 12px 14px; background: rgba(139, 123, 255, .07); border: 1px solid rgba(139, 123, 255, .2); font-size: 14px; color: #3a4157; }
+  .trend-why b, .trend-act b { display: block; font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); margin-bottom: 3px; }
+  .trend-act { font-size: 14px; color: #3a4157; }
+  .trend-act b { color: var(--green); }
+  .trend ul { list-style: none; margin: auto 0 0; padding: 0; display: grid; gap: 8px; border-top: 1px dashed var(--line); padding-top: 12px; }
+  .trend.featured ul { grid-template-columns: repeat(2, 1fr); column-gap: 24px; }
+  @media (max-width: 760px) { .trend.featured ul { grid-template-columns: 1fr; } }
+  .trend li { font-size: 14px; color: #3a4157; }
+  .trend li small { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--dim); margin-top: 1px; }
+  .trend a { color: inherit; text-decoration: none; background-image: linear-gradient(var(--violet), var(--violet)); background-size: 0 1px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .3s, color .2s; }
+  .trend a:hover { color: var(--text); background-size: 100% 1px; }
+  .trend a::after { content: " ↗"; color: var(--dim); font-size: .85em; }
+  .trend-foot { margin: 16px 0 0; font-size: 14px; color: var(--muted); }
+  .trend-foot b { font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); margin-right: 8px; }
+
+  /* News */
+  .news-layout { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 960px) { .news-layout { grid-template-columns: 1fr; } }
+  .feed, .market { padding: 22px; }
+  .feed h3, .market h3 { margin: 0 0 14px; font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); }
+  .feed h3 span { color: var(--dim); }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .feed-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .feed-head h3 { margin: 0; }
+  .feed-controls { display: flex; gap: 8px; flex-wrap: wrap; }
+  .seg { display: inline-flex; background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+  .seg button { border: 0; background: transparent; color: var(--muted); font: 500 12.5px var(--mono); padding: 6px 12px; border-radius: 7px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: rgba(139, 123, 255, .18); color: var(--text); box-shadow: inset 0 0 0 1px rgba(139, 123, 255, .5); }
+  #feed-who {
+    font: 500 12.5px var(--mono); color: var(--text); background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 10px; padding: 7px 10px; cursor: pointer;
+  }
+  .feed-list, .market-list { list-style: none; margin: 0; padding: 0; }
+  .feed-list li { display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .feed-list time { font-family: var(--mono); font-size: 12px; color: var(--dim); padding-top: 3px; }
+  .market-list li { padding: 12px 0; border-top: 1px solid var(--line); }
+  .market-list li:first-child { border-top: 0; }
+  p.line { margin: 0; font-size: 15px; line-height: 1.5; color: var(--text); }
+  p.line b { font-weight: 600; margin-right: 4px; }
+  p.line b::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: var(--dot); margin-right: 7px; vertical-align: 1px; }
+  p.src { margin: 3px 0 0; font-family: var(--mono); font-size: 11.5px; color: var(--dim); }
+  p.src a { color: var(--muted); text-decoration: none; }
+  p.src a:hover { color: var(--cyan); }
+  p.src a::after { content: " ↗"; }
+  .feed-empty { margin: 16px 0 4px; font-size: 14px; color: var(--muted); }
+  .more {
+    width: 100%; margin-top: 6px; padding: 10px; border-radius: 10px; cursor: pointer;
+    font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--bg-2); border: 1px solid var(--line);
+  }
+  .more:hover { color: var(--text); border-color: var(--violet); }
+  .more[hidden] { display: none; }
+
+  /* Card competitor */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .chip {
+    font-family: var(--mono); font-size: 12.5px; color: var(--muted); background: transparent;
+    border: 1px solid var(--line-strong); border-radius: 999px; padding: 7px 14px; cursor: pointer;
+    transition: all .2s;
+  }
+  .chip:hover { color: var(--text); border-color: var(--violet); }
+  .chip[aria-pressed="true"] { color: #07090f; background: var(--grad); border-color: transparent; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
+  @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    padding: 22px; display: flex; flex-direction: column; gap: 16px; position: relative;
+    transition: transform .3s cubic-bezier(.2, .8, .2, 1), border-color .3s, box-shadow .3s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: rgba(139, 123, 255, .45); box-shadow: 0 18px 50px -20px rgba(139, 123, 255, .45); }
+  .card[hidden] { display: none; }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .card h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: .01em; text-transform: uppercase; }
+  .card .type { margin: 2px 0 0; font-size: 14px; color: var(--muted); }
+  .level {
+    flex-shrink: 0; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+    padding: 4px 9px; border-radius: 6px; border: 1px solid; white-space: nowrap;
+  }
+  .level.high { color: var(--red); border-color: rgba(255, 107, 122, .4); background: rgba(255, 107, 122, .08); }
+  .level.mid { color: var(--amber); border-color: rgba(255, 181, 71, .4); background: rgba(255, 181, 71, .08); }
+  .level.low { color: var(--muted); border-color: var(--line-strong); }
+
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .metric { background: var(--bg-2); padding: 10px 12px; }
+  .metric small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+  .metric b { font-family: var(--mono); font-weight: 500; font-size: 15px; }
+  .metric b.up { color: var(--green); }
+  .metric b.down { color: var(--red); }
+  .metric b.na { color: var(--dim); }
+
+  .activity { display: grid; gap: 6px; }
+  .activity-row { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11.5px; color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
+  .meter { height: 6px; border-radius: 999px; background: var(--panel-solid); overflow: hidden; }
+  .meter i { display: block; height: 100%; background: var(--grad); border-radius: inherit; box-shadow: 0 0 12px rgba(62, 230, 255, .5); }
+
+  .price { border-left: 2px solid var(--violet); padding: 2px 0 2px 12px; }
+  .price small { display: block; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); }
+  .price b { font-family: var(--display); font-size: 18px; font-weight: 600; }
+  .price em { display: block; font-style: normal; font-size: 13px; color: var(--muted); }
+
+  .sw { display: grid; gap: 14px; }
+  .list-title { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 8px; }
+  .list-title.pos { color: var(--green); }
+  .list-title.neg { color: var(--red); }
+  .card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+  .card li { position: relative; padding-left: 20px; font-size: 14.5px; color: #3a4157; }
+  .card li::before { position: absolute; left: 0; top: 0; font-family: var(--mono); font-size: 13px; }
+  .pos-list li::before { content: "+"; color: var(--green); }
+  .neg-list li::before { content: "−"; color: var(--red); }
+  .news {
+    margin-top: auto; padding: 12px 14px; border-radius: 12px; background: rgba(62, 230, 255, .05);
+    border: 1px solid rgba(62, 230, 255, .14); font-size: 13.5px; color: var(--muted);
+  }
+  .news b { color: var(--cyan); font-family: var(--mono); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: 2px; }
+
+  /* Tabella */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; min-width: 780px; font-size: 14.5px; }
+  th, td { padding: 15px 18px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: var(--mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); white-space: nowrap; }
+  th button { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  th button:hover { color: var(--text); }
+  th button:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 4px; }
+  th button::after { content: "↕"; opacity: .4; }
+  th[aria-sort="ascending"] button { color: var(--cyan); }
+  th[aria-sort="descending"] button { color: var(--cyan); }
+  th[aria-sort="ascending"] button::after { content: "↑"; opacity: 1; }
+  th[aria-sort="descending"] button::after { content: "↓"; opacity: 1; }
+  tbody tr { transition: background .2s; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover { background: rgba(139, 123, 255, .06); }
+  tr.us td { background: rgba(62, 230, 255, .07); }
+  tr.us td:first-child { box-shadow: inset 2px 0 0 var(--cyan); }
+  td small { color: var(--dim); font-size: 12.5px; }
+  td.num { font-family: var(--mono); font-size: 14px; white-space: nowrap; }
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+  .flat { color: var(--dim); }
+  .bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--grad); vertical-align: middle; margin-right: 10px; box-shadow: 0 0 10px rgba(62, 230, 255, .4); }
+  .scroll-hint { display: none; font-family: var(--mono); font-size: 12px; color: var(--dim); margin: 10px 2px 0; }
+  @media (max-width: 820px) { .scroll-hint { display: block; } }
+
+  /* Grafico */
+  .chart-card { padding: 22px; }
+  .tabs { display: inline-flex; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; margin-bottom: 18px; }
+  .tabs button {
+    border: 0; background: transparent; color: var(--muted); font-family: var(--mono); font-size: 12.5px;
+    padding: 8px 14px; border-radius: 8px; cursor: pointer; transition: all .2s;
+  }
+  .tabs button:hover { color: var(--text); }
+  .tabs button[aria-selected="true"] { background: rgba(139, 123, 255, .18); color: var(--text); box-shadow: inset 0 0 0 1px rgba(139, 123, 255, .5); }
+  @media (max-width: 640px) {
+    .tabs { display: flex; }
+    .tabs button { flex: 1; padding: 8px 8px; }
+  }
+  @media (max-width: 760px) { .tabs { flex-wrap: wrap; } }
+  .chart-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-bottom: 22px;
+    background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  }
+  @media (max-width: 760px) { .chart-stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat { background: var(--bg-2); padding: 14px 16px; min-width: 0; }
+  .stat small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; }
+  .stat b { display: block; font-family: var(--display); font-weight: 600; font-size: clamp(24px, 3vw, 30px); line-height: 1.15; margin: 4px 0 2px; }
+  .stat span { display: block; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+  .stat b.up { color: var(--green); }
+  .stat b.down { color: var(--red); }
+  .chart-insight {
+    margin: 18px 0 0; padding: 12px 14px; border-radius: 12px; font-size: 14.5px; color: #3a4157;
+    background: rgba(139, 123, 255, .08); border: 1px solid rgba(139, 123, 255, .22);
+  }
+  .chart-insight b { font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); margin-right: 8px; }
+  .chart-box { position: relative; height: 420px; }
+  @media (max-width: 640px) { .chart-box { height: 460px; } }
+  .chart-note { font-family: var(--mono); font-size: 12px; color: var(--dim); margin: 14px 0 0; }
+  .chart-fallback { display: none; padding: 40px 0; text-align: center; color: var(--muted); }
+
+  /* Footer */
+  footer { padding: 40px 0 64px; color: var(--muted); font-size: 13.5px; border-top: 1px solid var(--line); margin-top: 32px; }
+  footer .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 820px) { footer .cols { grid-template-columns: 1fr; } }
+  footer h4 { margin: 0 0 6px; font-family: var(--mono); font-size: 11.5px; font-weight: 500; color: var(--text); text-transform: uppercase; letter-spacing: .08em; }
+  footer p { margin: 0; }
+  footer .sign { margin-top: 32px; font-family: var(--mono); font-size: 12px; color: var(--dim); display: flex; align-items: center; gap: 12px; }
+  footer .sign img { height: 20px; width: auto; }
+
+  /* Comparsa allo scroll */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .pulse::after { animation: none; }
+    .sov-bar i { transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="CVing, back to top"><img src="assets/cving-logo-dark.png" alt="CVing" width="68" height="26"><small>/ intelligence</small></a>
+    <ul>
+      <li><a href="#segnali">01 Signals</a></li>
+      <li><a href="#trend">02 Trends</a></li>
+      <li><a href="#news">03 News</a></li>
+      <li><a href="#competitor">04 Competitors</a></li>
+      <li><a href="#confronto">05 Comparison</a></li>
+      <li><a href="#grafico">06 Data</a></li>
+    </ul>
+    <div class="lang" role="group" aria-label="Language"><a href="index.html" hreflang="it" lang="it">IT</a><a href="en.html" hreflang="en" lang="en" aria-current="page">EN</a></div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="status"><span class="pulse"></span> Report updated <b>26/10/2026 · 06:58</b> · week of 19–26 October</div>
+    <h1>Competitor <span class="grad-text">2026</span><br>Market insight</h1>
+    <p class="lead">
+      <strong>Factorial and Personio lead the conversation on AI</strong>: they are the most active and frame it in terms of productivity.
+      Italy's AI and Work Decree, in force since 23 October, is pushing companies to look for transparent hiring tools:
+      that is where CVing's ethical, Italian positioning can stand out.
+    </p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="label">Tracked</div><b data-count="11">11</b><span>competitors</span></div>
+      <div class="kpi"><div class="label">News</div><b data-count="35">35</b><span>on 7 competitors</span></div>
+      <div class="kpi threat"><div class="label">Threats</div><b data-count="8">8</b><span>potential</span></div>
+      <div class="kpi opp"><div class="label">Opportunities</div><b data-count="8">8</b><span>potential</span></div>
+    </div>
+
+    <div class="sov">
+      <div class="sov-head">
+        <span class="mono">Share of voice · posts and news in the last 2 weeks</span>
+        <span class="mono" id="sov-total"></span>
+      </div>
+      <div class="sov-bar" id="sov-bar" role="img" aria-label="Split of posts and news across competitors"></div>
+      <div class="sov-legend" id="sov-legend"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="segnali">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">01 · Key signals</span>
+        <h2>What matters this week</h2>
+        <p>Threats, opportunities and actions derived automatically from the news. Validate before sharing.</p>
+      </div>
+      <div class="signals">
+        <article class="panel signal t reveal">
+          <h3>▲ Threats</h3>
+          <ol>
+            <li><div>Factorial is pushing AI and productivity: it risks looking more innovative than CVing.<small>Il Giornale delle PMI · 25/10</small></div></li>
+            <li><div>Personio is betting on AI with its own data on AI use at work.<small>LinkedIn · 23/10</small></div></li>
+            <li><div>nCore HR is taking the ethical message: «AI helps you choose, it doesn't choose for you».<small>LinkedIn · 23/10</small></div></li>
+            <li><div>TeamSystem has new resources: expect more marketing, discounts and sales reps.<small>LinkedIn · 22/10</small></div></li>
+          </ol>
+        </article>
+        <article class="panel signal o reveal">
+          <h3>◆ Opportunities</h3>
+          <ol>
+            <li><div>AI and Work Decree in force since 23/10: companies are looking for guidance and compliant tools.<small>shattered.io · 26/10</small></div></li>
+            <li><div>Hiring grants and incentives: companies ready to hire.<small>Lavoro e Concorsi · 25/10</small></div></li>
+            <li><div>Pay transparency: Italian companies put to the test on transparent salaries.<small>Agenda Digitale · 23/10</small></div></li>
+          </ol>
+        </article>
+        <article class="panel signal a reveal">
+          <h3>● Recommended actions</h3>
+          <ol>
+            <li><div>Position CVing against Factorial's, Personio's and nCore HR's AI messaging, without promising features that don't exist.<small>Marketing</small></div></li>
+            <li><div>Strengthen coverage of accounts contested with TeamSystem and prepare counter-arguments to discounts.<small>Sales</small></div></li>
+            <li><div>Explainer content on the AI and Work Decree and its impact on hiring.<small>Marketing</small></div></li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="trend">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">02 · Macrotrend</span>
+        <h2>This week's macro trends</h2>
+        <p>The HR topics most present in the news, what is happening and why it matters for CVing. For each topic, the most relevant stories with their source (original headlines in Italian).</p>
+      </div>
+      <div class="panel trend-volume reveal">
+        <div class="trend-volume-head">
+          <div>
+            <h3 class="mono">What people are talking about</h3>
+            <p class="trend-sub">Share of each topic in all tracked HR news</p>
+          </div>
+        </div>
+        <div class="mix" id="trend-mix"></div>
+        <div class="mix-rows" id="trend-rows" role="table" aria-label="Share of each topic and change"></div>
+        <p class="chart-insight" id="trend-insight"></p>
+        <p class="trend-note" id="trend-note"></p>
+      </div>
+      <div class="trend-grid" id="trend-cards"></div>
+      <p class="trend-foot reveal"><b class="mono">New players in Italy</b> No relevant new competitors this week. Flagged to watch: «Round startup Italia 2026» (Economyup, 23/10).</p>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">03 · News</span>
+        <h2>This week's news</h2>
+        <p>What you need to know this week, one line each. Click the source to read the original (mostly in Italian).</p>
+      </div>
+      <div class="news-layout">
+        <div class="panel feed reveal">
+          <div class="feed-head">
+            <h3 class="mono">What competitors did</h3>
+            <div class="feed-controls">
+              <div class="seg" role="group" aria-label="Which news to show">
+                <button type="button" data-scope="key" aria-pressed="true"></button>
+                <button type="button" data-scope="all" aria-pressed="false"></button>
+              </div>
+              <label class="sr-only" for="feed-who">Competitor</label>
+              <select id="feed-who"></select>
+            </div>
+          </div>
+          <ol class="feed-list" id="feed-list"></ol>
+          <p class="feed-empty" id="feed-empty" hidden>No key news for this competitor. Switch to "All" to see the rest.</p>
+          <button type="button" class="more" id="feed-more"></button>
+        </div>
+        <div class="panel market reveal">
+          <h3 class="mono">In the market</h3>
+          <ol class="market-list" id="market-list"></ol>
+          <button type="button" class="more" id="market-more"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="competitor">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">04 · Profiles</span>
+        <h2>Competitors one by one</h2>
+        <p>Strengths and weaknesses read from the last two weeks of signals: news, LinkedIn posts and Instagram followers.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter by activity level">
+        <button type="button" class="chip" aria-pressed="true" data-filter="all">All</button>
+        <button type="button" class="chip" aria-pressed="false" data-filter="high">High activity</button>
+        <button type="button" class="chip" aria-pressed="false" data-filter="mid">Medium</button>
+        <button type="button" class="chip" aria-pressed="false" data-filter="low">Low</button>
+      </div>
+      <div class="grid" id="cards"></div>
+    </div>
+  </section>
+
+  <section id="confronto">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">05 · Comparison</span>
+        <h2>Comparison table</h2>
+        <p>Click the headers to sort. The highlighted row is CVing, for reference.</p>
+      </div>
+      <div class="panel table-wrap reveal">
+        <table id="compare">
+          <thead>
+            <tr>
+              <th scope="col" data-key="name"><button type="button">Competitor</button></th>
+              <th scope="col" data-key="type"><button type="button">Positioning</button></th>
+              <th scope="col" data-key="priceSort"><button type="button">Price</button></th>
+              <th scope="col" data-key="total"><button type="button">Posts 2 wks</button></th>
+              <th scope="col" data-key="igNow"><button type="button">IG followers</button></th>
+              <th scope="col" data-key="igDelta"><button type="button">IG change</button></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="scroll-hint">← scroll the table sideways →</p>
+    </div>
+  </section>
+
+  <section id="grafico">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">06 · Data</span>
+        <h2>Who's moving most</h2>
+        <p>Tracked posts and news (news articles and LinkedIn posts) per report, and Instagram follower growth over the last week.</p>
+      </div>
+      <div class="panel chart-card reveal">
+        <div class="tabs" role="tablist" aria-label="Choose the chart">
+          <button type="button" role="tab" aria-selected="true" data-view="activity">Activity per report</button>
+          <button type="button" role="tab" aria-selected="false" data-view="delta">Weekly change</button>
+          <button type="button" role="tab" aria-selected="false" data-view="instagram">Instagram growth</button>
+        </div>
+        <div class="chart-stats" id="chart-stats"></div>
+        <div class="chart-box"><canvas id="chart" aria-label="Competitor chart" role="img"></canvas></div>
+        <p class="chart-fallback" id="chart-fallback">The chart didn't load (Chart.js unreachable). The data is in the table above.</p>
+        <p class="chart-insight" id="chart-insight"></p>
+        <p class="chart-note" id="chart-note"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Sources</h4>
+        <p>"Competitor 2026" spreadsheet (CVing Intelligence, generated on 26/10/2026): Weekly Highlights, Competitor Monitoring, Instagram Followers and Intelligence History tabs.</p>
+      </div>
+      <div>
+        <h4>Pricing</h4>
+        <p>Not in the spreadsheet: collected from vendor websites and comparison portals in October 2026. Only Factorial publishes a price list; figures marked "estimate" come from third-party sites and should be checked against a quote.</p>
+      </div>
+      <div>
+        <h4>Coverage</h4>
+        <p>WeWork and Jobtome are tracked but had no news this week. @siamo_jethr appears only in the Instagram chart.</p>
+      </div>
+    </div>
+    <p class="sign"><img src="assets/cving-logo-dark.png" alt="CVing" width="52" height="20"> competitive intelligence · W44 2026</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+  // Dati dal foglio "Competitor 2026" + prezzi raccolti a parte (vedi footer)
+  const competitors = [
+    {
+      name: "Factorial HR", short: "Factorial", type: "All-in-one HR suite for SMEs",
+      price: "From €5.90 /employee/month", priceNote: "Official price list, extra modules on top", priceSort: 5.9,
+      w43: 8, w44: 9, igPrev: 81289, igNow: 83154,
+      strengths: [
+        "Highly visible communication: the global «El Enredo» campaign and Factorial Summit 2026 covered by Forbes and Media Key",
+        "Public, low entry price, easy to try",
+        "The largest Instagram profile among the HR software tracked, and the fastest growing (+2.3%)"
+      ],
+      weaknesses: [
+        "Broad AI messaging (productivity, workload), not focused on hiring",
+        "Generalist suite: recruiting is one module among many",
+        "Final cost rises with modules and headcount"
+      ],
+      news: "Global «El Enredo» campaign (Media Key, 22/10)"
+    },
+    {
+      name: "Personio", short: "Personio", type: "HRIS for European SMEs",
+      price: "On request", priceNote: "Third-party estimate: €5–8 /employee/month (Core)", priceSort: 6.5,
+      w43: 8, w44: 10, igPrev: 15619, igNow: 15623,
+      strengths: [
+        "The most consistent on LinkedIn: 18 posts in two weeks, including its own data (Personio Index)",
+        "Events for its customer community (HUG)",
+        "International brand with strong investment capacity"
+      ],
+      weaknesses: [
+        "Content in English or German, little localised for Italy",
+        "Instagram flat: +4 followers in a week",
+        "No public price list"
+      ],
+      news: "Post on AI use at work «without telling the employer» (LinkedIn, 23/10)"
+    },
+    {
+      name: "TeamSystem HR", short: "TeamSystem", type: "Business software suite: payroll, attendance, HR",
+      price: "On request", priceNote: "Modular platform, priced by module", priceSort: null,
+      w43: 5, w44: 4, igPrev: null, igNow: null,
+      strengths: [
+        "Strong presence in Italy in business and payroll software",
+        "Institutional presence (Confindustria) and new resources to invest in marketing",
+        "Suite covering payroll, attendance, welfare and recruiting"
+      ],
+      weaknesses: [
+        "Recruiting is secondary to payroll and business software",
+        "Corporate rather than product communication",
+        "No Instagram profile tracked"
+      ],
+      news: "#adv campaign on technology and investment (LinkedIn, 22/10): expect more marketing and discounts"
+    },
+    {
+      name: "StepsConnect", short: "StepsConnect", type: "Candidate matching for retail, large-scale retail and hospitality",
+      price: "On request", priceNote: "No price list found", priceSort: null,
+      w43: 7, w44: 0, igPrev: 1156, igNow: 1156,
+      strengths: [
+        "Matching algorithm between job ads and candidates, integrated with the client's ATS",
+        "Focus on high-turnover sectors: retail, large-scale retail, hospitality, fashion",
+        "€1 million funding round to grow abroad as well"
+      ],
+      weaknesses: [
+        "Silent last week after 7 posts the week before",
+        "Small, flat social community (1,156 followers, 0%)",
+        "Not a full ATS: relies on other systems"
+      ],
+      news: "Nothing new this week"
+    },
+    {
+      name: "Altamira HRM", short: "Altamira", type: "Cloud HR suite: recruiting and performance",
+      price: "On request", priceNote: "Monthly or annual subscription", priceSort: null,
+      w43: 3, w44: 3, igPrev: 1774, igNow: 1780,
+      strengths: [
+        "Complete suite: ATS, video interviews, performance reviews",
+        "Steady content on employee reviews and development",
+        "No licence or installation: cloud subscription only"
+      ],
+      weaknesses: [
+        "Limited social visibility (1,780 followers)",
+        "No campaigns or partnerships this week",
+        "No public price list"
+      ],
+      news: "«Employees often ask for reviews too» (LinkedIn, 22/10)"
+    },
+    {
+      name: "nCore HR", short: "nCore HR", type: "Hiring ATS with AI",
+      price: "On request", priceNote: "Lite (up to 20 positions/year) and Profi plans", priceSort: null,
+      w43: 2, w44: 3, igPrev: 1162, igNow: 1166,
+      strengths: [
+        "Quick to react to the AI and Work Decree: «AI can help you choose, not choose for you»",
+        "Lite plan for companies that hire little",
+        "Presence at international events (Paris)"
+      ],
+      weaknesses: [
+        "Small brand: 1,166 Instagram followers",
+        "Few posts (5 in two weeks), LinkedIn only",
+        "No public price list"
+      ],
+      news: "Post on the AI and Work Decree (LinkedIn, 23/10)"
+    },
+    {
+      name: "Teamtailor", short: "Teamtailor", type: "ATS with career pages and employer branding",
+      price: "On request", priceNote: "Third-party estimate: from ~$229 /month, based on open positions", priceSort: null,
+      w43: 1, w44: 1, igPrev: null, igNow: null,
+      strengths: [
+        "ISO 42001 certification for AI management, among the first in the sector",
+        "Career pages and employer branding at the core of the product",
+        "One of the best-known international players in Italy"
+      ],
+      weaknesses: [
+        "Very low activity: 2 posts in two weeks",
+        "Pricing tied to open positions: costly for high-volume hiring",
+        "Little presence in Italian media"
+      ],
+      news: "ISO 42001 certification (LinkedIn, 19/10)"
+    },
+    {
+      name: "Inrecruiting (Zucchetti)", short: "Inrecruiting", type: "ATS of the Zucchetti Group",
+      price: "On request", priceNote: "Standard and Enterprise editions", priceSort: null,
+      w43: 0, w44: 2, igPrev: 4702, igNow: 4751, igNote: "@zucchetti_official profile",
+      strengths: [
+        "Sales strength and customer base of the Zucchetti Group",
+        "«All of recruiting in one platform» message, with conversational AI",
+        "Customisable Enterprise edition"
+      ],
+      weaknesses: [
+        "Not very active: 2 posts in two weeks",
+        "Communication sits inside the group brand, hard to recognise on its own",
+        "No public price list"
+      ],
+      news: "«Everything you need for recruiting, in one single platform» (LinkedIn, 22/10)"
+    },
+    {
+      name: "Arca24", short: "Arca24", type: "Recruiting software",
+      price: "On request", priceNote: "No price list found", priceSort: null,
+      w43: 0, w44: 0, igPrev: 187, igNow: 186,
+      strengths: [
+        "Italian player focused on recruiting",
+        "No visible competitive pressure in the period"
+      ],
+      weaknesses: [
+        "No online activity in the last two weeks",
+        "Small and shrinking Instagram (186 followers, −0.5%)",
+        "No public price list"
+      ],
+      news: "Nothing new this week"
+    }
+  ];
+
+  const cving = {
+    name: "CVing", type: "ATS, talent attraction and recruiting days", price: "—", priceNote: "", priceSort: null,
+    w43: null, w44: null, igPrev: 13113, igNow: 13189, us: true
+  };
+
+  // News dalla scheda Storico Intelligence (report del 26/10) e dalle schede Weekly Highlights / Analisi di mercato
+  const newsFeed = [{"c": "Factorial", "d": "2026-10-25", "t": "«We're #hiring a new Staff Software Engineer in Oleiros, Galicia. Apply today or share this post with your network.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_hiring-activity-7520086294438264832-aEhD", "b": "Factorial is hiring a Staff Software Engineer in Galicia (Spain).", "g": "Assunzioni", "k": false}, {"c": "Factorial", "d": "2026-10-24", "t": "Factorial: con l’AI crescono le aspettative di produttività, ma il carico di lavoro non cala", "s": "Il Giornale delle PMI", "u": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOV3BFX2NONlVURnpYUEdvSlVDZXFWY2syel9rbnNMbVdXZWhrYl9xTnllUHpSdmJ6djhIamdESlNsbTBNMnUwMmczblU2SVdEQmlhU29JNVEzTVJxajBvelZTT3BpaXZrTlUtNjd1Z3Bza29qX2wxZjYwTUlQd3R0QXo3dy0wMXFzcmlDWU5vRGR4eTVBZXc3SElCdWpNMjBXclJZTFNDWHFjZUNPWHhSNEk5M1ZnMURqdWc?oc=5", "b": "With AI, companies expect more productivity, but people's workload isn't going down.", "g": "AI", "k": true}, {"c": "nCore HR", "d": "2026-10-24", "t": "«In Paris we stocked up on more questions than croissants 🥐»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/company-ncorehr_more-questions-than-croissants-at-unleash-activity-7519669065456668672-iXH7", "b": "nCore HR shares its presence at UNLEASH Paris, Europe's HR tech fair.", "g": "Evento", "k": false}, {"c": "Factorial", "d": "2026-10-24", "t": "«We're #hiring a new Staff Software Engineer in Madrid, Community of Madrid. Apply today or share this post with your network.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_hiring-activity-7519720711683375104-tYTD", "b": "Factorial is hiring a Staff Software Engineer in Madrid.", "g": "Assunzioni", "k": false}, {"c": "Factorial", "d": "2026-10-23", "t": "Factorial racconta il caos del lavoro con la campagna \"Il groviglio\"", "s": "Engage.it", "u": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQMmM1akJCYmpfR05XM2xER3FLWXBJWUtzb0RJQlQyTmFuYzh5Y3RiaVUyaU8xT1F5R2hzSldPckVZQ0owMFhKRVhYSGt2UDlmaDBjaVZSMDRNX1hhdV9MZFBjREZSTTFxRDBma2lkb1lHbnRRb1RNdlhPSmQwZUlGNkMwbkkwUjhtakJ5MVZkSVV5UGJTaFNOc2ZKMzV2Ylp6c1VUbQ?oc=5", "b": "Factorial launches its «Il groviglio» (\"The Tangle\") campaign in Italy, about everyday chaos at work.", "g": "Campagna", "k": true}, {"c": "Factorial", "d": "2026-10-23", "t": "L’impatto dell’AI sulla produttività aziendale al Factorial Summit 2026", "s": "Forbes Italia", "u": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUnZhZkpsUUlYNUNiaUZYZU1uaktZRzZyR0pndWdQLWJJdzRtR2VFSGJvTnhzWHQzTHp2ZDZmdE94aFA0ZW1WWHI0UE1zOElPS0tyOFh1QWdRNjhDekk4bE4ybXRLX0NxVHM1aV80eVZUaG1YRldkWGlTYV90LUVpSWFLbXlTS0J2eVE4TWNB?oc=5", "b": "Forbes covers Factorial Summit 2026, focused on AI's impact on company productivity.", "g": "AI", "k": true}, {"c": "Personio", "d": "2026-10-23", "t": "«Nearly a quarter of employees are using AI at work without telling their employer 👀»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/personio_hrstrategy-futureofwork-shadowai-activity-7519394571663872001-9PEA", "b": "Nearly one in four employees uses AI at work without telling their employer.", "g": "AI", "k": true}, {"c": "Personio", "d": "2026-10-23", "t": "«Spent Wednesday in Paris for UNLEASH. Between kicking off at the UNLEASH 100 breakfast with fellow leaders and diving into discussions with...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/richterph_spent-wednesday-in-paris-for-unleash-between-ugcPost-7519350782568108032-xxKO", "b": "A Personio manager recaps the day at UNLEASH Paris, between meetings and panels.", "g": "Evento", "k": false}, {"c": "nCore HR", "d": "2026-10-23", "t": "«⚖️ L’AI può aiutarti a scegliere chi assumere. Da oggi, per legge, non può farlo al posto tuo.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/company-ncorehr_dlgs-1792026-cosa-cambia-per-chi-assume-activity-7519374092223938560-07v-", "b": "On the AI and Work Decree: AI can help choose who to hire, but by law a person makes the decision.", "g": "AI", "k": true}, {"c": "Factorial", "d": "2026-10-23", "t": "«Everyone agrees on this one thing: AI is helping teams deliver more. But what isn't following is pay.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_everyone-agrees-on-this-one-thing-ai-is-activity-7519382405451943936-t75i", "b": "AI makes teams deliver more, but pay isn't keeping up.", "g": "AI", "k": true}, {"c": "TeamSystem", "d": "2026-10-23", "t": "«All’Education & Open Innovation Forum di Confindustria, il nostro Executive Chairman Federico Leproux ha espresso la posizione del Gruppo...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/teamsystem_alleducation-open-innovation-forum-di-activity-7519421840931561472-r0_w", "b": "Executive Chairman Federico Leproux speaks at Confindustria's Education & Open Innovation Forum.", "g": "Corporate", "k": false}, {"c": "Inrecruiting", "d": "2026-10-22", "t": "«Everything you need for recruiting, in one single platform.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/in-recruiting-worldwide_inrecruiting-talentacquisition-recruiting-activity-7518982776990351360-S_Uw", "b": "Inrecruiting presents itself as a single platform for the whole recruiting process.", "g": "Prodotto", "k": true}, {"c": "Personio", "d": "2026-10-22", "t": "«HR wears many hats- and these are only a few🧢»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/adriesmith_hr-wears-many-hats-and-these-are-only-a-ugcPost-7518946261949939712-1XI_", "b": "Post about how people in HR have to wear many different hats.", "g": "Contenuto HR", "k": false}, {"c": "Personio", "d": "2026-10-22", "t": "«Sit down to write a self-review and most people can only really remember the last month, even when the review is meant to cover the last...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/personio_sit-down-to-write-a-self-review-and-most-activity-7518959442688737300-54Iq", "b": "In self-reviews people only remember the last month well, even when the review covers a longer period.", "g": "Contenuto HR", "k": false}, {"c": "Altamira", "d": "2026-10-22", "t": "«La valutazione la chiedono spesso anche i dipendenti.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/altamira-srl_quale-di-questi-aspetti-sistemeresti-per-activity-7518987379534159872-sTjF", "b": "Employees often ask for performance reviews too, not just the company.", "g": "Contenuto HR", "k": false}, {"c": "Factorial", "d": "2026-10-22", "t": "«If you’ve watched this video thinking, “This company looks just like mine,” we need to talk.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_if-youve-watched-this-video-thinking-this-activity-7518944663278649344-hyUx", "b": "Factorial invites anyone who recognises their own company in its campaign video to get in touch.", "g": "Campagna", "k": false}, {"c": "TeamSystem", "d": "2026-10-22", "t": "«#adv Quando pensi a un'azienda che guarda al futuro, ti vengono in mente tecnologia e investimenti? Anche, ma bisogna guardare soprattutto...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factanza_adv-ugcPost-7518971454244204544-Uoha", "b": "Sponsored content (#adv) on innovation and investment: a sign of more marketing budget to come.", "g": "Campagna", "k": true}, {"c": "Personio", "d": "2026-10-21", "t": "«HUG 2026 is in the books! Great few days in Munich, speaking on a panel with Sara Weber, Kim Kristin Eggers, and Dr. Bardia Monshi, and...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/richterph_personio-recruiting-hr-ugcPost-7518641479616036864-nYrL", "b": "Wrap-up of HUG 2026, Personio's event in Munich, with panels on HR and work.", "g": "Evento", "k": false}, {"c": "Personio", "d": "2026-10-21", "t": "«🤝 Networking that actually matters. That’s what Personio’s event HUG yesterday was all about!»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/activity-7516803058706837505-tXEx", "b": "Personio recaps HUG, its networking event for customers and partners.", "g": "Evento", "k": false}, {"c": "Personio", "d": "2026-10-21", "t": "«Die Zukunft von HR wird nicht irgendwann gestaltet. Sie entsteht bereits heute.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/uwe-hoffmann-318147225_hug2026-personio-digitalisierung-ugcPost-7518565592979718144-_kSS", "b": "Post in German tied to HUG 2026: the future of HR is being built today.", "g": "Contenuto HR", "k": false}, {"c": "Personio", "d": "2026-10-21", "t": "«At UNLEASH Paris today? Come grab a coffee and say hi to the Personio team at booth #211 ☕️👋🏼»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/pc-f_at-unleash-paris-today-come-grab-a-coffee-ugcPost-7518574267681394688-fIkv", "b": "Personio invites visitors to its booth at UNLEASH Paris.", "g": "Evento", "k": false}, {"c": "Personio", "d": "2026-10-21", "t": "«HR wears every hat. Come and pick yours at UNLEASH Paris, stand #210 🧢»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/personio_unleashparis-hrtech-peopleops-activity-7518574670875373568-oiZU", "b": "Personio promotes its booth at UNLEASH Paris.", "g": "Evento", "k": false}, {"c": "nCore HR", "d": "2026-10-21", "t": "«Quanti candidati stanno ancora aspettando una tua risposta? 🤔»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/company-ncorehr_ncorehr-thehumanrecruiting-recruiting-activity-7518559213464375296-y2MX", "b": "How many candidates are still waiting for your reply? Post about candidates left without a response.", "g": "Contenuto HR", "k": true}, {"c": "Factorial", "d": "2026-10-21", "t": "«Saying no feels harder than saying yes. Until you’ve seen what a partnership that was never going to work really costs.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/factorialai_saying-no-feels-harder-than-saying-yes-until-activity-7518665108588376064-6_5q", "b": "Saying no to the wrong partnership costs less than going ahead with it.", "g": "Corporate", "k": false}, {"c": "Factorial", "d": "2026-10-21", "t": "«Spanisches Catering, Drinks und mehr als 100 Gäste: Factorial hat am 30. September 2026 sein neues Büro in München eröffnet. Dazu gab es...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/activity-7518340576488910848-H7-k", "b": "Factorial opened a new office in Munich (30 September) with over 100 guests.", "g": "Corporate", "k": false}, {"c": "Inrecruiting", "d": "2026-10-20", "t": "«Inda’s AI is becoming increasingly conversational.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/in-recruiting-worldwide_inda-inrecruiting-artificialintelligence-activity-7518258680031604736-oY2B", "b": "Inda, Inrecruiting's AI, is becoming more and more conversational.", "g": "AI", "k": true}, {"c": "Personio", "d": "2026-10-20", "t": "«🙏 The day has come. Cancel your morning meetings, it’s time to dig into the 2026 Workforce Pulse report.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/personio_workforcepulse-activity-7518219577202442240-2mx1", "b": "Personio publishes its 2026 Workforce Pulse report on the world of work.", "g": "Contenuto HR", "k": true}, {"c": "Altamira", "d": "2026-10-20", "t": "«Alcune cose si capiscono meglio guardandole.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/altamira-srl_quando-tutto-ci%C3%B2-che-%C3%A8-visivo-diventa-essenziale-activity-7518242289530429440-JXoT", "b": "Post on the value of visual content: some things are easier to understand by seeing them.", "g": "Contenuto HR", "k": false}, {"c": "TeamSystem", "d": "2026-10-20", "t": "«Per un hotel, aumentare le entrate non significa intervenire solo sulle tariffe delle camere.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/teamsystem_per-un-hotel-aumentare-le-entrate-non-significa-activity-7518228260200185856-xBHo", "b": "Revenue management for hotels: raising revenue takes more than adjusting room rates.", "g": "Fuori HR", "k": false}, {"c": "Teamtailor", "d": "2026-10-19", "t": "«We’re officially ISO 42001 certified! Teamtailor is happy to announce that we’re officially ISO 42001 certified, and we are among the first...»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/teamtailor_were-officially-iso-42001-certified-teamtailor-activity-7517931227488677888--sIg", "b": "Teamtailor gets ISO 42001 certification for responsible AI management, among the first in the sector.", "g": "AI", "k": true}, {"c": "Altamira", "d": "2026-10-19", "t": "«Sulla carta non fa una piega.»", "s": "LinkedIn", "u": "https://www.linkedin.com/posts/altamira-srl_ps-sul-sasso-dellultima-immagine-non-si-activity-7518060929641762816-L6dx", "b": "Short post: the title doesn't say what it's about, it needs opening.", "g": "Contenuto HR", "k": false}];
+  const marketNews = [{"k": "Employer branding", "t": "InJob si espande. In ingresso altri cinquanta addetti", "s": "Quotidiano Nazionale", "d": "26/10", "u": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQbW5SZDhSTWdxRWNKcHphZWlMenpjWmd3UUNEQkx6VGJiNEhxUjBHYjBvUmw3QTJkNGRFOWlLWE1qZTJxRF9xaFlqZy1PYllSRkhBZzNYMWcwLXRIYVhORnd4X3V2WGN6dXlMb2N6ZWxaal9HTWFDUmQ4VF9zMUdXakY1UW1rWGM?oc=5", "b": "Employment agency InJob is growing and hiring 50 more people."}, {"k": "Recruiting & AI", "t": "Recruiting Day Young a Pordenone: quattro colloqui in 20 minuti per gli under 35", "s": "RaiNews", "d": "25/10", "u": "https://news.google.com/rss/articles/CBMigAJBVV95cUxQXzhnYVhReUk0NVJBWTFaRnBUNWZsR1dQaHRuTVNEQklxMlRJUzBSSk5oY0RtRDZpaWZBLW5uZXpTbnE0Q3NheHI2QnRMRlZsZEUzOVJGTmNyVmlSR19IQlZPc3VqNlp2SzFlVlhaRTltaTktbjBTci0zLXpWUnEta3Zyam5VZkJvNXFrc3JJUVczQ20yMHNCZ2YySVFmLXlqS3JtQWp6bzE3YUJaSjJWdFpJak1yQTlTRDg0WE1lMlMyOHFYbUNpdnEwZzE2ekM3NEpqcVdJc09uODFWVVVyVDFMNDVrbEswd3RlZ2s5RGlXQWtyYW1EYjdWYVk1R0w00gGAAkFVX3lxTFBfOGdhWFF5STQ1UkFZMVpGcFQ1ZmxHV1BodG5NU0RCSXEyVElTMFJKTmhjRG1ENmlpZkEtbm5lelNucTRDc2F4cjZCdExGVmxkRTM5UkZOY3JWaVJHX0hCVk9zdWo2WnZLMWVWWFpFOW1pOS1uMFNyLTMtelZScS1rdnJqblVmQm81cWtzcklRVzNDbTIwc0JnZjJJUWYteWpLcm1BanpvMTdhQlpKMlZ0WklqTXJBOVNEODRYTWUyUzI4cVhtQ2l2cTBnMTZ6Qzc0SmpxV0lzT244MVZVVXJUMUw0NWtsSzB3dGVnazlEaVdBa3JhbURiN1ZhWTVHTDQ?oc=5", "b": "Recruiting Day for under-35s in Pordenone: four interviews in 20 minutes."}, {"k": "HR Tech Italia", "t": "Paylocity balza del 69% dopo che InvestingPro ne ha identificato il valore", "s": "Investing.com", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOWXhmckFIajdFTTROY1pLcGJYX2JaZzlhUHFLYnpZaWc3N2s5SGNaTWRiakhqOWMyek9mTmZ4VzJqUGN0Mi1XOEx2N0pTWEMzZTBXVHA4dUpjcFlLWVROUkxIWG5KS3NCWnU4Y1JEeVJURXFmVXFNMzJGQ0lIaTVBX2c5eEtZQVh1azM2UzJqTmQ3QkE1UjBMUEtOM202VE1OaUlSbXJjc09lbkduRkpjYWdzS3N3SlVzSUVpSVlURHd4TE9ILVZucUQ2dWFSQQ?oc=5", "b": "Financial news: shares of Paylocity, a US HR software company, jump 69%."}, {"k": "Trasparenza retributiva", "t": "Aziende italiane alla prova degli stipendi trasparenti: i dati 2026", "s": "Agenda Digitale", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPNTk5a1pYdnRhVVNKVTFDMWJwcTItUU9yVmJzdHVrcGRqeFRZQl81VU9JS0tFM2hXLXFUclh1U2lmZzl0ZHNMYUF1YUE4TVg0U19JTzNoUVBWWDdYRVdDSEtPVVlfaE5JcnNOUnpHM3lhNTlCa0w2YWh4YklmeGZrdXhIS2NJRUVCMjRyTFBMUG15Q1ZldUNjWkhSNjRIZDRWSnI2d0lIMzBwQzhoRWZsV2swTzRBQQ?oc=5", "b": "Italian companies and pay transparency: the 2026 data."}, {"k": "AI Act e lavoro", "t": "Decreto IA e Lavoro: cosa cambia dal 23 ottobre 2026", "s": "shattered.io", "d": "26/10", "u": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5EbERMdnFZSWNTYzl4cTBKaElQd0RwSGRVUTA5VDRaWDN5MndUMFJJWjZ3OFpoOFJIUHRmRnRrcVlURDFxT0tHZmNJQzM3NVd4OXJSYzJnQXpqYVNydW5LMFBlc1FkMnFXbEJIb2NHOEx1Y0otZHZRclZ0RzQ?oc=5", "b": "AI and Work Decree: what changes from 23 October 2026."}, {"k": "Intelligenza Artificiale in HR", "t": "Forbes Top Hr: cultura, retention e intelligenza artificiale ridisegnano il lavoro in Italia", "s": "Forbes Italia", "d": null, "u": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOLWdmN2VNZkVOS1JsbjBMUTlBdFhIVmg3aUxZSDQyT280dEdwUFFjQmZaQ3RkQjd2ZjBXdENpSjliaHdrV3hYYy1XOWpjX055SUtOVVYxdjFzYVdudXlCd2YyaF9MUEhYNmhRamRWMkZiVEJ6VUtvUWZCeW9YdnJuTkIyNXBqa2lNQVZTdWZRNlcxZGNSYVlQWTU2cGRKalNpMENqMEFkVjh4c29ZTkJlTlhaME9rSzQxazFBeQ?oc=5", "b": "Forbes Top HR: culture, retention and AI are reshaping work in Italy."}, {"k": "Intelligenza Artificiale in HR", "t": "Come l’AI trasforma il people management tra nuovi ruoli e competenze", "s": "Il Sole 24 ORE", "d": null, "u": "https://news.google.com/rss/articles/CBMipgFBVV95cUxORURVZlJOcjJmQnIyMjgxMjRISl9hT19HRzZuQmg4RDg2am5pc2hWeHJLQVdiYUE3VWFKbmVNQjlqNVh5MGhLbzRfWWpwYVZ0OTJReENhN0gtUHNsMVRKcGVGMEloa3diTk9fc25pUTlxSXJDM3IxRVhSX3AzTXNmd1RFT1g1ZHliQ3M5cmRiN1NIcEFZdnNjazZ3U0xNaFNhbnZLcXBB?oc=5", "b": "How AI is transforming people management, with new roles and skills."}, {"k": "Intelligenza Artificiale in HR", "t": "Gestione delle HR e AI: come guidare l’innovazione con visione e responsabilità", "s": "AI4Business", "d": null, "u": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQX3owaVU3TnJQbjY2YUoxMEtqOVlXRVZzQkFzampLTmdBMGRpVENTWmNfUzdiTjZNZDBNLVEtYk55NWhSQjBsMlJhSjItWnZVWDRxMWJicXJPZlc1N0lDQlRDUXRlQ1Q2TVhaNnVYTnVmbjBuMUxxN2QzSG9KWVJueXJwckpmbkJweXBwTmd5MFpodkxjR3JKc2dLZ2tUdDZBZE1oUTN6ZWhzMzhVZG9KMkQtSVR6Yi1tV2w4XzNOaTE1LXAzOHFKTzR1RGJ3ekFpRXc?oc=5", "b": "HR and AI: how to lead innovation with vision and responsibility."}, {"k": "Intelligenza Artificiale in HR", "t": "AI e lavoro: nuovi obblighi per datori e HR", "s": "Ipsoa", "d": null, "u": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdVJkX3l1M2JSZ2o0ZGZXVTZCci13bE5pMGxnOUVyZWt0dlE1OWlSUDNmc0syeE41Rmc3MGEzTWlGRlNfXzk4NWNHT1pxTzdva2JERU5EQ1NJMi1hWkNyakFBRmhQeVhCVTdzX0Q0V3VyMXJUdl9HcnZTd2VQUld1U01OZ2J2WlRiT1lvSE9sRW1ZYnhldE9ESy1Ga1NBeWMy?oc=5", "b": "AI and work: new obligations for employers and HR."}, {"k": "Intelligenza Artificiale in HR", "t": "Oracle lancia applicazioni HR basate sull’intelligenza artificiale con Claw", "s": "Investing.com", "d": null, "u": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPZ0Q5T0FhREVGWnZ1dkNzQnhOSDFhd1FfMHR6RVhKZFdxOVVreVBqRmlITVQ0eUFMcVNaT0xTbm1KUHNnOC1TcmFFTl9WM2l5YnY0bEJlRlVFRlpiRGU2cmhubVVGMUpHLTNiN1drLTZmdnFBZVZuZUQxRXUwdkJFU2hQSU5GU2M3MUlwdzZyUmdFVDliTzAweFMtMGhMVXhtTEVlU3pCanNTWGM0VjBKNjdQREptS0NaUzZDUW1QNDVYeUVKU29zaFZn?oc=5", "b": "Oracle launches AI-powered HR applications."}, {"k": "Employer Branding & Talent", "t": "Una creatura bifronte: la restanza e la retention", "s": "7Grammilavoro", "d": null, "u": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPRTRqREw2QUk2aG1nS0Q4d3hBV3NrUC1qaDkxSXFNbEVzazNIR09HeF9Pd2NHeUVoSm80NVpFYy1WYXM4UlVMakJ2cmZWaXFNWWFhVEk4NlZkbmdwNldJQVdJR1lhMXNETUZZN3JSVGpXLWVvVVRQNU04U2V5NFBBM2pvUzFidw?oc=5", "b": "On what makes people stay in a company («restanza») and how to retain them."}, {"k": "Welfare & Organizzazione", "t": "Industria 5.0 e welfare aziendale: perché le PMI restano indietro", "s": "Agenda Digitale", "d": null, "u": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQcDZSUGNzb3VzRzhVcjRINUcwLXRIblRCYWttNTdTdjFCeE13M0ZDamhwQ0MtSU5fY2k3U2wyQkxGUkdTUV9adDQ4X3FObk9FcVF5V0p4SnE3ZUMwTFJ1VnB3ZS1qRmRvMUNRRTNYaUdCWVRKSGFFTFVJNEpWenkwWUZCSWhnOERMcjhhUkFlV1gwVWVWRVhwejF5aTA1dUpUcmRuSi1McmkwczVLNGc?oc=5", "b": "Industry 5.0 and corporate welfare: why SMEs are lagging behind."}, {"k": "Welfare & Organizzazione", "t": "Fringe benefit 2027: la sfida delle Pmi nella digitalizzazione del welfare aziendale", "s": "Il Sole 24 ORE", "d": null, "u": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQYjRpQWxVampzWWRWa0NfUVFIUzhXa2dNMVllTi1LQlItVF9EZ1lWdGdKR0VDaG44NG4tekVXQkgxWTgzdVFsNDRlT28xdmI1bFVvRlNYaGFJcTJHcmxwN3AzRWxNSjdGMTF2ZHc3T3J6NU16RVg2TkpzVDN0X09ReGFKU3Vid01NS0tmdWJjSjRzRVRNR0RPaG1yUktVNy12Y3lXSGhJM08?oc=5", "b": "Fringe benefits 2027: the challenge for SMEs of digitising corporate welfare."}, {"k": "Welfare & Organizzazione", "t": "Welfare aziendale, dieci anni dopo: un confronto sulle sfide e le prospettive future", "s": "Università Pontificia Salesiana", "d": null, "u": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNSXM2d1J5UkR3LThiZjdkN0NZQVFOeGJOemo2WmgzdElmM0lqLW9ncS14RFNVMEtVelRUcjVGeDhEQVBiRFdzZFBZQ3JOMnB6LVlBOEFXUDVZR3doNTlka043M216clZLN1o1eDVnVDZac25lR3pSY1dFUDRnNlVEdWFlWWtGRGVhY2FoVmtqUnZ2LU5Ca3pBaGdleElFajMxcUswZXBfal9OVHpPMko4aVVLNnctLWln?oc=5", "b": "Corporate welfare ten years on: a discussion of challenges and future prospects."}, {"k": "Welfare & Organizzazione", "t": "Rimborso RSA con il welfare aziendale per un genitore", "s": "Generazione Vincente", "d": null, "u": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOZkQ5SzBpOEd2S1ZZLUZCdmdCSlJOb19SVWc4WU9UWkpNa3gyMEJ4NUxLQW9LS2dMS3laR29HXzlHdWdiNm0zbDRXdEw0aFFCaE5ucWxiTWo5YUp5UmVuN1hiVUtnZUY4VFFRRThISWhaWFRweTZFY1NpeUxOeXlram40QldpdGZzeE5uRlY0SVkyTk0?oc=5", "b": "Using corporate welfare to reimburse a parent's care home (RSA) costs."}];
+
+  // Macrotrend: volumi dalla scheda Storico Intelligence (sezione Tema), notizie selezionate a mano
+  const macroTrends = [{"name": "AI Act & work", "color": "#8b7bff", "w43": 89, "w44": 28, "what": "Since 23 October, Legislative Decree 179/2026 applies the AI Act in Italy: no dismissals decided by an algorithm alone, the final word goes to a person, supervision by AgID and ACN. The Digital Omnibus pushes some deadlines to 2027–2028.", "why": "Companies are looking for transparent, compliant hiring tools: this is where CVing's ethical positioning plays, with AI as HR's copilot and the final decision left to a person.", "action": "Explainer content on the decree and its impact on hiring processes.", "news": [{"t": "No ai licenziamenti decisi dall’algoritmo, sì al risarcimento danni: ecco l’AI Act in vigore da oggi", "s": "la Repubblica", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPSWkxRG9JSFFISUxoS2sxVmR2NzVzSS1LSmJFMTdhVzJYbUxaYnp0c3N2ZmdOcnZJdHlaeklyYWMyUVdHLTFLQmlKVUR2ekF2ak5CM2k1UTNSUUJSdk5iM21VSk45OEx1RmQzNFlfdnAyYm5TT2VjR2pxZFdFNWdkeUJET3BUYWp1SFktbnlUUGRVTWs4Q095cjVYUXEwa0hfTnpGUmx3d3M3R3ViVjRVSUtXRjEwWU85c0NydnR4b0ZOVE5Kb1doUk1Rc1hGQ21FR0Z4cG1wNmdJYnZFcE9VTE92a2s4M0NzejVpS3VTU28?oc=5"}, {"t": "AI e lavoro: nuovi obblighi per datori e HR", "s": "Ipsoa", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdVJkX3l1M2JSZ2o0ZGZXVTZCci13bE5pMGxnOUVyZWt0dlE1OWlSUDNmc0syeE41Rmc3MGEzTWlGRlNfXzk4NWNHT1pxTzdva2JERU5EQ1NJMi1hWkNyakFBRmhQeVhCVTdzX0Q0V3VyMXJUdl9HcnZTd2VQUld1U01OZ2J2WlRiT1lvSE9sRW1ZYnhldE9ESy1Ga1NBeWMy?oc=5"}, {"t": "Intelligenza artificiale in azienda, 7 adempimenti dal decreto 179/2026", "s": "Pasquale Pillitteri", "d": "24/10", "u": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQbTFXeks0UjljeV9LU2NkZUdtaG5IVTIzR19XdERpWXRMQWZtRDRldC1zRVlOLWp2cjBFbDBoci01SjRiWnBtckJhcV9KZExvNVNpaGdBNndLWGduc19PUGNHQXlOWDhlOURjQWN1TlQ4SnFKZlBobXJBVnlFdHFtRUs2QVE0ajQ?oc=5"}, {"t": "Digital Omnibus 2026: scadenze AI Act rinviate al 2027 e 2028", "s": "ACCA software", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9udWczZnVqbG1pRTNiaEU5d2JLNFljSkVneDJCU21CSXBJelI3MkdSNnlmQ09CdHZxTF9FcEppRTRuVnR2SVpISlNFcWtheHd0cTFCNlBYczRicHBzVWxXWFhDNDhuRFE?oc=5"}]}, {"name": "Recruiting & AI", "color": "#3ee6ff", "w43": 100, "w44": 38, "what": "HR platforms are pushing agentic AI in recruiting: Dayforce is buying Ribbon AI for conversational interviews, Paylocity is launching Recruiting Optimizer. Meanwhile Recruiting Days are multiplying (Pordenone, Castel Guelfo, Lidl in Cagliari).", "why": "Two fronts: the AI race raises the bar for competitors' messaging, while Recruiting Days are an end-to-end service CVing already offers.", "action": "Push CVing Recruiting Days in content, with case studies and numbers.", "news": [{"t": "Dayforce acquisirà Ribbon AI per integrare i colloqui conversazionali nel recruiting agentico", "s": "Unite.AI", "d": "24/10", "u": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1GSVYxWEpOZ0phVTNlVXZrcW5PNlVOYTdodUFHNEtrcFl6NEFJb2g2bGhHQ3NGVnNUTUpId1hPam9lNzNudzFENG1NVmRYSlVRSXRIekswblhIWkFkOTZtSzlUVUF1Nm1nVUlaeUJkUUtrQWpsNWlSSE95YW1OZw?oc=5"}, {"t": "Paylocity Corporation lancia Recruiting Optimizer, la soluzione per il recruiting basata sull'intelligenza artificiale, che potenzia Paylocity Recruiting", "s": "MarketScreener Italia", "d": "22/10", "u": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQM0FaVThXUkw3VUQ3eTh5UnBob1EzWi0zVmR5UjlPUUVYdUVGNXhob2RZaE9HYWdJUGZEUVR2anNhelI5T3B6Mk9pTzVWclFkbG5WbTRlZ2l2UmhhNXg4dC1ybEsyaVE3NktQNGRaQWd0Mlo4VkNHamFtVlFHNlEyNU5fZkZpLWRlQnlrMTRQNi1GaXhEdXFJdUZjeExQblI1YmwxaFlBSEF2aXZCU080aHpEV2F2OXZTZExJWmhNd3dVOVBLb1ZUaWhOTkttejUxSktwcVluNHJoUm5ueDJ4dHpTM3dYcE96bUE?oc=5"}, {"t": "Quando il tuo CV viene scartato già dall'IA: ecco come sta cambiando il reclutamento", "s": "blue News", "d": "19/10", "u": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxORU9Oc2g3OC1sbW1TNkMzWnNzZktmcnRmMHdCak5IdE52WUNjTWVCWkQzRnRyQmxGLXJlVFBRb19vQnJlLXJscHA2Q090MC1TSFNjUTczX0hhTU1TOFBjUEZ6ZHhJanhqeTZadVQwSU5UcHRja2VDWHRSUlhiX2RBX3ZTYUZxd1RBaV83bk9KR19yQ3Z1Qmd4RXIydHA5ZGQ1NFFpYjVSWm4zVlJKczBJZlJuN3hxSG1aMDBscHc4SXJkaEtkY1JNNDYtUTJZZEJYczBob1pB?oc=5"}, {"t": "Recruiting Day Young a Pordenone: quattro colloqui in 20 minuti per gli under 35", "s": "RaiNews", "d": "25/10", "u": "https://news.google.com/rss/articles/CBMigAJBVV95cUxQXzhnYVhReUk0NVJBWTFaRnBUNWZsR1dQaHRuTVNEQklxMlRJUzBSSk5oY0RtRDZpaWZBLW5uZXpTbnE0Q3NheHI2QnRMRlZsZEUzOVJGTmNyVmlSR19IQlZPc3VqNlp2SzFlVlhaRTltaTktbjBTci0zLXpWUnEta3Zyam5VZkJvNXFrc3JJUVczQ20yMHNCZ2YySVFmLXlqS3JtQWp6bzE3YUJaSjJWdFpJak1yQTlTRDg0WE1lMlMyOHFYbUNpdnEwZzE2ekM3NEpqcVdJc09uODFWVVVyVDFMNDVrbEswd3RlZ2s5RGlXQWtyYW1EYjdWYVk1R0w00gGAAkFVX3lxTFBfOGdhWFF5STQ1UkFZMVpGcFQ1ZmxHV1BodG5NU0RCSXEyVElTMFJKTmhjRG1ENmlpZkEtbm5lelNucTRDc2F4cjZCdExGVmxkRTM5UkZOY3JWaVJHX0hCVk9zdWo2WnZLMWVWWFpFOW1pOS1uMFNyLTMtelZScS1rdnJqblVmQm81cWtzcklRVzNDbTIwc0JnZjJJUWYteWpLcm1BanpvMTdhQlpKMlZ0WklqTXJBOVNEODRYTWUyUzI4cVhtQ2l2cTBnMTZ6Qzc0SmpxV0lzT244MVZVVXJUMUw0NWtsSzB3dGVnazlEaVdBa3JhbURiN1ZhWTVHTDQ?oc=5"}]}, {"name": "Employer branding", "color": "#3df5a7", "w43": 11, "w44": 6, "what": "Few stories, tied to company expansions (InJob hiring 50 more staff) and critical takes on recruiting, such as the film «Sotto a chi tocca».", "why": "An under-covered topic: room for CVing's social and video formats and its «Work with us» landing pages.", "action": null, "news": [{"t": "InJob si espande. In ingresso altri cinquanta addetti", "s": "Quotidiano Nazionale", "d": "26/10", "u": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQbW5SZDhSTWdxRWNKcHphZWlMenpjWmd3UUNEQkx6VGJiNEhxUjBHYjBvUmw3QTJkNGRFOWlLWE1qZTJxRF9xaFlqZy1PYllSRkhBZzNYMWcwLXRIYVhORnd4X3V2WGN6dXlMb2N6ZWxaal9HTWFDUmQ4VF9zMUdXakY1UW1rWGM?oc=5"}, {"t": "Sotto a chi tocca: il film che svela le devianze del recruitment", "s": "Parole di Management", "d": "20/10", "u": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQY1VpbmNkTkpEMlViekhIemRIbFp3T1l6N2RvNmxpbWRtbElsVDZQbFRYX0VkbFUxdkxUakN1YmxHek5EUi1RRUpYVUFWc25JZmJ4NUp6RHJCNWhjVHc3aGVNcVdNZ0dqWkhiT3RNX2U1ZGd2MHlaUjJ4a0x3UVNrWmoydTFLcnd4N3JIQ29vcDh0QnFSMnUzUmpGaE9lLWVyOHFwU3A0SjBZNmtUN2NhVDlR?oc=5"}, {"t": "Strategie HR Hospitality per un Futuro Sostenibile: Trasformare la Crisi con Work in Travel", "s": "Foodmakers.it", "d": "20/10", "u": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQZWI1elBlTXBRUGRiejU1cG9HalQtbkJuZ1pvQWpYcW9PS2VFRk5wLTd5Mm53WTVPa2Rxb1c5V2hWN2ZCSmZpeE0yMHpmckFBRnR5X1N0SHpVSE02ajE5VVhveTMyZEZJc2xWSXE0VUVVdWI2bGJNWEZKeW9uVXFSV0x3R3AwbGUwcVF3eV8zamFKSV9tOTFCRUZndnZmWlVSLUdGSnRvVFNMVVQ5SzBOYkQxaTBQb2tN?oc=5"}]}, {"name": "Pay transparency", "color": "#ffb547", "w43": 7, "w44": 6, "what": "Transposition of EU Directive 2023/970 ends pay secrecy; the first analyses of Italian companies' 2026 data are coming out.", "why": "The directive requires telling candidates the starting pay or its range before the interview: a field job ads and career pages will need to handle.", "action": null, "news": [{"t": "Aziende italiane alla prova degli stipendi trasparenti: i dati 2026", "s": "Agenda Digitale", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPNTk5a1pYdnRhVVNKVTFDMWJwcTItUU9yVmJzdHVrcGRqeFRZQl81VU9JS0tFM2hXLXFUclh1U2lmZzl0ZHNMYUF1YUE4TVg0U19JTzNoUVBWWDdYRVdDSEtPVVlfaE5JcnNOUnpHM3lhNTlCa0w2YWh4YklmeGZrdXhIS2NJRUVCMjRyTFBMUG15Q1ZldUNjWkhSNjRIZDRWSnI2d0lIMzBwQzhoRWZsV2swTzRBQQ?oc=5"}, {"t": "La fine del segreto salariale e le nuove regole per negoziare lo stipendio in azienda", "s": "BusinessCommunity.it", "d": "21/10", "u": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNWnZIUjBDQ0lKRnZ2U3ZNU1dzOWhTLXc3aTdnNWwxVWtPcHNFM1JjVFdnTkMtMUU3WU5Ic09hVEdsSW5iZW1nNVVuR2Z4aHAwNVlPRlJvQ3ZNNWNCVGV0bWg2UThWRkZBZFJQaTJhOUxuQkRuaTRpRlJYQjNoNG1kVE56Z0lPSXlJNjBiekVrTWdEb05ONk5XcUM0LTcwWTJtQTd2d1ZFWkUxTk1ORDZLUHhxc2ZzbjB4NG1kZGowM3lxQmlvVzFBcDBoNkpDVHlUdW9PM1hMMURnTlJuczJDQ2E5T05OLU500gHoAUFVX3lxTE1adkhSMENDSUpGdnZTdk1TV3M5aFMtdzdpN2c1bDFVa09wc0UzUmNUV2dOQy0xRTdZTkhzT2FUR2xJbmJlbWc1VW5HZnhocDA1WU9GUm9Ddk01Y0JUZXRtaDZROFZGRkFkUlBpMmE5TG5CRG5pNGlGUlhCM2g0bWRUTnpnSU9JeUk2MGJ6RWtNZ0RvTk42TldxQzQtNzBZMm1BN3Z3VkVaRTFOTU5ENktQeHFzZnNuMHg0bWRkajAzeXFCaW9XMUFwMGg2SkNUeVR1b08zWEwxRGdOUm5zMkNDYTlPTk4tTnQ?oc=5"}, {"t": "Il recepimento della Direttiva UE 2023/970 sulla trasparenza retributiva: una grande opportunità per il turismo romagnolo", "s": "www.ilponte.com", "d": "21/10", "u": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOa1h0Z1BEUjBpZDlObUZ0eWlBLXZGdEJ2d1NWSEhRVFdWZGF4eGdnOW40V1dpZ21ZVU5TZ0dhNnR6LXlhYkhWODlJRmY3WmxSV3FoaDJ6eFZTRXlCZ2thTWxXUnd3LTVaaGhlMEZ2VTlIR3JNY2lWek1OWXRKMWFzM2M4b3FrT3dycG9EQV9tRmd4cXVJSlBPbF9GTWV2cW5vNEFsVWtGLXBiWTE1REp4WXdmN3ZSeTRGOWVlRlZxMFBVazRuNHhuVGFocEpmXzJfb2xMMWo2ZmJKMzZRVzgzMVVJNDdsOTZnYUxhQnY0RzN1ck0?oc=5"}]}, {"name": "HR Tech Italy", "color": "#ff6b7a", "w43": 1, "w44": 1, "what": "Weak signal: financial news on Paylocity (+69% on the stock market) and Oracle launching AI-powered HR apps.", "why": "Worth watching: for now it concerns big international vendors more than the Italian SME market.", "action": null, "news": [{"t": "Paylocity balza del 69% dopo che InvestingPro ne ha identificato il valore", "s": "Investing.com", "d": "23/10", "u": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOWXhmckFIajdFTTROY1pLcGJYX2JaZzlhUHFLYnpZaWc3N2s5SGNaTWRiakhqOWMyek9mTmZ4VzJqUGN0Mi1XOEx2N0pTWEMzZTBXVHA4dUpjcFlLWVROUkxIWG5KS3NCWnU4Y1JEeVJURXFmVXFNMzJGQ0lIaTVBX2c5eEtZQVh1azM2UzJqTmQ3QkE1UjBMUEtOM202VE1OaUlSbXJjc09lbkduRkpjYWdzS3N3SlVzSUVpSVlURHd4TE9ILVZucUQ2dWFSQQ?oc=5"}, {"t": "Oracle lancia applicazioni HR basate sull’intelligenza artificiale con Claw", "s": "Investing.com", "d": null, "u": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPZ0Q5T0FhREVGWnZ1dkNzQnhOSDFhd1FfMHR6RVhKZFdxOVVreVBqRmlITVQ0eUFMcVNaT0xTbm1KUHNnOC1TcmFFTl9WM2l5YnY0bEJlRlVFRlpiRGU2cmhubVVGMUpHLTNiN1drLTZmdnFBZVZuZUQxRXUwdkJFU2hQSU5GU2M3MUlwdzZyUmdFVDliTzAweFMtMGhMVXhtTEVlU3pCanNTWGM0VjBKNjdQREptS0NaUzZDUW1QNDVYeUVKU29zaFZn?oc=5"}]}];
+
+  // Profili Instagram monitorati (scheda Follower Instagram)
+  const instagram = [
+    ["@cving_app", 13113, 13189], ["@factorial", 81289, 83154], ["@siamo_jethr", 38445, 39061],
+    ["@zucchetti_official", 4702, 4751], ["@ncorehr", 1162, 1166], ["@altamirahrm", 1774, 1780],
+    ["@personio_hr", 15619, 15623], ["@stepsconnect_it", 1156, 1156], ["@wework", 594207, 594057],
+    ["@arca24_hr", 187, 186]
+  ];
+
+  const palette = ["#8b7bff", "#3ee6ff", "#3df5a7", "#ffb547", "#ff6b7a", "#c084fc", "#60a5fa", "#f472b6", "#94a3b8"];
+  const nf = new Intl.NumberFormat("en-GB");
+  const pf = new Intl.NumberFormat("en-GB", { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 1, signDisplay: "exceptZero" });
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  for (const c of [...competitors, cving]) {
+    c.total = c.w43 == null ? null : c.w43 + c.w44;
+    c.igDelta = c.igPrev ? (c.igNow - c.igPrev) / c.igPrev : null;
+    c.level = c.total == null ? null : c.total >= 9 ? "high" : c.total >= 5 ? "mid" : "low";
+  }
+  const levelLabel = { high: "High activity", mid: "Medium activity", low: "Low activity" };
+  const maxTotal = Math.max(...competitors.map(c => c.total));
+  const sumTotal = competitors.reduce((s, c) => s + c.total, 0);
+
+  // Share of voice
+  const sov = [...competitors].filter(c => c.total > 0).sort((a, b) => b.total - a.total);
+  document.getElementById("sov-total").textContent = `${sumTotal} posts & news`;
+  document.getElementById("sov-bar").innerHTML = sov.map((c, i) =>
+    `<i style="flex:${c.total};background:${palette[i]};transform:scaleX(${reduceMotion ? 1 : 0})" title="${esc(c.short)}: ${c.total}"></i>`).join("");
+  document.getElementById("sov-legend").innerHTML = sov.map((c, i) =>
+    `<span><i style="background:${palette[i]}"></i>${esc(c.short)} <b>${Math.round(c.total / sumTotal * 100)}%</b></span>`).join("");
+  requestAnimationFrame(() => requestAnimationFrame(() =>
+    document.querySelectorAll("#sov-bar i").forEach(i => i.style.transform = "scaleX(1)")));
+
+  // Card
+  function deltaClass(d) { return d == null ? "na" : d > 0.0005 ? "up" : d < -0.0005 ? "down" : ""; }
+  document.getElementById("cards").innerHTML = competitors.map(c => `
+    <article class="panel card reveal" data-level="${c.level}">
+      <div class="card-head">
+        <div>
+          <h3>${esc(c.name)}</h3>
+          <p class="type">${esc(c.type)}</p>
+        </div>
+        <span class="level ${c.level}">${levelLabel[c.level]}</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><small>Posts</small><b>${c.total}</b></div>
+        <div class="metric"><small>IG followers</small><b class="${c.igNow == null ? "na" : ""}">${c.igNow == null ? "n/a" : nf.format(c.igNow)}</b></div>
+        <div class="metric"><small>IG change</small><b class="${deltaClass(c.igDelta)}">${c.igDelta == null ? "n/a" : pf.format(c.igDelta)}</b></div>
+      </div>
+      <div class="activity">
+        <div class="activity-row"><span>Share of voice</span><span>${Math.round(c.total / sumTotal * 100)}%</span></div>
+        <div class="meter"><i style="width:${Math.max(2, c.total / maxTotal * 100)}%"></i></div>
+      </div>
+      <div class="price">
+        <small>Price</small>
+        <b>${esc(c.price)}</b>
+        <em>${esc(c.priceNote)}</em>
+      </div>
+      <div class="sw">
+        <div>
+          <p class="list-title pos">Strengths</p>
+          <ul class="pos-list">${c.strengths.map(s => `<li>${esc(s)}</li>`).join("")}</ul>
+        </div>
+        <div>
+          <p class="list-title neg">Weaknesses</p>
+          <ul class="neg-list">${c.weaknesses.map(s => `<li>${esc(s)}</li>`).join("")}</ul>
+        </div>
+      </div>
+      <p class="news"><b>This week</b>${esc(c.news)}</p>
+    </article>`).join("");
+
+  // Filtri per livello di attività
+  document.querySelectorAll(".chip[data-filter]").forEach(chip => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll(".chip[data-filter]").forEach(c => c.setAttribute("aria-pressed", c === chip));
+      const f = chip.dataset.filter;
+      document.querySelectorAll("#cards .card").forEach(card => {
+        card.hidden = f !== "all" && card.dataset.level !== f;
+      });
+    });
+  });
+
+  // Macrotrend: barre di volume e card per tema
+  const safeUrl = u => /^https:\/\//.test(u || "") ? u : null;
+  // Le quote sul totale si confrontano tra report anche se il feed raccoglie volumi diversi
+  const tot43 = macroTrends.reduce((s, t) => s + t.w43, 0);
+  const tot44 = macroTrends.reduce((s, t) => s + t.w44, 0);
+  macroTrends.forEach(t => {
+    t.share = t.w44 / tot44 * 100;
+    t.prevShare = t.w43 / tot43 * 100;
+    t.points = Math.round((t.share - t.prevShare) * 10) / 10;
+  });
+  const fmt1 = v => v.toLocaleString("en-GB", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const shareTxt = v => `${Math.round(v)}%`;
+  const chg = p => Math.abs(p) < 0.5
+    ? ["flat", "= stable"]
+    : p > 0 ? ["up", `▲ +${fmt1(p)} pts`] : ["down", `▼ −${fmt1(-p)} pts`];
+  const intensity = share => share >= 25 ? ["high", "Dominant topic"] : share >= 5 ? ["mid", "Relevant topic"] : ["low", "Weak signal"];
+  const bySh = [...macroTrends].sort((a, b) => b.share - a.share);
+
+  const mixBar = key => bySh.map(t => {
+    const v = t[key];
+    return `<i style="flex:${v};background:${t.color}" title="${esc(t.name)}: ${shareTxt(v)}">${v >= 6 ? shareTxt(v) : ""}</i>`;
+  }).join("");
+  document.getElementById("trend-mix").innerHTML = `
+    <div class="mix-line"><span>Report 26/10</span><div class="mix-bar">${mixBar("share")}</div></div>
+    <div class="mix-line prev"><span>Report 19/10</span><div class="mix-bar">${mixBar("prevShare")}</div></div>`;
+  document.getElementById("trend-rows").innerHTML = `
+    <div class="mix-row head" role="row"><span role="columnheader">Topic</span><span role="columnheader" style="text-align:right">Share</span><span role="columnheader">vs previous report</span><span role="columnheader" style="text-align:right">Articles</span></div>` +
+    bySh.map(t => {
+      const [c, label] = chg(t.points);
+      return `<div class="mix-row" role="row">
+        <span class="name" role="cell"><i style="background:${t.color}"></i>${esc(t.name)}</span>
+        <span class="share" role="cell">${shareTxt(t.share)}</span>
+        <span class="chg ${c}" role="cell">${label}</span>
+        <span class="abs" role="cell">${t.w44} of ${tot44}</span>
+      </div>`;
+    }).join("");
+  const riser = [...macroTrends].sort((a, b) => b.points - a.points)[0];
+  const faller = [...macroTrends].sort((a, b) => a.points - b.points)[0];
+  const lead = bySh[0], runnerUp = bySh[1];
+  document.getElementById("trend-insight").innerHTML = `<b>Reading</b>${esc(
+    `${lead.name} and ${runnerUp.name} together account for ${shareTxt(lead.share + runnerUp.share)} of the news. ` +
+    `${faller.name} stays central but drops ${fmt1(-faller.points)} points (from ${shareTxt(faller.prevShare)} to ${shareTxt(faller.share)}), ` +
+    `while ${riser.name} gains ${fmt1(riser.points)} points (from ${shareTxt(riser.prevShare)} to ${shareTxt(riser.share)}).`)}`;
+  document.getElementById("trend-note").textContent =
+    `// shares calculated on automatically collected articles: ${tot44} in the 26/10 report, ${tot43} in the 19/10 one. ` +
+    `The feed also includes off-topic items (public job calls, casting, foreign outlets): what counts is each topic's weight, not the absolute number. Stories in the cards are hand-picked.`;
+  document.getElementById("trend-cards").innerHTML = macroTrends.map((t, i) => {
+    const [lvl, label] = intensity(t.share);
+    const [c, chgLabel] = chg(t.points);
+    return `
+    <article class="panel trend reveal ${i === 0 ? "featured" : ""}" style="--tc:${t.color}">
+      <div class="trend-head">
+        <div>
+          <h3>${esc(t.name)}</h3>
+          <p class="count"><b>${shareTxt(t.share)}</b> of this week's news <span class="chg ${c}">${chgLabel}</span></p>
+        </div>
+        <span class="level ${lvl}">${label}</span>
+      </div>
+      <p class="what">${esc(t.what)}</p>
+      <div class="trend-why"><b>Why it matters for CVing</b>${esc(t.why)}</div>
+      ${t.action ? `<div class="trend-act"><b>To do</b>${esc(t.action)}</div>` : ""}
+      <ul>${t.news.map(n => {
+        const url = safeUrl(n.u);
+        const title = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(n.t)}</a>` : esc(n.t);
+        return `<li>${title}<small>${esc(n.s)}${n.d ? " · " + esc(n.d) : ""}</small></li>`;
+      }).join("")}</ul>
+    </article>`;
+  }).join("");
+
+  // News: di default solo le notizie importanti, una riga ciascuna
+  const df = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short" });
+  const colorOf = Object.fromEntries(sov.map((c, i) => [c.short, palette[i]]));
+  const FEED_LIMIT = 6;
+  let feedScope = "key", feedWho = "", feedOpen = false;
+  const segBtns = document.querySelectorAll(".seg button");
+  segBtns[0].textContent = `Key · ${newsFeed.filter(n => n.k).length}`;
+  segBtns[1].textContent = `All · ${newsFeed.length}`;
+  const who = document.getElementById("feed-who");
+  who.innerHTML = `<option value="">All competitors</option>` +
+    [...new Set(newsFeed.map(n => n.c))].map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  const sourceLink = n => {
+    const url = safeUrl(n.u);
+    const label = n.s === "LinkedIn" ? "Post LinkedIn" : n.s;
+    return url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)}</a>` : esc(label);
+  };
+  // Il nome è già in grassetto: "Factorial lancia…" si legge come una frase sola
+  const brief = n => n.b.startsWith(n.c + " ") ? n.b.slice(n.c.length + 1) : n.b;
+  function renderFeed() {
+    const items = newsFeed.filter(n => (feedScope === "all" || n.k) && (!feedWho || n.c === feedWho));
+    const shown = feedOpen ? items : items.slice(0, FEED_LIMIT);
+    document.getElementById("feed-list").innerHTML = shown.map(n => `
+      <li>
+        <time datetime="${n.d}">${df.format(new Date(n.d + "T12:00:00"))}</time>
+        <div>
+          <p class="line"><b style="--dot:${colorOf[n.c] || "var(--dim)"}">${esc(n.c)}</b> ${esc(brief(n))}</p>
+          <p class="src">${sourceLink(n)}</p>
+        </div>
+      </li>`).join("");
+    document.getElementById("feed-empty").hidden = items.length > 0;
+    const more = document.getElementById("feed-more");
+    more.hidden = items.length <= FEED_LIMIT;
+    more.textContent = feedOpen ? "Show less" : `Show ${items.length - FEED_LIMIT} more`;
+  }
+  segBtns.forEach(btn => btn.addEventListener("click", () => {
+    segBtns.forEach(b => b.setAttribute("aria-pressed", b === btn));
+    feedScope = btn.dataset.scope; feedOpen = false; renderFeed();
+  }));
+  who.addEventListener("change", () => { feedWho = who.value; feedOpen = false; renderFeed(); });
+  document.getElementById("feed-more").addEventListener("click", () => { feedOpen = !feedOpen; renderFeed(); });
+  renderFeed();
+
+  // Mercato: prima le 5 notizie più utili per CVing, le altre a richiesta
+  const MARKET_FIRST = ["Decreto IA e Lavoro", "AI e lavoro: nuovi obblighi", "stipendi trasparenti", "Recruiting Day Young", "InJob"];
+  const marketSorted = [
+    ...MARKET_FIRST.map(k => marketNews.find(n => n.t.includes(k))).filter(Boolean),
+    ...marketNews.filter(n => !MARKET_FIRST.some(k => n.t.includes(k)))
+  ];
+  let marketOpen = false;
+  function renderMarket() {
+    const shown = marketOpen ? marketSorted : marketSorted.slice(0, MARKET_FIRST.length);
+    document.getElementById("market-list").innerHTML = shown.map(n => `
+      <li>
+        <p class="line">${esc(n.b || n.t)}</p>
+        <p class="src">${sourceLink(n)}</p>
+      </li>`).join("");
+    document.getElementById("market-more").textContent = marketOpen ? "Show less" : `Show ${marketSorted.length - MARKET_FIRST.length} more`;
+  }
+  document.getElementById("market-more").addEventListener("click", () => { marketOpen = !marketOpen; renderMarket(); });
+  renderMarket();
+
+  // Tabella ordinabile
+  const tbody = document.querySelector("#compare tbody");
+  let rows = [...competitors, cving];
+  function deltaCell(d) {
+    if (d == null) return '<span class="flat">n/a</span>';
+    const cls = d > 0.0005 ? "up" : d < -0.0005 ? "down" : "flat";
+    return `<span class="${cls}">${pf.format(d)}</span>`;
+  }
+  function renderTable() {
+    tbody.innerHTML = rows.map(c => `
+      <tr class="${c.us ? "us" : ""}">
+        <td><b>${esc(c.name)}</b>${c.us ? ' <small>(us)</small>' : ""}</td>
+        <td>${esc(c.type)}</td>
+        <td>${esc(c.price)}${c.priceNote ? `<br><small>${esc(c.priceNote)}</small>` : ""}</td>
+        <td class="num">${c.total == null ? '<span class="flat">—</span>' :
+          `<span class="bar" style="width:${Math.max(4, c.total / maxTotal * 64)}px"></span>${c.total}`}</td>
+        <td class="num">${c.igNow == null ? '<span class="flat">n/a</span>' : nf.format(c.igNow)}${c.igNote ? `<br><small>${esc(c.igNote)}</small>` : ""}</td>
+        <td class="num">${deltaCell(c.igDelta)}</td>
+      </tr>`).join("");
+  }
+  document.querySelectorAll("#compare th").forEach(th => {
+    th.querySelector("button").addEventListener("click", () => {
+      const key = th.dataset.key;
+      const dir = th.getAttribute("aria-sort") === "descending" ? "ascending" : "descending";
+      document.querySelectorAll("#compare th").forEach(h => h.removeAttribute("aria-sort"));
+      th.setAttribute("aria-sort", dir);
+      const sign = dir === "ascending" ? 1 : -1;
+      rows.sort((a, b) => {
+        const va = a[key], vb = b[key];
+        if (va == null && vb == null) return 0;
+        if (va == null) return 1;   // valori mancanti sempre in fondo
+        if (vb == null) return -1;
+        return (typeof va === "string" ? va.localeCompare(vb, "en") : va - vb) * sign;
+      });
+      renderTable();
+    });
+  });
+  rows.sort((a, b) => (b.total ?? -1) - (a.total ?? -1));
+  renderTable();
+
+  // Comparsa allo scroll e contatori
+  const io = "IntersectionObserver" in window && !reduceMotion
+    ? new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      }), { threshold: 0.08, rootMargin: "0px 0px -40px 0px" })
+    : null;
+  document.querySelectorAll(".reveal").forEach(el => io ? io.observe(el) : el.classList.add("in"));
+
+  if (!reduceMotion) {
+    document.querySelectorAll("[data-count]").forEach(el => {
+      const target = +el.dataset.count, t0 = performance.now(), dur = 1100;
+      const step = now => {
+        const p = Math.min(1, (now - t0) / dur);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
+  // Grafico: statistiche di sintesi, lettura e grafico per ciascuna vista
+  const fallback = document.getElementById("chart-fallback");
+  const note = document.getElementById("chart-note");
+  // Le variazioni sotto lo 0,1% prendono un decimale in più, così non risultano "+0,0%"
+  const pct = (v, digits = v !== 0 && Math.abs(v) < 0.1 ? 2 : 1) =>
+    `${v > 0 ? "+" : v < 0 ? "−" : ""}${Math.abs(v).toLocaleString("en-GB", { minimumFractionDigits: digits, maximumFractionDigits: digits })}%`;
+  const nfg = new Intl.NumberFormat("en-GB", { useGrouping: "always" });
+  const signed = v => v > 0 ? `+${v}` : v < 0 ? `−${-v}` : "0";
+  const cls = v => v > 0 ? "up" : v < 0 ? "down" : "";
+
+  const byTotal = [...competitors].sort((a, b) => b.total - a.total);
+  const sumW43 = competitors.reduce((s, c) => s + c.w43, 0);
+  const sumW44 = competitors.reduce((s, c) => s + c.w44, 0);
+  const deltas = competitors.map(c => ({ ...c, delta: c.w44 - c.w43 })).sort((a, b) => b.delta - a.delta || b.total - a.total);
+  const igRows = instagram.map(([h, p, n]) => ({ h, p, n, d: (n - p) / p * 100 })).sort((a, b) => b.d - a.d);
+  const cvingRank = igRows.findIndex(r => r.h === "@cving_app") + 1;
+  const names = list => list.map(c => c.short).join(", ").replace(/, ([^,]*)$/, " and $1");
+
+  function summary(view) {
+    if (view === "activity") {
+      const [a, b] = byTotal;
+      const top2 = Math.round((a.total + b.total) / sumTotal * 100);
+      const silent = competitors.filter(c => c.total === 0);
+      return {
+        stats: [
+          ["Total posts & news", sumTotal, `${sumW43} + ${sumW44} across the two reports`],
+          ["Most active", a.short, `${a.total} items · ${Math.round(a.total / sumTotal * 100)}% of the total`],
+          ["Top 2", `${top2}%`, `${a.short} and ${b.short}`],
+          ["No activity", silent.length, silent.length ? names(silent) : "none"]
+        ],
+        insight: `${a.short} and ${b.short} alone account for ${top2}% of all activity: they are leading the conversation on AI in HR. The other ${competitors.length - 2} competitors share the rest.`
+      };
+    }
+    if (view === "delta") {
+      const diff = sumW44 - sumW43;
+      const maxUp = deltas[0].delta, maxDown = deltas[deltas.length - 1].delta;
+      const risers = deltas.filter(c => c.delta === maxUp && maxUp > 0);
+      const fallers = deltas.filter(c => c.delta === maxDown && maxDown < 0);
+      const stable = deltas.filter(c => c.delta === 0);
+      return {
+        stats: [
+          ["Report 26/10 vs 19/10", { v: signed(diff), c: cls(diff) }, `${sumW44} items vs ${sumW43} (${pct(diff / sumW43 * 100, 0)})`],
+          ["Biggest increase", { v: signed(maxUp), c: cls(maxUp) }, names(risers)],
+          ["Biggest drop", { v: signed(maxDown), c: cls(maxDown) }, names(fallers)],
+          ["Unchanged", stable.length, names(stable)]
+        ],
+        insight: `Overall volume is almost flat (${signed(diff)}), but who is talking changes: ${names(risers)} ${risers.length > 1 ? "are" : "is"} speeding up, while ${names(fallers)} went quiet after a busy week.`
+      };
+    }
+    const best = igRows[0];
+    const cv = igRows.find(r => r.h === "@cving_app");
+    const down = igRows.filter(r => r.d < 0);
+    return {
+      stats: [
+        ["CVing", { v: pct(cv.d), c: cls(cv.d) }, `${nfg.format(cv.n)} followers (+${nfg.format(cv.n - cv.p)})`],
+        ["CVing rank", `#${cvingRank} of ${igRows.length}`, "by percentage growth"],
+        ["Fastest growth", { v: pct(best.d), c: cls(best.d) }, `${best.h} · +${nfg.format(best.n - best.p)} followers`],
+        ["Profiles declining", down.length, down.map(r => r.h).join(", ") || "none"]
+      ],
+      insight: `CVing is growing faster than Personio, nCore HR and Altamira, but Factorial added ${nfg.format(best.n - best.p)} followers in a week, more than 20 times CVing's ${nfg.format(cv.n - cv.p)}.`
+    };
+  }
+
+  function renderSummary(view) {
+    const { stats, insight } = summary(view);
+    document.getElementById("chart-stats").innerHTML = stats.map(([label, value, sub]) => {
+      const v = typeof value === "object" ? value : { v: value, c: "" };
+      return `<div class="stat"><small>${esc(label)}</small><b class="${v.c}">${esc(v.v)}</b><span>${esc(sub)}</span></div>`;
+    }).join("");
+    document.getElementById("chart-insight").innerHTML = `<b>Reading</b>${esc(insight)}`;
+  }
+
+  const notes = {
+    activity: "// items logged in the Intelligence History tab: Google News articles and official LinkedIn posts",
+    delta: "// difference in items between the 26/10 and 19/10 reports, per competitor",
+    instagram: "// change between the previous week and the 26/10 figure · CVing in green"
+  };
+
+  let current = "activity";
+  let draw = () => {};
+  document.querySelectorAll(".tabs button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b === btn));
+      current = btn.dataset.view;
+      renderSummary(current);
+      note.textContent = notes[current];
+      draw(current);
+    });
+  });
+  renderSummary(current);
+  note.textContent = notes[current];
+
+  if (typeof Chart === "undefined") {
+    document.querySelector(".chart-box").style.display = "none";
+    fallback.style.display = "block";
+  } else {
+    const isMobile = () => window.matchMedia("(max-width: 640px)").matches;
+    const grid = "rgba(20, 24, 38, .08)";
+    Chart.defaults.font.family = "'JetBrains Mono', ui-monospace, monospace";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = "#5b6275";
+    const tooltip = {
+      backgroundColor: "#121726", borderColor: "rgba(139, 123, 255, .4)", borderWidth: 1,
+      titleColor: "#e8ebf7", bodyColor: "#cfd4e6", footerColor: "#3ee6ff", padding: 12, cornerRadius: 10
+    };
+    let chart;
+
+    // Etichette con il valore in cima a ogni barra (o alla fine, se orizzontale)
+    const valueLabels = {
+      id: "valueLabels",
+      afterDatasetsDraw(c, _args, opts) {
+        if (!opts.format) return;
+        const { ctx } = c;
+        const meta = c.getDatasetMeta(c.data.datasets.length - 1);
+        const horizontal = c.options.indexAxis === "y";
+        ctx.save();
+        ctx.font = "500 11px 'JetBrains Mono', ui-monospace, monospace";
+        ctx.fillStyle = "#141826";
+        meta.data.forEach((bar, i) => {
+          const value = opts.value(i);
+          const text = opts.format(value);
+          if (text == null) return;
+          const neg = value < 0;
+          if (horizontal) {
+            ctx.textAlign = neg ? "right" : "left"; ctx.textBaseline = "middle";
+            ctx.fillText(text, bar.x + (neg ? -8 : 8), bar.y);
+          } else {
+            ctx.textAlign = "center"; ctx.textBaseline = neg ? "top" : "bottom";
+            ctx.fillText(text, bar.x, bar.y + (neg ? 6 : -6));
+          }
+        });
+        ctx.restore();
+      }
+    };
+
+    function gradient(ctx, area, horizontal, from, to) {
+      if (!area) return from;
+      const g = horizontal
+        ? ctx.createLinearGradient(area.left, 0, area.right, 0)
+        : ctx.createLinearGradient(0, area.bottom, 0, area.top);
+      g.addColorStop(0, from); g.addColorStop(1, to);
+      return g;
+    }
+
+    draw = view => {
+      if (chart) chart.destroy();
+      const horizontal = isMobile();
+      let data, options;
+
+      if (view === "activity") {
+        data = {
+          labels: byTotal.map(c => c.short),
+          datasets: [
+            { label: "Report of 19 October", data: byTotal.map(c => c.w43), backgroundColor: "rgba(139, 123, 255, .35)", borderRadius: 6, borderSkipped: false },
+            { label: "Report of 26 October",  data: byTotal.map(c => c.w44), borderRadius: 6, borderSkipped: false,
+              backgroundColor: ctx => gradient(ctx.chart.ctx, ctx.chart.chartArea, horizontal, "#8b7bff", "#3ee6ff") }
+          ]
+        };
+        const axis = { border: { display: false }, ticks: { precision: 0 } };
+        options = {
+          indexAxis: horizontal ? "y" : "x",
+          layout: { padding: horizontal ? { right: 28 } : { top: 22 } },
+          scales: {
+            x: { ...axis, stacked: true, grid: { color: horizontal ? grid : "transparent" } },
+            y: { ...axis, stacked: true, grid: { color: horizontal ? "transparent" : grid } }
+          },
+          plugins: {
+            tooltip: { ...tooltip, callbacks: { footer: items => `Total: ${items.reduce((s, i) => s + i.parsed[horizontal ? "x" : "y"], 0)}` } },
+            valueLabels: { value: i => byTotal[i].total, format: v => String(v) }
+          }
+        };
+      } else if (view === "delta") {
+        data = {
+          labels: deltas.map(c => c.short),
+          datasets: [{
+            label: "Change in items",
+            data: deltas.map(c => c.delta),
+            backgroundColor: deltas.map(c => c.delta > 0 ? "#3df5a7" : c.delta < 0 ? "#ff6b7a" : "rgba(139, 123, 255, .35)"),
+            borderRadius: 6, borderSkipped: false, minBarLength: 3
+          }]
+        };
+        const axis = { border: { display: false }, ticks: { precision: 0 } };
+        options = {
+          indexAxis: horizontal ? "y" : "x",
+          layout: { padding: horizontal ? { left: 24, right: 28 } : { top: 22, bottom: 8 } },
+          scales: {
+            x: { ...axis, grid: { color: horizontal ? grid : "transparent" }, suggestedMin: horizontal ? -8 : undefined, suggestedMax: horizontal ? 4 : undefined },
+            y: { ...axis, grid: { color: horizontal ? "transparent" : grid }, suggestedMin: horizontal ? undefined : -8, suggestedMax: horizontal ? undefined : 4 }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: { ...tooltip, callbacks: { label: i => `${signed(i.raw)} items · ${deltas[i.dataIndex].w43} → ${deltas[i.dataIndex].w44}` } },
+            valueLabels: { value: i => deltas[i].delta, format: signed }
+          }
+        };
+      } else {
+        data = {
+          labels: igRows.map(r => r.h),
+          datasets: [{
+            label: "Follower change (%)",
+            data: igRows.map(r => +r.d.toFixed(2)),
+            backgroundColor: igRows.map(r => r.h === "@cving_app" ? "#3df5a7" : r.d < 0 ? "#ff6b7a" : "rgba(139, 123, 255, .75)"),
+            borderRadius: 6, borderSkipped: false, minBarLength: 3
+          }]
+        };
+        options = {
+          indexAxis: "y",
+          layout: { padding: { left: 8, right: 52 } },
+          scales: {
+            x: { grid: { color: grid }, border: { display: false }, ticks: { callback: v => v + "%" } },
+            y: { grid: { color: "transparent" }, border: { display: false } }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: { ...tooltip, callbacks: { label: i => `${pct(i.raw, 2)} · ${nfg.format(igRows[i.dataIndex].n)} followers` } },
+            valueLabels: { value: i => igRows[i].d, format: v => pct(v) }
+          }
+        };
+      }
+
+      chart = new Chart(document.getElementById("chart"), {
+        type: "bar", data, plugins: [valueLabels],
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          animation: reduceMotion ? false : { duration: 900, easing: "easeOutQuart" },
+          interaction: { mode: "index", intersect: false },
+          layout: options.layout,
+          plugins: { legend: { position: "bottom", labels: { usePointStyle: true, pointStyle: "rectRounded", boxWidth: 8, padding: 18 } }, ...options.plugins },
+          scales: options.scales, indexAxis: options.indexAxis
+        }
+      });
+    };
+
+    let wasMobile = isMobile();
+    window.addEventListener("resize", () => {
+      if (isMobile() !== wasMobile) { wasMobile = isMobile(); draw(current); }
+    });
+    draw(current);
+  }
+</script>
+</body>
+</html>
