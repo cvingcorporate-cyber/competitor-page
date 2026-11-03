@@ -3,7 +3,13 @@ name: Apify · ricognizione actor e dataset
 # Da lanciare a mano: elenca actor e task Apify dell'account e, per l'ultima
 # esecuzione riuscita di ognuno, i campi del dataset. Serve a mappare i dati
 # prima di agganciarli alla pagina. Non salva nulla nel repository.
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      dataset_id:
+        description: "ID di un dataset Apify da analizzare (facoltativo)"
+        required: false
+        default: "zLVyM2B45EZtMHXOX"
 
 permissions:
   contents: read
@@ -15,17 +21,20 @@ jobs:
       - name: Elenca actor, task e campi dei dataset
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          DATASET_ID: ${{ inputs.dataset_id }}
         run: |
           python3 - <<'PY'
           import json, os, sys, urllib.request
 
           token = os.environ.get("APIFY_TOKEN")
+          dataset_id = os.environ.get("DATASET_ID")
           if not token:
-              sys.exit("Manca il secret APIFY_TOKEN: aggiungilo in Settings → Secrets and variables → Actions.")
+              print("Secret APIFY_TOKEN assente: provo solo il dataset indicato, senza token.")
 
           def get(path):
               # Token nell'header, non nell'URL: così non compare nei log
-              req = urllib.request.Request("https://api.apify.com/v2" + path, headers={"Authorization": "Bearer " + token})
+              headers = {"Authorization": "Bearer " + token} if token else {}
+              req = urllib.request.Request("https://api.apify.com/v2" + path, headers=headers)
               try:
                   with urllib.request.urlopen(req, timeout=30) as r:
                       return json.load(r)
@@ -35,6 +44,20 @@ jobs:
           def short(v):
               s = json.dumps(v, ensure_ascii=False) if not isinstance(v, str) else v
               return (s[:70] + "…") if len(s) > 70 else s
+
+          def show_items(ds):
+              info = get(f"/datasets/{ds}")
+              if "error" in info:
+                  print(f"  dataset non leggibile (HTTP {info['error']})"); return
+              print(f"  elementi: {info.get('data', {}).get('itemCount')} · aggiornato: {info.get('data', {}).get('modifiedAt')}")
+              items = get(f"/datasets/{ds}/items?limit=3&clean=1")
+              if isinstance(items, list) and items:
+                  keys = sorted({k for it in items for k in it})
+                  print("  campi:", ", ".join(keys))
+                  for n, it in enumerate(items, 1):
+                      print(f"  esempio {n}:")
+                      for k in keys[:30]:
+                          if k in it: print(f"    {k}: {short(it[k])}")
 
           def describe(kind, item_id, name):
               last = get(f"/{kind}/{item_id}/runs/last?status=SUCCEEDED").get("data")
@@ -52,6 +75,12 @@ jobs:
                       print(f"  esempio {n}:")
                       for k in keys[:25]:
                           if k in it: print(f"    {k}: {short(it[k])}")
+
+          if dataset_id:
+              print(f"\n=== DATASET {dataset_id}")
+              show_items(dataset_id)
+          if not token:
+              sys.exit(0)
 
           acts = get("/acts?limit=100").get("data", {}).get("items", [])
           tasks = get("/actor-tasks?limit=100").get("data", {}).get("items", [])
